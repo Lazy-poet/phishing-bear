@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 9" width="22" height="9">
+	<title>toggle-btn</title>
+	<defs>
+		<image  width="22" height="9" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAJCAMAAAAB6ixHAAAAAXNSR0IB2cksfwAAADlQTFRFt7q7j5OWu76/m5+hb3R3ICgtTFNXNz5CkZWXaW9ydXp82drb////wsTFnJ+ihYmMLTQ5u72/iIyPzEMzXAAAABN0Uk5T////////////////AP///////w1JebUAAAA2SURBVHicdci3EQAgDASwNzmn/YcFd9xhVAog9dIw1r08QhQkZBGK6NeVjnbjQLfHuHFgLskGhDEH0h9D46kAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>
