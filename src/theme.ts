@@ -1,4 +1,4 @@
-import { createTheme, lightThemePrimitives } from "baseui";
+import { createTheme, lightThemePrimitives, Theme } from "baseui";
 
 type Breakpoints = {
   small: number | string;
@@ -38,12 +38,12 @@ export const theme = createTheme(
     ...ResponsiveTheme,
     typography: {
       primaryFontFamily: "'Inter', sans-serif",
-      font12: {
-        fontFamily: "'Inter', sans-serif",
-        fontSize: "12px",
-        fontWeight: 400,
+      font: (size: number | string, weight: number = 400) => ({
+        fontFamily: "'Raleway', sans-serif",
+        fontSize: typeof size === "number" ? `${size}px` : size,
+        fontWeight: weight,
         lineHeight: 1.5,
-      },
+      }),
       fontBold12: {
         fontFamily: "'Inter', sans-serif",
         fontSize: "12px",
@@ -79,13 +79,17 @@ export const theme = createTheme(
         borderWidth: "1px",
       },
     },
+    buttonBorderRadius: "3px",
     colors: {
-      primary: "#0E294B",
+      primary: "#FDD244",
+      secondary: "#35BA6E",
       accent: "#B4873F",
       overlay: "rgba(14, 41, 75, 0.7)",
+      dark: '#381A46',
+      bg: '#E3F5EB',
+      bgHover: '#9FDEB8'
     },
-    buttonBorderRadius: "3px",
   }
 );
 
-export type MyTheme = typeof theme;
+export type CustomTheme = typeof theme;
