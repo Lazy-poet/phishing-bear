@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <footer className="bg-secondary">
+    <footer className="bg-secondary" style={{ scrollSnapAlign: 'start' }}>
       <div className="container">
         <div className="row py-5">
           <div className="col-12 col-sm-12 col-md-4 col-lg-4">

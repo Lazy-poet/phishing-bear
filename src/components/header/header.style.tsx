@@ -6,13 +6,28 @@ import Link from 'next/link'
 import { StyleObject } from 'styletron-react';
 
 
-export const HeaderWrapper = customStyled('div', ({ $theme }) => ({
+export const DesktopHeaderWrapper = customStyled('div', ({ $theme }) => ({
+    display: 'none',
+    [$theme.mediaQuery.medium]: {
+        display: 'flex',
+    },
     background: $theme.colors.bg,
     height: '60px',
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '0 50px'
+    padding: '0 50px',
+}))
+
+export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
+    display: 'flex',
+    [$theme.mediaQuery.medium]: {
+        display: 'none',
+    },
+    background: $theme.colors.bg,
+    height: '45px',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0 10px',
 }))
 
 export const NavItem: React.FC<{ href: string, logo?: string, label: string, onClick?: () => void, style?: StyleObject }> = ({ href, logo, label, onClick, style }) => {

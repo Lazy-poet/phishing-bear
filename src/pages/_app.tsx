@@ -8,7 +8,7 @@ import store from '../../redux/store'
 import { Provider as StyletronProvider } from "styletron-react";
 import { styletron } from '../styletron';
 import { BaseProvider } from "baseui";
-import { theme } from "../theme";
+import { theme, CustomTheme } from "../theme";
 
 function MyApp({ Component, pageProps: { ...pageProps } }: any) {
   const [state, setState] = useState(false)
@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps: { ...pageProps } }: any) {
   }, []);
   return (
     <StyletronProvider value={styletron}>
-      <BaseProvider theme={theme}>
+      <BaseProvider theme={theme as CustomTheme}>
         <Provider store={store}>
           {state ?
             <Component {...pageProps} />

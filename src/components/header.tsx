@@ -19,7 +19,9 @@ const Header = () => {
   }
 
   return (
-    <header className="border-bottom border-dark" >
+    <header className="border-bottom border-dark" style={{
+      scrollSnapAlign: "start",
+    }} >
       <div className="container-fluid">
         <div className="row align-items-center">
           {isLoggedIn === true ? <>

@@ -4,10 +4,16 @@ import { useRouter } from 'next/router'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { authServices } from '../../services'
-import { setLogOut, setMedata } from '../../redux/slices/session.slice'
+import { authServices } from '../../../services'
+import { setLogOut, setMedata } from '../../../redux/slices/session.slice'
 import { Button } from '@components'
 
+const NAV_ITEMS = [
+  { title: 'Dashboard', href: '/dashboard', logo: '/assets/images/dashboard.svg' },
+  { title: 'Handbook', href: '/handbook', logo: '/assets/images/handbook.svg' },
+  { title: 'FAQs', href: '/faq', logo: '/assets/images/faq.svg' },
+  { title: 'My community', href: '/community', logo: '/assets/images/community.svg' },
+]
 const NavPrivate = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -73,7 +79,7 @@ const NavPrivate = () => {
         <ul className="dropdown-menu rounded-0 p-0 border-0 shadow">
           <li className="py-2">
             <Link
-              href={{ pathname: '/my-account' }}
+              href='/my-account'
             >
               <a className="dropdown-item py-3 px-4 fs-3">
                 <img src="/assets/images/my-account.svg" alt="My account" className="img-fluid me-2" />  My account

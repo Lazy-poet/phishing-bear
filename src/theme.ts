@@ -8,7 +8,7 @@ type Breakpoints = {
 }
 const breakpoints: Breakpoints = {
   small: 678,
-  medium: 1024,
+  medium: 1200,
   large: 1440,
   xLarge: 1940
 };

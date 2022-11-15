@@ -4,14 +4,16 @@ import Link from 'next/link'
 import { useRouter } from 'next/router';
 
 import { LinkButton } from '../form-inputs';
-import { NavItem, HeaderWrapper } from './header.style'
+import { NavItem, DesktopHeaderWrapper, MobileHeaderWrapper } from './header.style'
 import LocaleSelector from './localeSelector';
 import { useCustomStyletron } from '../../styles/custom-styles'
+
 const NavPublic = () => {
   const router = useRouter()
   const [css, theme] = useCustomStyletron()
   return (
-    <HeaderWrapper>
+    <>
+    <DesktopHeaderWrapper>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
         <Link href="/home">
           <img src="/assets/images/logo.svg" alt="Logo" className={css({
@@ -60,8 +62,27 @@ const NavPublic = () => {
         }
 
       </div>
-    </HeaderWrapper >
-
+    </DesktopHeaderWrapper >
+    <MobileHeaderWrapper>
+    <Link href="/home">
+          <img src="/assets/images/logo.svg" alt="Logo" className={css({
+            width: '120px',
+            marginRight: '50px',
+            cursor: 'pointer',
+            ':hover': {
+              transform: 'scale(1.01)'
+            }
+          })} />
+        </Link>
+        <img src="/assets/images/hamburger.svg" alt="Logo" className={css({
+            width: '40px',
+            cursor: 'pointer',
+            ':hover': {
+              transform: 'scale(1.01)'
+            }
+          })} />
+    </MobileHeaderWrapper>
+</>
   )
 }
 export default NavPublic;
