@@ -19,7 +19,7 @@ const Header = () => {
   }
 
   return (
-    <header className="border-bottom border-dark py-4 px-5" >
+    <header className="border-bottom border-dark" >
       <div className="container-fluid">
         <div className="row align-items-center">
           {isLoggedIn === true ? <>
