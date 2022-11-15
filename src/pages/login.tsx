@@ -41,7 +41,7 @@ const Login = () => {
         if (data.error === false) {
           setTimeout(() => {
             data.error === false && router.push('/community')
-            resetForm({ values: '' })
+            resetForm({ values: {} })
           }, 500)
         }
       })

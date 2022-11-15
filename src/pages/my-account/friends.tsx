@@ -15,7 +15,7 @@ const GetFriends = () => {
   const router = useRouter()
 
   const [loading, setLoading] = useState(false)
-  const [showFriends, setShowFriends] = useState<FetchDataProps[] | []>([])
+  const [showFriends, setShowFriends] = useState<any>([])
   console.log('showFriends', showFriends);
 
   const logOut = () => {

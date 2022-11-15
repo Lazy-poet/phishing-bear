@@ -18,12 +18,4 @@ const Button = ({ name, loading, type, key, icon, className, children, onClick }
     </>
   )
 }
-Button.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
-  className: PropTypes.string,
-  loading: PropTypes.bool,
-  icon: PropTypes.any,
-  onClick: PropTypes.func.isRequired,
-};
 export default Button

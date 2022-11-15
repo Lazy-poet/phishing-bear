@@ -54,13 +54,13 @@ const NextPage = () => {
         bio: values.bio,
       }
       setLoading(true)
-      userServices.updateUserProfile(item).then((data) => {
+      userServices.updateUserProfile(item).then(({data}) => {
         setAlert(data)
         if (data.error === false) {
           setLoading(false)
           setTimeout(() => {
             router.push('/community')
-          }, [1000])
+          }, 1000)
         }
       })
     },
