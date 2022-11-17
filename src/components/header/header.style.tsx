@@ -16,6 +16,7 @@ export const DesktopHeaderWrapper = customStyled('div', ({ $theme }) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0 50px',
+    boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)'
 }))
 
 export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
@@ -28,6 +29,8 @@ export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0 10px',
+    boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)'
+
 }))
 
 export const NavItem: React.FC<{ href: string, logo?: string, label: string, onClick?: () => void, style?: StyleObject }> = ({ href, logo, label, onClick, style }) => {
@@ -59,7 +62,7 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
     })}>
 
         <Link href={href}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'start', gap: 5,}}>
                 {logo && <img src={logo} alt="" className={css({ width: '20px', height: '20px' })} />}
                 {label}
             </div>

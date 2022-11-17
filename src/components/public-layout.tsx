@@ -13,7 +13,7 @@ const PublicLayout = ({ children }: any) => {
         height: "calc(var(--vh, 1vh) * 100)",
       }}>
         <Header />
-        {children}
+        <main style={{marginTop: '45px'}}>{children}</main>
       <Footer />
       </div>
     </>

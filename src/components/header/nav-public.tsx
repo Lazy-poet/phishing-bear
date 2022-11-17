@@ -7,8 +7,13 @@ import { LinkButton } from '../form-inputs';
 import { NavItem, DesktopHeaderWrapper, MobileHeaderWrapper } from './header.style'
 import LocaleSelector from './localeSelector';
 import { useCustomStyletron } from '../../styles/custom-styles'
+import Sidebar from '../sidebar/sidebar'
 
-const NavPublic = () => {
+type Props = {
+showSidebar: boolean
+toggleSidebar: () => void
+}
+const NavPublic = ({showSidebar, toggleSidebar}) => {
   const router = useRouter()
   const [css, theme] = useCustomStyletron()
   return (
@@ -80,7 +85,11 @@ const NavPublic = () => {
             ':hover': {
               transform: 'scale(1.01)'
             }
-          })} />
+          })}
+          onClick={toggleSidebar}
+          />
+      <Sidebar show={showSidebar} toggle={toggleSidebar} />
+
     </MobileHeaderWrapper>
 </>
   )
