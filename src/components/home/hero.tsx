@@ -11,15 +11,23 @@ const Hero = (props: Props) => {
             width: '100vw',
             height: 'fit-content',
             background: 'url(/assets/images/hero.svg) no-repeat 100% 100%/cover',
-            padding: '100px',
+            padding: '50px 20px',
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            [theme.mediaQuery.medium]: {
-                padding: '100px 200px',
+            textAlign: 'center',
+            gap: '50px',
+            [theme.mediaQuery.small]: {
+                flexDirection: 'row',
+                textAlign: 'left',
+                gap: 0
 
             },
-          scrollSnapAlign: "start",
+            [theme.mediaQuery.medium]: {
+                padding: '100px 200px',
+            },
+            scrollSnapAlign: "start",
 
 
 
@@ -42,10 +50,9 @@ const Hero = (props: Props) => {
 
                 </StyledHeaderText>
                 <StyledParagraphText overrides={{
-                    lineHeight: 1.4,
+                    lineHeight: 1.7,
                     fontSize: '14px',
                     [theme.mediaQuery.medium]: {
-                        lineHeight: 1.5,
                         fontSize: '16px'
                     },
                     [theme.mediaQuery.large]: {
@@ -56,18 +63,23 @@ const Hero = (props: Props) => {
                     Targeted attacks with malicious payload use social engineering and phishing to bypass email gateways. Our Email Protection prevents these attacks to protect your business and data.
 
                 </StyledParagraphText>
-                <StyledButton small overrides={{
+                <StyledButton top="20px" small overrides={{
                     background: theme.colors.primary,
                     color: theme.colors.dark,
-                    borderRadius: '30px',
-                    height: '60px',
-                    width: 'fit-content',
-                    padding: '20px 30px',
+                    borderRadius: '5px',
+                    height: '40px',
+                    width: '100%',
+                    padding: '0 30px',
                     transition: 'all .3s ease',
                     ...theme.typography.font(16, 700),
                     ':hover': {
                         color: theme.colors.secondary,
                         background: '#fff',
+                    },
+                    [theme.mediaQuery.small]: {
+                        height: '60px',
+                        width: 'fit-content',
+
                     }
                 }}>
                     Try it for free
