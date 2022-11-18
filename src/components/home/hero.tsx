@@ -18,7 +18,7 @@ const Hero = (props: Props) => {
             justifyContent: 'center',
             textAlign: 'center',
             gap: '50px',
-            [theme.mediaQuery.small]: {
+            [theme.mediaQuery.xsmall]: {
                 flexDirection: 'row',
                 textAlign: 'left',
                 gap: 0
@@ -32,7 +32,7 @@ const Hero = (props: Props) => {
 
 
         })}>
-            <div className={css({ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px', alignSelf: 'start', maxWidth: '550px' })}>
+            <div className={css({ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px', alignSelf: 'start', })}>
                 <StyledHeaderText overrides={{
                     lineHeight: 1.5,
                     fontSize: '24px',
@@ -76,7 +76,7 @@ const Hero = (props: Props) => {
                         color: theme.colors.secondary,
                         background: '#fff',
                     },
-                    [theme.mediaQuery.small]: {
+                    [theme.mediaQuery.xsmall]: {
                         height: '60px',
                         width: 'fit-content',
 

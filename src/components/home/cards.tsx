@@ -10,9 +10,15 @@ const Cards = (props: Props) => {
 
     return (
         <div className={css({
-            display: 'flex', alignItems: 'center',
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
-            gap: '20px'
+            flexFlow: 'column',
+            gap: '200px',
+            [theme.mediaQuery.small]: {
+                flexFlow: 'row',
+                gap: '20px'
+            }
         })}>
             <Card logo="/assets/images/monthly_plan.svg" cta="Try it for free" btnStyle={{
                 background: theme.colors.primary,

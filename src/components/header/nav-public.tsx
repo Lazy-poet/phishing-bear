@@ -10,68 +10,75 @@ import { useCustomStyletron } from '../../styles/custom-styles'
 import Sidebar from '../sidebar/sidebar'
 
 type Props = {
-showSidebar: boolean
-toggleSidebar: () => void
+  showSidebar: boolean
+  toggleSidebar: () => void
 }
-const NavPublic = ({showSidebar, toggleSidebar}) => {
+const NavPublic = ({ showSidebar, toggleSidebar }) => {
   const router = useRouter()
   const [css, theme] = useCustomStyletron()
   return (
     <>
-    <DesktopHeaderWrapper>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
-        <Link href="/home">
-          <img src="/assets/images/logo.svg" alt="Logo" className={css({
-            width: '170px',
-            marginRight: '50px',
-            cursor: 'pointer',
-            ':hover': {
-              transform: 'scale(1.01)'
-            }
-          })} />
-        </Link>
-        <NavItem href="/about" label="About us" />
-        <NavItem href="/pricing" label="Pricing" />
-        <NavItem href="/platform" label="User Platform" logo="/assets/images/user-platform.svg" />
-      </div>
+      <DesktopHeaderWrapper>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
+          <Link href="/home">
+            <img src="/assets/images/logo.svg" alt="Logo" className={css({
+              width: '170px',
+              marginRight: '20px',
+              [theme.mediaQuery.medium]: {
+                marginRight: '50px',
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
-        <LocaleSelector />
-        <NavItem href="#" label="Try it for free" style={{
-          borderRadius: '5px',
-          background: theme.colors.secondary,
-          color: '#fff',
-          opacity: 1,
-          margin: '10px',
-          height: '80%',
-          ':hover': {
-            opacity: .8
-          }
-        }} />
+              },
+              cursor: 'pointer',
+              ':hover': {
+                transform: 'scale(1.01)'
+              }
+            })} />
+          </Link>
+          <NavItem href="/about" label="About us" />
+          <NavItem href="/pricing" label="Pricing" />
+          <NavItem href="/platform" label="User Platform" logo="/assets/images/user-platform.svg" />
+        </div>
 
-        {router?.pathname === '/login' ? null :
-          <NavItem href="/login" label="Log in" style={{
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
+          <LocaleSelector />
+          <NavItem href="#" label="Try it for free" style={{
             borderRadius: '5px',
-            // color: theme.colors.secondary,
-            border: `1px solid ${theme.colors.dark}`,
-            width: '100px',
-            background: 'transparent',
+            background: theme.colors.secondary,
+            color: '#fff',
             opacity: 1,
             margin: '10px',
-          height: '80%',
-
+            height: '80%',
             ':hover': {
               opacity: .8
             }
-          }}  />
-        }
+          }} />
 
-      </div>
-    </DesktopHeaderWrapper >
-    <MobileHeaderWrapper>
-    <Link href="/home">
+          {router?.pathname === '/login' ? null :
+            <NavItem href="/login" label="Log in" style={{
+              borderRadius: '5px',
+              // color: theme.colors.secondary,
+              border: `1px solid ${theme.colors.dark}`,
+              width: '100px',
+              background: 'transparent',
+              opacity: 1,
+              margin: '10px',
+              height: '80%',
+
+              ':hover': {
+                opacity: .8
+              }
+            }} />
+          }
+
+        </div>
+      </DesktopHeaderWrapper >
+      <MobileHeaderWrapper>
+        <Link href="/home">
           <img src="/assets/images/logo.svg" alt="Logo" className={css({
             width: '120px',
+            [theme.mediaQuery.xsmall]: {
+              width: '150px',
+            },
             marginRight: '50px',
             cursor: 'pointer',
             ':hover': {
@@ -80,18 +87,18 @@ const NavPublic = ({showSidebar, toggleSidebar}) => {
           })} />
         </Link>
         <img src="/assets/images/hamburger.svg" alt="Logo" className={css({
-            width: '40px',
-            cursor: 'pointer',
-            ':hover': {
-              transform: 'scale(1.01)'
-            }
-          })}
+          width: '40px',
+          cursor: 'pointer',
+          ':hover': {
+            transform: 'scale(1.01)'
+          }
+        })}
           onClick={toggleSidebar}
-          />
-      <Sidebar show={showSidebar} toggle={toggleSidebar} />
+        />
+        <Sidebar show={showSidebar} toggle={toggleSidebar} />
 
-    </MobileHeaderWrapper>
-</>
+      </MobileHeaderWrapper>
+    </>
   )
 }
 export default NavPublic;

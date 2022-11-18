@@ -14,20 +14,28 @@ const Home: NextPage = () => {
       <SEO />
       <PublicLayout>
         <Hero />
-        <div style={{
+        <section style={{
           scrollSnapAlign: "start",
-          padding: '0 0 50px'
+          padding: '0 20px 50px'
 
         }}>
           <StyledDarkParagraphText overrides={{
             textAlign: 'center',
             margin: '0 auto',
-            ...theme.typography.font(30, 700),
+            ...theme.typography.font(24, 700),
+            [theme.mediaQuery.small]: {
+              ...theme.typography.font(26, 700),
+
+            },
+            [theme.mediaQuery.large]: {
+              ...theme.typography.font(30, 700),
+
+            },
             maxWidth: '600px'
           }}>Training is the best protection - Detect threats that email gateways can't.</StyledDarkParagraphText>
           {addSpace("vert", '150px')}
           <Cards />
-        </div>
+        </section>
         <FooterBanner />
       </PublicLayout>
     </>

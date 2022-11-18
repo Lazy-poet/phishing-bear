@@ -8,20 +8,24 @@ import { StyleObject } from 'styletron-react';
 
 export const DesktopHeaderWrapper = customStyled('div', ({ $theme }) => ({
     display: 'none',
-    [$theme.mediaQuery.medium]: {
+    padding: '0 20px',
+    [$theme.mediaQuery.small]: {
         display: 'flex',
+    },
+    [$theme.mediaQuery.medium]: {
+        padding: '0 50px',
+
     },
     background: $theme.colors.bg,
     height: '60px',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '0 50px',
     boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)'
 }))
 
 export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
     display: 'flex',
-    [$theme.mediaQuery.medium]: {
+    [$theme.mediaQuery.small]: {
         display: 'none',
     },
     background: $theme.colors.bg,
@@ -47,7 +51,7 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
         ":hover": {
             background: theme.colors.bgHover,
         },
-        [theme.mediaQuery.medium]: {
+        [theme.mediaQuery.small]: {
             ...theme.typography.font(14, 700),
             padding: '15px',
 
@@ -62,7 +66,7 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
     })}>
 
         <Link href={href}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'start', gap: 5,}}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'start', gap: 5, }}>
                 {logo && <img src={logo} alt="" className={css({ width: '20px', height: '20px' })} />}
                 {label}
             </div>

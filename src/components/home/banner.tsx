@@ -7,16 +7,22 @@ type Props = {}
 const Banner = (props: Props) => {
     const [css, theme] = useCustomStyletron();
     return (
-        <div className={css({
+        <section className={css({
             width: '100vw',
             height: 'fit-content',
             background: theme.colors.secondary,
-            padding: '100px',
+            padding: '20px',
             paddingBottom: '50px',
             display: 'flex',
+            flexFlow: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '50px',
+            [theme.mediaQuery.xsmall]: {
+                flexFlow: 'row',
+                padding: '50px',
+
+            },
             [theme.mediaQuery.medium]: {
                 padding: '100px 200px',
                 paddingBottom: '50px'
@@ -36,11 +42,33 @@ const Banner = (props: Props) => {
                 object: 'cover'
             })} />
 
-            <div className={css({ flex: 1, paddingTop: '50px', display: 'flex', flexDirection: 'column', gap: '20px', alignSelf: 'start', maxWidth: '550px', position: 'relative' })}>
+            <div className={css({
+                flex: 1,
+                zIndex: 2,
+                paddingTop: '50px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backdropFilter: 'blur(2px)',
+                [theme.mediaQuery.xsmall]: {
+                    alignItems: 'start',
+
+                },
+                gap: '20px',
+                // alignSelf: 'start',
+                position: 'relative',
+
+            })}>
                 <StyledHeaderText overrides={{
                     lineHeight: 1.5,
                     fontSize: '24px',
                     textTransform: 'none',
+                    textAlign: 'center',
+                    [theme.mediaQuery.xsmall]: {
+                        textAlign: 'left',
+
+                    },
                     [theme.mediaQuery.medium]: {
                         fontSize: '28px'
                     },
@@ -56,6 +84,11 @@ const Banner = (props: Props) => {
                 <StyledParagraphText overrides={{
                     lineHeight: 1.4,
                     fontSize: '14px',
+                    textAlign: 'center',
+                    [theme.mediaQuery.xsmall]: {
+                        textAlign: 'left',
+
+                    },
                     [theme.mediaQuery.medium]: {
                         lineHeight: 1.5,
                         fontSize: '16px'
@@ -76,12 +109,16 @@ const Banner = (props: Props) => {
                         border: '2px solid ' + theme.colors.dark,
                         height: 'fit-content',
                         width: 'fit-content',
-                        padding: '7px 20px',
+                        padding: '10px 25px',
                         transition: 'all .3s ease',
+                        boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
                         ...theme.typography.font(14, 700),
                         ':hover': {
                             color: theme.colors.secondary,
                             background: '#fff',
+                            borderColor: theme.colors.secondary,
+                            boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
+
                         }
                     }}>
                         Try it for free
@@ -93,24 +130,43 @@ const Banner = (props: Props) => {
                         border: '2px solid #fff',
 
                         height: 'fit-content',
-                        width: 'fit-content',
-                        padding: '7px 20px',
+                        width: 'max-content',
+                        padding: '10px 25px',
                         transition: 'all .3s ease',
+                        boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
                         ...theme.typography.font(14, 700),
                         ':hover': {
                             color: theme.colors.secondary,
                             background: '#fff',
+                            boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
                         }
                     }}>
                         View plans
                     </StyledButton>
                 </div>
             </div>
-            <div className={css({ flex: 1 })}>
-                <img src="/assets/images/ninja-bear.svg" style={{ maxWidth: '80%', height: 'auto', paddingTop: '50px', }} />
+            <div className={css({
+                flex: 1,
+                padding: '20px',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                height: '100%',
+                transform: 'translate(-50%, -50%)',
+                opacity: .3,
+                zIndex: 0,
+                [theme.mediaQuery.xsmall]: {
+                    position: 'initial',
+                    opacity: 1,
+                    display: 'block',
+                    transform: 'translate(0px, 0px)',
+                    zIndex: 1,
+                }
+            })}>
+                <img src="/assets/images/ninja-bear.svg" style={{ maxWidth: '100%', margin: '0 auto', height: 'auto', paddingTop: '50px', }} />
             </div>
 
-        </div>
+        </section>
     )
 }
 

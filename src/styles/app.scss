@@ -1,60 +1,29 @@
 $theme-colors: (
-  primary: #35BA6E,
-  warning: #FFA726,
-  secondary: #1A2040,
-  success: #A8E1BE,
+  primary: #35ba6e,
+  warning: #ffa726,
+  secondary: #1a2040,
+  success: #a8e1be,
   light: #f8f8f8,
-  info: #3BD17C,
-  danger: #C8102E,
-  dark: #02042b
+  info: #3bd17c,
+  danger: #c8102e,
+  dark: #02042b,
 );
-@import 'bootstrap/scss/bootstrap.scss';
-@import url('https://fonts.googleapis.com/css2?family=Exo:wght@100;400;500;600;700;900&family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import "bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@100;400;500;600;700;900&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
   box-sizing: border-box;
 }
 body {
   font-size: 22px;
-  font-family: 'Raleway', sans-serif;
-  background-color: #E3F5EB;
+  font-family: "Raleway", sans-serif;
+  background-color: #e3f5eb;
 }
 
 div#__next {
   overflow-x: hidden;
 }
-
-h1 {
-  font-size: 55px;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 45px;
-  font-weight: 600;
-}
-
-h3 {
-  font-size: 40px;
-  font-weight: 600;
-}
-
-h4 {
-  font-size: 30px;
-  font-weight: 600;
-}
-
-h5 {
-  font-size: 25px;
-  font-weight: 500;
-}
-
-h6 {
-  font-size: 20px;
-  font-weight: 600;
-}
-
 .fs-1 {
   font-size: 35px !important;
   font-weight: 500;
@@ -81,7 +50,7 @@ h6 {
 }
 
 .font-roboto {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-weight: 400;
 }
 
@@ -116,7 +85,6 @@ button.btn.btn-primary.bg-warning,
 button.btn.btn-primary,
 a.btn.btn-link.text-white.bg-primary {
   border: 1px solid rgba(26, 32, 64, 0.5);
-
 }
 
 .btn-opacity-success {
@@ -131,14 +99,12 @@ a.btn.btn-link.text-white.bg-primary {
   box-shadow: 0 1px 25px 0 rgb(0 0 0 / 10%) !important;
 }
 
-
 .home-page {
   background-image: url(../../public/assets/images/banner.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
-
 
 header {
   height: 106px;
@@ -161,12 +127,12 @@ header .me-5 {
   bottom: 0;
   right: 0;
   border-bottom: 40px solid white;
-  border-left: 25px solid #A8E1BE;
+  border-left: 25px solid #a8e1be;
   width: 0;
 }
 
 .card-primary:before {
-  border-left: 25px solid #4FE890 !important;
+  border-left: 25px solid #4fe890 !important;
 }
 
 .cta-banner .card,
@@ -176,7 +142,7 @@ header .me-5 {
 }
 
 .card-primary {
-  background: linear-gradient(139.03deg, #35BA6E 26.47%, #4FE890 100.07%);
+  background: linear-gradient(139.03deg, #35ba6e 26.47%, #4fe890 100.07%);
   box-shadow: none !important;
 }
 
@@ -199,7 +165,6 @@ header .me-5 {
 
 .card-business {
   margin-top: 200px;
-
 }
 
 .home-page .my-auto .font-roboto {
@@ -223,7 +188,7 @@ footer .col-lg-5 {
 }
 
 .standard-card .card::before {
-  border-left: 25px solid #35BA6E
+  border-left: 25px solid #35ba6e;
 }
 
 .standard-card img {
@@ -242,7 +207,7 @@ footer .col-lg-5 {
 .contact-form label {
   color: #fff;
   margin-bottom: 15px !important;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
 .card-bg .accordion-item {
@@ -254,7 +219,7 @@ footer .col-lg-5 {
 }
 
 .cta-banner .card-text {
-  color: #000000CC;
+  color: #000000cc;
 }
 
 .copyright p {
@@ -308,7 +273,6 @@ footer .col-lg-5 {
   display: none;
 }
 
-
 .dropdown-toggle::before {
   content: "";
   background-image: url(../../public/assets/images/dropdown.svg);
@@ -325,7 +289,7 @@ footer .col-lg-5 {
 }
 
 .standard-card ul li::marker {
-  color: #FAC932;
+  color: #fac932;
 }
 
 .vr-line:after {
@@ -346,7 +310,6 @@ footer .col-lg-5 {
   right: 0;
   top: 30px;
   margin-right: -50px;
-
 }
 
 .faq-content .accordion-button::after {
@@ -367,7 +330,7 @@ footer .col-lg-5 {
 }
 
 .faq-content .accordion-button::before {
-  content: '';
+  content: "";
   background-image: url(../../public/assets/images/plus.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -378,7 +341,7 @@ footer .col-lg-5 {
 }
 
 .faq-content .accordion-button:not(.collapsed)::before {
-  content: '';
+  content: "";
   background-image: url(../../public/assets/images/minus.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -409,35 +372,30 @@ footer .col-lg-5 {
 
 .faq-content .container,
 .faq-content .accordion-item {
-  background: #5973FF0D;
+  background: #5973ff0d;
   border-radius: 24px;
-
 }
 
 .faq-content .accordion-button {
-  background-color: #F7F8FF;
+  background-color: #f7f8ff;
   border-bottom: 1px solid;
   border-radius: 0px !important;
 }
 
 .faq-content .accordion-collapse {
   color: #000;
-  background-color: #EFF1FF;
+  background-color: #eff1ff;
   border-radius: 24px !important;
 }
 
 .accordion-button:not(.collapsed) {
   color: #000;
-  background-color: #EFF1FF;
+  background-color: #eff1ff;
   border-radius: 24px 24px 0px 0px !important;
   border-bottom: 0;
 }
 
 @media only screen and (max-width: 1375px) {
-  h1 {
-    font-size: 48px;
-  }
-
   header ul li a,
   header .btn {
     font-size: 20px !important;
@@ -461,11 +419,6 @@ footer .col-lg-5 {
 }
 
 @media only screen and (max-width: 1290px) {
-
-  h1 {
-    font-size: 43px;
-  }
-
   header ul li a,
   header .btn {
     font-size: 17px !important;
@@ -491,8 +444,6 @@ footer .col-lg-5 {
   .private-nav .btn {
     font-size: 20px !important;
   }
-
-
 }
 
 @media only screen and (max-width: 1205px) {
@@ -510,11 +461,6 @@ footer .col-lg-5 {
 }
 
 @media only screen and (max-width: 1166px) {
-
-  h1 {
-    font-size: 37px;
-  }
-
   header ul li a,
   header .btn {
     font-size: 13px !important;
@@ -534,12 +480,6 @@ footer .col-lg-5 {
 }
 
 @media only screen and (max-width: 1024px) {
-
-  h1,
-  h2 {
-    font-size: 35px;
-  }
-
   .fs-1 {
     font-size: 30px !important;
   }
@@ -562,7 +502,6 @@ footer .col-lg-5 {
 }
 
 @media only screen and (max-width: 991px) {
-
   header.border-bottom.border-dark.py-4.px-5 {
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -574,7 +513,7 @@ footer .col-lg-5 {
   }
 
   div#offcanvasExample {
-    background-color: #35BA6E;
+    background-color: #35ba6e;
   }
 
   .offcanavas-img {
@@ -591,7 +530,6 @@ footer .col-lg-5 {
   .vr-line:after {
     display: none;
   }
-
 }
 
 @media only screen and (max-width: 767px) {

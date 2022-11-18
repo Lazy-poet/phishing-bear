@@ -16,7 +16,14 @@ const Card = ({ children, cta, btnStyle, logo }: Props) => {
     return (
         <div className={css({
             height: '400px',
-            width: '280px',
+            width: '100%',
+            maxWidth: '350px',
+            [theme.mediaQuery.small]: {
+                maxWidth: '280px'
+            },
+            [theme.mediaQuery.large]: {
+                maxWidth: '300px'
+            },
             background: '#fff',
             position: 'relative',
             borderRadius: '20px',
@@ -28,7 +35,6 @@ const Card = ({ children, cta, btnStyle, logo }: Props) => {
 
         })}>
             <img src={logo} className={css({
-                maxWidth: '90%', 
                 height: 'auto',
                 maxHeight: '200px',
                 margin: '0 auto',

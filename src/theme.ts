@@ -1,16 +1,18 @@
 import { createTheme, lightThemePrimitives, Theme } from "baseui";
 
 type Breakpoints = {
+  xsmall: number | string,
   small: number | string;
   medium: number | string
   large: number | string
-  xLarge: number | string
+  xlarge: number | string
 }
 const breakpoints: Breakpoints = {
-  small: 678,
+  xsmall: 678,
+  small: 920,
   medium: 1200,
   large: 1440,
-  xLarge: 1940
+  xlarge: 1940
 };
 const ResponsiveTheme = (
   Object.keys(breakpoints) as (keyof Breakpoints)[]

@@ -46,7 +46,7 @@ const Header = () => {
             </div>
 
             <div className="col-10  d-none d-lg-block d-xl-block">
-              <NavPublic />
+              <NavPublic showSidebar={null} toggleSidebar={null} />
             </div>
           </>}
 
