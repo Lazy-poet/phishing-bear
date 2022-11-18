@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps: { ...pageProps } }: any) {
 
   useEffect(() => {
     require('bootstrap/dist/js/bootstrap');
-    require('@fortawesome/fontawesome-free/js/all.js')
+    // require('@fortawesome/fontawesome-free/js/all.js')
     setState(true)
   }, []);
   return (
