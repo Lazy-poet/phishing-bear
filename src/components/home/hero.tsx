@@ -36,9 +36,9 @@ const Hero = (props: Props) => {
 
 
         return () => {
-            wrapper.current.removeEventListener('mouseover', listener)
-            wrapper.current.removeEventListener('mousemove', listener)
-            wrapper.current.removeEventListener('mouseleave', resetTransform)
+            wrapper.current?.removeEventListener('mouseover', listener)
+            wrapper.current?.removeEventListener('mousemove', listener)
+            wrapper.current?.removeEventListener('mouseleave', resetTransform)
         }
     }, [imgRef.current, wrapper.current])
     return (

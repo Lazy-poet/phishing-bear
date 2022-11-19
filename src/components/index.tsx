@@ -19,6 +19,8 @@ export { default as Hero } from './home/hero'
 export { default as Cards } from './home/cards'
 export { default as FooterBanner } from './home/banner'
 export { default as Footer } from './footer/footer'
+export { default as SectionWrapper } from './about'
+export * from './about'
 
 export {
   PrivateLayout, Header, PublicLayout, SEO, InputField, Button, CheckBox, LinkButton, SelectField, Alert, Loading,
@@ -93,8 +95,8 @@ export const StyledParagraphText = customStyled<"p", TextProps>(
 );
 export const StyledDarkParagraphText = customStyled<any, TextProps>(
   "p",
-  ({ size, color, weight, align, overrides }) => ({
-    color: "rgba(14, 41, 75, 1) !important",
+  ({ size, color, weight, align, overrides, $theme }) => ({
+    color: `${$theme.colors.dark} !important`,
     fontSize: size || "18px",
     letterSpacing: ".5px",
     fontWeight: weight || 300,
