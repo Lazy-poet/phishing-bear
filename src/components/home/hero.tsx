@@ -1,11 +1,46 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useCustomStyletron } from '../../styles/custom-styles';
 import { addSpace, StyledButton, StyledHeaderText, StyledParagraphText } from '../index'
 
 type Props = {}
 
+const getRandomTransform = () => {
+    const x = (Math.random() - 0.5) * 100;
+    const y = (Math.random() - 0.5) * 100;
+    return `translate(${x}px, ${y}px)`
+}
 const Hero = (props: Props) => {
     const [css, theme] = useCustomStyletron()
+    const imgRef = useRef<HTMLImageElement>(null)
+    const wrapper = useRef<HTMLDivElement>(null)
+    const throttle = useRef(false)
+    useEffect(() => {
+        const listener = () => {
+            if (throttle.current) return;
+            imgRef.current.style.transform = getRandomTransform();
+            throttle.current = true;
+            setTimeout(() => {
+                throttle.current = false
+            }, 500)
+        }
+        const resetTransform = () => {
+            imgRef.current.style.transform = 'translate(0, 0)'
+        }
+
+        if (!imgRef.current || !wrapper.current) {
+            return
+        }
+        wrapper.current.addEventListener('mouseover', listener);
+        wrapper.current.addEventListener('mousemove', listener);
+        wrapper.current.addEventListener('mouseleave', resetTransform);
+
+
+        return () => {
+            wrapper.current.removeEventListener('mouseover', listener)
+            wrapper.current.removeEventListener('mousemove', listener)
+            wrapper.current.removeEventListener('mouseleave', resetTransform)
+        }
+    }, [imgRef.current, wrapper.current])
     return (
         <section className={css({
             width: '100vw',
@@ -85,8 +120,11 @@ const Hero = (props: Props) => {
                     Try it for free
                 </StyledButton>
             </div>
-            <div className={css({ flex: 1 })}>
-                <img src="/assets/images/astro-bear-ninja.svg" style={{ maxWidth: '100%', height: 'auto' }} />
+            <div className={css({ flex: 1 })} ref={wrapper}>
+                <img src="/assets/images/astro-bear-ninja.svg" ref={imgRef} className={css({
+                    maxWidth: '100%', height: 'auto',
+                    transition: 'all 1s linear',
+                })} />
             </div>
         </section>
     )
