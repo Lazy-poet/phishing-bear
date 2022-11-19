@@ -20,7 +20,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
     <>
       <DesktopHeaderWrapper>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
-          <Link href="/home">
+          <Link href="/">
             <img src="/assets/images/logo.svg" alt="Logo" className={css({
               width: '170px',
               marginRight: '20px',
@@ -73,7 +73,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
         </div>
       </DesktopHeaderWrapper >
       <MobileHeaderWrapper>
-        <Link href="/home">
+        <Link href="/">
           <img src="/assets/images/logo.svg" alt="Logo" className={css({
             width: '120px',
             [theme.mediaQuery.xsmall]: {

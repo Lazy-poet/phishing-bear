@@ -8,7 +8,13 @@ type Props = {
     show: boolean,
     toggle: () => void
 }
-
+const links = [
+    { label: 'Home', href: '/' },
+    { label: 'About us', href: '/about' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Enterprise solutions', href: '/enterprise' },
+    { label: 'Private solutions', href: 'private' },
+]
 const Sidebar = ({ toggle, show }: Props) => {
     const [css, theme] = useCustomStyletron()
     return (
@@ -50,13 +56,7 @@ const Sidebar = ({ toggle, show }: Props) => {
                 padding: '20px 0'
             })}>
                 {
-                    [
-                        { label: 'Home', href: '' },
-                        { label: 'About us', href: '' },
-                        { label: 'Pricing', href: '' },
-                        { label: 'Enterprise solutions', href: '' },
-                        { label: 'Private solutions', href: '' },
-                    ].map(({ href, label }) => (<NavItem href={href} label={label} style={{
+                   links.map(({ href, label }) => (<NavItem href={href} label={label} style={{
                         width: '100%',
                         height: 'fit-content',
                         padding: '15px 20px',

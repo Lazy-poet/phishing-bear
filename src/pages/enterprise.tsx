@@ -2,7 +2,7 @@ import React from 'react'
 import type { NextPage } from 'next'
 import { PublicLayout, LinkButton, SEO } from '@components'
 
-const Enterprices: NextPage = () => {
+const Enterprise: NextPage = () => {
   return (
     <>
       <SEO />
@@ -89,4 +89,4 @@ const Enterprices: NextPage = () => {
     </>
   )
 }
-export default Enterprices;
+export default Enterprise;
