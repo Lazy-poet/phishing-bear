@@ -3,6 +3,7 @@ import { styled, useStyletron } from 'baseui';
 import { useCustomStyletron, customStyled } from '../../styles/custom-styles'
 import { CustomTheme } from '../../theme'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { StyleObject } from 'styletron-react';
 
 
@@ -38,7 +39,9 @@ export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
 }))
 
 export const NavItem: React.FC<{ href: string, logo?: string, label: string, onClick?: () => void, style?: StyleObject }> = ({ href, logo, label, onClick, style }) => {
-    const [css, theme] = useCustomStyletron()
+    const [css, theme] = useCustomStyletron();
+    const router = useRouter();
+    const isActive = router.pathname === href;
     return <div onClick={onClick} className={css({
         height: '100%',
         width: 'fit-content',
@@ -47,9 +50,10 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
         transition: 'all .2s ease-in-out',
         display: 'grid',
         placeContent: 'center',
+        background: isActive ? theme.colors.bgHover : 'none',
         ...theme.typography.font(12, 700),
         ":hover": {
-            background: theme.colors.bgHover,
+            background: 'rgba(168, 225, 190,.5)',
         },
         [theme.mediaQuery.small]: {
             ...theme.typography.font(14, 700),
