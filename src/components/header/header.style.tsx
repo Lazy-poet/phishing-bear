@@ -42,39 +42,39 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
     const [css, theme] = useCustomStyletron();
     const router = useRouter();
     const isActive = router.pathname === href;
-    return <div onClick={onClick} className={css({
-        height: '100%',
-        width: 'fit-content',
-        padding: '10px',
-        cursor: 'pointer',
-        transition: 'all .2s ease-in-out',
-        display: 'grid',
-        placeContent: 'center',
-        background: isActive ? theme.colors.bgHover : 'none',
-        ...theme.typography.font(12, 700),
-        ":hover": {
-            background: 'rgba(168, 225, 190,.5)',
-        },
-        [theme.mediaQuery.small]: {
-            ...theme.typography.font(14, 700),
-            padding: '15px',
+    return <Link href={href}>
+        <div onClick={onClick} className={css({
+            height: '100%',
+            width: 'fit-content',
+            padding: '10px',
+            cursor: 'pointer',
+            transition: 'all .2s ease-in-out',
+            display: 'grid',
+            placeContent: 'center',
+            background: isActive ? theme.colors.bgHover : 'none',
+            ...theme.typography.font(12, 700),
+            ":hover": {
+                background: 'rgba(168, 225, 190,.5)',
+            },
+            [theme.mediaQuery.small]: {
+                ...theme.typography.font(14, 700),
+                padding: '15px',
 
-        },
-        [theme.mediaQuery.large]: {
-            ...theme.typography.font(16, 700),
-            padding: '15px',
+            },
+            [theme.mediaQuery.large]: {
+                ...theme.typography.font(16, 700),
+                padding: '15px',
 
-        },
-        ...style
+            },
+            ...style
 
-    })}>
+        })}>
 
-        <Link href={href}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'start', gap: 5, }}>
                 {logo && <img src={logo} alt="" className={css({ width: '20px', height: '20px' })} />}
                 {label}
             </div>
-        </Link>
-    </div>
+        </div>
+    </Link>
 
 }

@@ -12,7 +12,7 @@ const SectionWrapper = ({ children, overrides }: Props) => {
     const [css, theme] = useCustomStyletron();
     return (
         <section className={css({
-            scrollSnapAlign: "center",
+            scrollSnapAlign: "start",
             padding: '100px 20px',
             display: 'flex',
             alignItems: "center",
@@ -21,19 +21,19 @@ const SectionWrapper = ({ children, overrides }: Props) => {
             gap: '30px',
             position: 'relative',
             [theme.mediaQuery.xsmall]: {
-                padding: '100px 50px',
+                padding: '50px',
                 flexDirection: "row",
             },
             [theme.mediaQuery.small]: {
-                padding: '100px'
+                padding: '50px 100px'
             },
             [theme.mediaQuery.medium]: {
-                padding: '150px 200px',
+                padding: '50px 250px',
                 gap: '100px',
 
             },
             [theme.mediaQuery.large]: {
-                padding: '150px 250px'
+                padding: '100px 300px'
             },
             ...overrides
         })}>
@@ -55,10 +55,16 @@ export const SectionText = ({ heading, body }: { heading: string, body: string }
             [theme.mediaQuery.xsmall]: {
                 textAlign: 'left',
 
-            }
+            },
+            [theme.mediaQuery.medium]: {
+                ...theme.typography.font(26, 600),
+            },
         }}>{heading}</StyledParagraphText>
         <StyledParagraphText color="inherit" overrides={{
             ...theme.typography.font(14, 400),
+            [theme.mediaQuery.medium]: {
+                ...theme.typography.font(16, 400),
+            },
             maxWidth: '1000px',
             marginBottom: '20px',
             textAlign: 'left',
@@ -79,7 +85,6 @@ export const ImageWrapper = customStyled('div', ({ $theme }) => ({
     [$theme.mediaQuery.xsmall]: {
         position: 'initial',
         opacity: 1,
-        display: 'block',
         transform: 'translate(0px, 0px)',
         zIndex: 1,
     }

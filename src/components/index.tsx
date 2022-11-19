@@ -3,7 +3,6 @@ import PublicLayout from './public-layout'
 import Header from './header/index'
 // import Footer from './footer'
 import SEO from './seo'
-import { InputField } from './form-inputs'
 import Button from './form-inputs/button'
 import CheckBox from './form-inputs/checkbox'
 import LinkButton from './form-inputs/link'
@@ -23,7 +22,7 @@ export { default as SectionWrapper } from './about'
 export * from './about'
 
 export {
-  PrivateLayout, Header, PublicLayout, SEO, InputField, Button, CheckBox, LinkButton, SelectField, Alert, Loading,
+  PrivateLayout, Header, PublicLayout, SEO, Button, CheckBox, LinkButton, SelectField, Alert, Loading,
   Pagination, NavPrivate, NavPublic,
 }
 
@@ -108,22 +107,35 @@ export const StyledDarkParagraphText = customStyled<any, TextProps>(
   })
 );
 
-export const StyledInput = customStyled("input", () => ({
+export const StyledInput = customStyled("input", ({ $theme }) => ({
   boxSizing: "border-box",
   width: "100%",
-  height: "40px",
-  background: "rgba(248, 248, 248, 1)",
+  height: "fit-content",
+  background: "transparent",
+  border: 'none',
+  outline: 'none',
   "::placeholder": {
-    color: "rgba(176, 176, 176, .6)",
-    fontSize: "13px",
+    color: $theme.colors.bg,
+    fontSize: "14px",
     fontWeight: 300,
   },
-  border: "1px solid rgba(139, 139, 139, 1)",
-  padding: "15px",
+  borderBottom: "1px solid #fff",
+  padding: "10px 20px",
   margin: "10px 0",
 }));
 
+export const StyledTextArea = customStyled('textarea', ({ $theme }) => ({
+  border: '1px solid rgba(255, 255, 255, .3)',
+  borderRadius: '7px',
+  background: 'rgba(255, 255, 255, .15)',
+  padding: '10px',
+  width: '100%',
+  '::placeholder': {
+    color: 'rgba(255, 255, 255, .35)',
+    ...$theme.typography.font(15, 400)
 
+  }
+}))
 export const StyledPasswordInput: React.FC<{ placeholder: string, value: string, name?: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }> = ({
   placeholder,
   onChange,
@@ -197,3 +209,191 @@ export const StyledButton = customStyled<"button", Partial<ButtonProps>>(
 
   })
 );
+export const InputField: React.FC<
+  {
+    label: string,
+    placeholder: string,
+    type: "text" | "email" | "select" | "checkbox",
+    options?: { name: string, value: string }[],
+    name: string,
+    value: string,
+    error?: any,
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  } & React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
+> = ({
+  label,
+  placeholder,
+  type,
+  options,
+  name,
+  value,
+  onChange,
+  required,
+  error,
+  ...others
+}) => {
+    const [css, theme] = useCustomStyletron()
+    return (
+      <div
+        className={css({
+          fontSize: "16px",
+          fontWeight: 400,
+          textTransform: "capitalize",
+          margin: '10px 0',
+          color: '#fff'
+        })}
+        {...others}
+      >
+        {type === "select" ? (
+          <>
+            <label htmlFor={name}>{label}</label>
+            <StyledCustomSelect
+              placeholder={placeholder}
+              options={options!}
+              onSelect={onChange}
+              name={name}
+              value={value}
+              {...others}
+            />
+          </>
+        ) : (
+          <div className={css({ display: 'flex', flexFlow: 'column', alignItems: 'start' })}>
+            <label htmlFor={name}>{label} {required && <strong title={`${label} is required`} style={{ color: 'red', fontSize: '1rem' }}>*</strong>}</label>
+            <StyledInput
+              id={name}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}
+              name={name}
+              {...others}
+            />
+            {error && <StyledParagraphText weight={400} size={'.7rem'} style={{
+              color: 'red'
+            }}>{error} </StyledParagraphText>}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+export const StyledCustomSelect: React.FC<{
+  placeholder: string;
+  options: { value: string, name: string }[];
+  onSelect: (e: ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+  value: string,
+}> = ({ placeholder, options, onSelect, name, value, ...others }) => {
+  const [css] = useCustomStyletron();
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const inputRef = useRef(null);
+  const inputStyle = css({
+    background: "#fff !important",
+    outline: 'none',
+    "::placeholder": {
+      color: "rgba(176, 176, 176, 1)",
+    },
+    ":hover": {
+      cursor: "pointer",
+    },
+  });
+  return (
+    <div
+      className={css({
+        width: "100%",
+        height: "fit-content",
+        position: "relative",
+        gridArea: "input",
+
+      })}
+    >
+      <div
+        className={css({
+          position: "relative",
+          width: "100%",
+          height: "fit-content",
+
+        })}
+        onClick={(e) => {
+          if ((others as any).readOnly) return
+          setOptionsOpen(!optionsOpen);
+        }}
+      >
+        <StyledInput
+          ref={inputRef}
+          className={inputStyle}
+          readOnly
+          value={value}
+          placeholder={placeholder}
+          name={name}
+        />
+        <svg
+          width="9"
+          height="6"
+          viewBox="0 0 9 6"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "7%",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <path
+            d="M0.605575 0H8.39442C8.93326 0 9.20267 0.764898 8.82125 1.21316L4.92834 5.79188C4.69222 6.06937 4.30778 6.06937 4.07166 5.79188L0.178747 1.21316C-0.202673 0.764898 0.0667427 0 0.605575 0Z"
+            fill="#0E294B"
+          />
+        </svg>
+      </div>
+      {/**handle clickaway */}
+      {optionsOpen && <div onClick={() => setOptionsOpen(false)} className={css({ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0, 0, 0, .02)', zIndex: 1 })} />}
+
+      <div
+        className={css({
+          position: "absolute",
+          bottom: "0",
+          transform: "translateY(calc(100% - 12px))",
+          left: 0,
+          height: "fit-content",
+          width: "100%",
+          display: optionsOpen ? "flex" : "none",
+          flexFlow: "column",
+          border: "1px solid rgba(139, 139, 139, 1)",
+          zIndex: 1,
+          maxHeight: '300px',
+          overflowY: 'auto'
+
+
+        })}
+      >
+        {options.map((opt) => (
+          <StyledInput
+            onClick={() => {
+              onSelect({ target: { name, value: opt.name } } as any)
+              setOptionsOpen(false);
+            }}
+            readOnly
+            value={opt.name}
+            className={inputStyle + ' ' + css({
+              border: 'none',
+              outline: 'none',
+              margin: 0,
+              ':not(:last-child)': {
+                borderBottom: "1px solid rgba(139, 139, 139, 1)",
+              },
+              ':hover': {
+                background: "rgba(241, 241, 241, 1)"
+              },
+              ...(value === opt.name && { background: 'rgba(241, 241, 241, 1) !important' })
+            })}
+          />
+        ))}
+      </div>
+      {/* )} */}
+    </div>
+  );
+};
