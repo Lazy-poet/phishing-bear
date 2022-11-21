@@ -5,8 +5,9 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 
 import { authServices } from '../../services'
-import { Button, InputField, Alert, SEO, PublicLayout } from '@components'
-
+import { Button, InputField, Alert, SEO, PublicLayout, StyledButton, StyledParagraphText } from '@components'
+import { useCustomStyletron } from '../styles/custom-styles'
+import { PulseLoader } from 'react-spinners'
 const ForgotPassword = () => {
   const [alert, setAlert] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -28,7 +29,7 @@ const ForgotPassword = () => {
       })
     },
   })
-
+  const [css, theme] = useCustomStyletron()
   return (
     <>
       <SEO />
@@ -48,21 +49,35 @@ const ForgotPassword = () => {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     error={formik?.touched.email && formik.errors.email && formik.errors.email}
+                    style={{ color: theme.colors.dark }}
+                    inputStyles={{
+                      height: '50px',
+                      borderRadius: '10px',
+                      background: '#FFF',
+                      color: theme.colors.dark,
+                      '::placeholder': {
+                        color: 'rgba(0, 0, 0, .3)',
+                        fontSize: '13px '
+                      }
+                    }}
                   />
 
-                  {alert && <Alert alerts={alert} />}
+                  {/* {alert && <Alert alerts={alert} />} */}
 
                   <div className="d-grid gap-2 mb-2">
-                    <Button
-                      type="submit"
-                      name="Reset"
-                      className="text-white fs-5 rounded-1"
-                      loading={loading}
-                    />
+                    <StyledButton overrides={{
+                      background: theme.colors.secondary,
+                      height: '50px',
+                      margin: '10px 0',
+                      borderRadius: '7px',
+                      border: '.5px solid ' + theme.colors.dark,
+                      ...theme.typography.font(14)
+                    }}>{loading ? <PulseLoader color="#ffffff" size={10} /> : "Reset"}</StyledButton>
                   </div>
                 </form>
                 <Link href="/login">
-                  <a className="text-decoration-none fs-4">Back to login</a>
+                  <StyledParagraphText color={'#5a74ff'} size="16px" style={{ cursor: 'pointer' }} weight={800}>Back to login</StyledParagraphText>
+
                 </Link>
               </div>
             </div>

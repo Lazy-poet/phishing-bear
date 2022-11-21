@@ -6,9 +6,12 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup';
 
 import { authServices } from '../../services';
-import { Button, InputField, Alert, SEO, CheckBox, PublicLayout } from '@components';
+import { Button, InputField, Alert, SEO, StyledCheckbox, PublicLayout, StyledHeaderText, StyledButton, StyledParagraphText } from '@components';
+import { useCustomStyletron } from '../styles/custom-styles';
+import { PulseLoader } from 'react-spinners'
 
 const SignIn = () => {
+  const [css, theme] = useCustomStyletron()
   const router = useRouter()
 
   const [loading, setLoading] = useState(false)
@@ -78,7 +81,11 @@ const SignIn = () => {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9 col-md-8 col-lg-7 col-xl-5 mx-auto">
-                <h3 className="text-center mb-4">Sign up</h3>
+                <StyledHeaderText overrides={{
+                  ...theme.typography.font(38, 800),
+                  color: theme.colors.dark,
+                  textAlign: "center"
+                }}>Sign Up</StyledHeaderText>
                 <form className="my-2" onSubmit={formik.handleSubmit}>
 
                   <InputField
@@ -90,7 +97,17 @@ const SignIn = () => {
                     value={formik.values.first_name}
                     onChange={formik.handleChange}
                     error={formik?.touched.first_name && formik.errors.first_name && formik.errors.first_name}
-
+                    style={{ color: theme.colors.dark }}
+                    inputStyles={{
+                      height: '50px',
+                      borderRadius: '10px',
+                      background: '#FFF',
+                      color: theme.colors.dark,
+                      '::placeholder': {
+                        color: 'rgba(0, 0, 0, .3)',
+                        fontSize: '13px '
+                      }
+                    }}
                   />
                   <InputField
                     type="text"
@@ -101,6 +118,17 @@ const SignIn = () => {
                     value={formik.values.last_name}
                     onChange={formik.handleChange}
                     error={formik?.touched.last_name && formik.errors.last_name && formik.errors.last_name}
+                    style={{ color: theme.colors.dark }}
+                    inputStyles={{
+                      height: '50px',
+                      borderRadius: '10px',
+                      background: '#FFF',
+                      color: theme.colors.dark,
+                      '::placeholder': {
+                        color: 'rgba(0, 0, 0, .3)',
+                        fontSize: '13px '
+                      }
+                    }}
                   />
                   <InputField
                     type="email"
@@ -111,6 +139,17 @@ const SignIn = () => {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     error={formik?.touched.email && formik.errors.email && formik.errors.email}
+                    style={{ color: theme.colors.dark }}
+                    inputStyles={{
+                      height: '50px',
+                      borderRadius: '10px',
+                      background: '#FFF',
+                      color: theme.colors.dark,
+                      '::placeholder': {
+                        color: 'rgba(0, 0, 0, .3)',
+                        fontSize: '13px '
+                      }
+                    }}
                   />
 
                   <div className="position-relative">
@@ -123,43 +162,47 @@ const SignIn = () => {
                       value={formik.values.password}
                       onChange={formik.handleChange}
                       error={formik?.touched.password && formik.errors.password && formik.errors.password}
+                      style={{ color: theme.colors.dark }}
+                      inputStyles={{
+                        height: '50px',
+                        borderRadius: '10px',
+                        background: '#FFF',
+                        color: theme.colors.dark,
+                        '::placeholder': {
+                          color: 'rgba(0, 0, 0, .3)',
+                          fontSize: '13px '
+                        }
+                      }}
                     />
-
-                    {showPassword === false && <button type="button" className="btn border-0 p-0 position-absolute m-auto eye-off" onClick={() => setShowPassword(showPassword ? false : true)}>
-                      <i className="fa-solid fa-eye-slash" ></i>
-                    </button>}
-                    {showPassword === true && <button type="button" className="btn border-0 p-0 position-absolute m-auto eye-on" onClick={() => setShowPassword(showPassword ? false : true)}>
-                      <i className="fa-solid fa-eye" ></i>
-                    </button>}
                   </div>
-                  <CheckBox
-                    type="checkbox"
+                  <StyledCheckbox
                     name="checkbox1"
                     onChange={(e) => handleValue(e)}
-                    checkBoxOptions={[
-                      { label: "By creating an account, I agree to this website's privacy policy and terms of service", value: 'checked' },
-                    ]}
+                    label="By creating an account, I agree to this website's privacy policy and terms of service"
+                    checked={true}
                   />
-                  <CheckBox
-                    type="checkbox"
+                  <StyledCheckbox
                     name="checkbox2"
                     onChange={(e) => handleValue(e)}
-                    checkBoxOptions={[
-                      { label: ' I consent to receive marketing emails.', value: 'checked1' },
-                    ]}
+                    label=' I consent to receive marketing emails.'
+                    checked={true}
                   />
                   {alert && <Alert alerts={alert} />}
                   <div className="d-grid gap-2 mb-2">
-                    <Button type="submit" name={"Let's get started!"} className={checked?.data?.value?.length > 1 ? 'text-white fs-5 rounded-1' : 'text-white disabled fs-5 rounded-1'}
-                      loading={loading}
-                    />
+                    <StyledButton disabled={checked?.data?.value?.length < 2} overrides={{
+                      background: theme.colors.secondary,
+                      height: '50px',
+                      borderRadius: '7px',
+                      border: '.5px solid ' + theme.colors.dark,
+                      ...theme.typography.font(14)
+                    }}>{loading ? <PulseLoader color="#ffffff" size={10} /> : "Let's get started!"}</StyledButton>
                   </div>
-
                 </form>
                 <ul className="nav justify-content-between">
-                  <label className="fs-4">Already have an account?</label>
+                  <StyledParagraphText color={theme.colors.dark} size="14px" weight={500}>Already have an account?</StyledParagraphText>
                   <Link href="/login">
-                    <a className="text-decoration-none fs-4">Log In</a>
+                    <StyledParagraphText color={'#5a74ff'} size="14px" style={{ cursor: 'pointer' }} weight={800}>Log In</StyledParagraphText>
+
                   </Link>
                 </ul>
               </div>

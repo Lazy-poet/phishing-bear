@@ -7,7 +7,7 @@ const Private: NextPage = () => {
     <>
       <SEO />
       <PublicLayout>
-        <section className="pb-0">
+        <section className="pb-0" style={{ scrollSnapAlign: 'start' }}>
           <div className="container">
             <div className="row">
               <div className="col-10 mx-auto text-center">
@@ -19,7 +19,7 @@ const Private: NextPage = () => {
           </div>
         </section>
 
-        <section className="bg-secondary card-bg py-0">
+        <section className="bg-secondary card-bg py-0" style={{ scrollSnapAlign: 'start' }}>
           <div className="container">
 
             <div className="accordion " id="accordionExample">
@@ -75,11 +75,11 @@ const Private: NextPage = () => {
 
         </section>
 
-        <section>
+        <section style={{ scrollSnapAlign: 'start' }}>
           <div className="container">
             <div className="row">
               <div className="col-10 mx-auto text-center">
-                <p className="fs-1 mb-5">Targeted attacks with malicious payload use social engineering and phishing to bypass email gateways. Our Email Protection prevents these attacks to protect your business and data. </p>
+                <p className="fs-2 mb-5">Targeted attacks with malicious payload use social engineering and phishing to bypass email gateways. Our Email Protection prevents these attacks to protect your business and data. </p>
                 <Button type={'button'} name={'Try it for free'} className={'bg-primary text-white btn-pill fs-2'} />
                 <LinkButton name={'View plans'} className={'text-dark d-block fs-3'} path={''} />
               </div>

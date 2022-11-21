@@ -8,7 +8,7 @@ $theme-colors: (
   danger: #c8102e,
   dark: #02042b,
 );
-// @import "bootstrap/scss/bootstrap.scss";
+@import "bootstrap/scss/bootstrap.scss";
 @import url("https://fonts.googleapis.com/css2?family=Exo:wght@100;400;500;600;700;900&family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
@@ -61,7 +61,8 @@ div#__next {
 }
 
 section {
-  padding: 130px 0;
+  padding: 100px 0;
+  scroll-snap-align: start;
 }
 
 .container {

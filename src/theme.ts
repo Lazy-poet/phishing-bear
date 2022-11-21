@@ -35,7 +35,7 @@ const overrides = {
     primaryFontFamily: "'Inter', sans-serif",
     font: (size: number | string, weight: number = 400) => ({
       fontFamily: "'Raleway', sans-serif",
-      fontSize: typeof size === "number" ? `${size}px` : size,
+      fontSize: typeof size === "number" ? `${size}px !important` : size + ' !important',
       fontWeight: weight,
       lineHeight: 1.5,
     }),

@@ -72,17 +72,17 @@ export const addSpace = (
 
 export const StyledHeaderText = customStyled<"h1", TextProps>("h1", ({ size, color, weight, uppercase, overrides }) => ({
   color: color || "white",
-  fontSize: size || "38px",
+  fontSize: (size || "38px") + " !important",
   letterSpacing: "1px",
   fontWeight: weight || 700,
   textTransform: uppercase ? 'uppercase' : 'capitalize',
-  ...overrides
+  ...overrides,
 }));
 export const StyledParagraphText = customStyled<"p", TextProps>(
   "p",
   ({ size, color, weight, align, overrides }) => ({
     color: color || "white",
-    fontSize: size || "18px",
+    fontSize: (size || "18px") + " !important",
     letterSpacing: ".5px",
     fontWeight: weight || 300,
     lineHeight: 1.5,
@@ -96,7 +96,7 @@ export const StyledDarkParagraphText = customStyled<any, TextProps>(
   "p",
   ({ size, color, weight, align, overrides, $theme }) => ({
     color: `${$theme.colors.dark} !important`,
-    fontSize: size || "18px",
+    fontSize: (size || "18px") + " !important",
     letterSpacing: ".5px",
     fontWeight: weight || 300,
     lineHeight: 1.5,
@@ -107,13 +107,14 @@ export const StyledDarkParagraphText = customStyled<any, TextProps>(
   })
 );
 
-export const StyledInput = customStyled("input", ({ $theme }) => ({
+export const StyledInput = customStyled<'input', { overrides?: StyleObject }>("input", ({ $theme, overrides }) => ({
   boxSizing: "border-box",
   width: "100%",
   height: "fit-content",
   background: "transparent",
   border: 'none',
   outline: 'none',
+  position: 'relative',
   "::placeholder": {
     color: $theme.colors.bg,
     fontSize: "14px",
@@ -122,7 +123,8 @@ export const StyledInput = customStyled("input", ({ $theme }) => ({
   borderBottom: "1px solid #fff",
   padding: "10px 20px",
   margin: "10px 0",
-  color: '#fff'
+  color: '#fff',
+  ...overrides
 }));
 
 export const StyledTextArea = customStyled('textarea', ({ $theme }) => ({
@@ -139,10 +141,11 @@ export const StyledTextArea = customStyled('textarea', ({ $theme }) => ({
 
   }
 }))
-export const StyledPasswordInput: React.FC<{ placeholder: string, value: string, name?: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }> = ({
+export const StyledPasswordInput: React.FC<{ overrides?: StyleObject, placeholder: string, value: string, name?: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }> = ({
   placeholder,
   onChange,
-  value, name
+  value, name,
+  overrides
 }) => {
   const [style] = useCustomStyletron();
   const [showPassword, setShowPassword] = useState(false)
@@ -163,6 +166,7 @@ export const StyledPasswordInput: React.FC<{ placeholder: string, value: string,
         name={name ?? "password"}
         value={value}
         ref={passwordRef}
+        overrides={overrides}
       />
       <svg
         width="20"
@@ -221,6 +225,8 @@ export const InputField: React.FC<
     name: string,
     value: string,
     error?: any,
+    inputStyles?: StyleObject,
+    isPassword?: boolean,
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
   } & React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -236,6 +242,7 @@ export const InputField: React.FC<
   onChange,
   required,
   error,
+  inputStyles,
   ...others
 }) => {
     const [css, theme] = useCustomStyletron()
@@ -265,15 +272,22 @@ export const InputField: React.FC<
         ) : (
           <div className={css({ display: 'flex', flexFlow: 'column', alignItems: 'start' })}>
             <label htmlFor={name}>{label} {required && <strong title={`${label} is required`} style={{ color: 'red', fontSize: '1rem' }}>*</strong>}</label>
-            <StyledInput
-              id={name}
-              type={type}
-              placeholder={placeholder}
+            {type == "password" ? <StyledPasswordInput placeholder={placeholder}
               value={value}
               onChange={onChange}
               name={name}
-              {...others}
-            />
+              overrides={inputStyles}
+              {...others} /> :
+              <StyledInput
+                id={name}
+                type={type}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                name={name}
+                overrides={inputStyles}
+                {...others}
+              />}
             {error && <StyledParagraphText weight={400} size={'.7rem'} style={{
               color: 'red'
             }}>{error} </StyledParagraphText>}
@@ -400,3 +414,18 @@ export const StyledCustomSelect: React.FC<{
     </div>
   );
 };
+
+export const StyledCheckbox: React.FC<{ checked: boolean, label?: string, name: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }> = ({ checked, label, name, onChange }) => {
+  const [css, theme] = useCustomStyletron();
+  return <div className={css({
+    display: 'flex', gap: '10px', alignItems: 'flex-start',
+    ...theme.typography.font(14, 500),
+    marginBottom: '10px'
+  })}>
+    <input id={name} type="checkbox" name={name} checked={checked} onChange={onChange} className={css({
+      cursor: 'pointer'
+    })} />
+    <label htmlFor={name}>{label}</label>
+  </div>
+
+}

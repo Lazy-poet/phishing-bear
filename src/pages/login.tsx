@@ -9,7 +9,9 @@ import { useDispatch } from 'react-redux';
 import { authServices } from '../../services';
 import { setToken } from '../../redux/slices/session.slice';
 import { FetchDataProps } from '../utils/type';
-import { Button, InputField, Alert, SEO, PublicLayout } from '@components';
+import { Button, InputField, Alert, SEO, PublicLayout, StyledHeaderText, StyledButton, StyledParagraphText, StyledDarkParagraphText } from '@components';
+import { useCustomStyletron } from '../styles/custom-styles';
+import { PulseLoader } from 'react-spinners'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -35,6 +37,7 @@ const Login = () => {
     onSubmit: async (values: { [key: string]: string; }, { resetForm }) => {
       setLoading(true)
       authServices.login(values).then((data: FetchDataProps | any) => {
+        console.log('data is', data)
         dispatch(setToken(data?.access_token))
         setAlert(data)
         setLoading(false)
@@ -48,6 +51,7 @@ const Login = () => {
     },
   })
 
+  const [css, theme] = useCustomStyletron()
   return (
     <>
       <SEO />
@@ -56,7 +60,11 @@ const Login = () => {
           <div className="container">
             <div className="row">
               <div className="col-12 col-sm-9 col-md-8 col-lg-7 col-xl-5 mx-auto">
-                <h3 className="text-center mb-4">Login</h3>
+                <StyledHeaderText overrides={{
+                  ...theme.typography.font(38, 800),
+                  color: theme.colors.dark,
+                  textAlign: "center"
+                }}>Log in</StyledHeaderText>
                 <form onSubmit={formik.handleSubmit}>
                   <InputField
                     type="email"
@@ -67,11 +75,22 @@ const Login = () => {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     error={formik?.touched.email && formik.errors.email && formik.errors.email}
+                    style={{ color: theme.colors.dark }}
+                    inputStyles={{
+                      height: '50px',
+                      borderRadius: '10px',
+                      background: '#FFF',
+                      color: theme.colors.dark,
+                      '::placeholder': {
+                        color: 'rgba(0, 0, 0, .3)',
+                        fontSize: '13px '
+                      }
+                    }}
                   />
 
                   <div className="position-relative">
                     <InputField
-                      type={`${showPassword ? 'text' : 'password'}`}
+                      type="password"
                       name="password"
                       placeholder="Password"
                       label="Password"
@@ -79,27 +98,43 @@ const Login = () => {
                       value={formik.values.password}
                       onChange={formik.handleChange}
                       error={formik?.touched.password && formik.errors.password && formik.errors.password}
+                      style={{ color: theme.colors.dark }}
+                      inputStyles={{
+                        height: '50px',
+                        borderRadius: '10px',
+                        background: '#FFF',
+                        color: theme.colors.dark,
+                        '::placeholder': {
+                          color: 'rgba(0, 0, 0, .3)',
+                          fontSize: '13px '
+                        }
+                      }}
                     />
-                    {showPassword === false && <button type="button" className="btn border-0 p-0 position-absolute m-auto eye-off" onClick={() => setShowPassword(showPassword ? false : true)}>
-                      <i className="fa-solid fa-eye-slash" ></i>
-                    </button>}
-                    {showPassword === true && <button type="button" className="btn border-0 p-0 position-absolute m-auto eye-on" onClick={() => setShowPassword(showPassword ? false : true)}>
-                      <i className="fa-solid fa-eye" ></i>
-                    </button>}
                   </div>
+                  <Link href="/forgot-password">
 
-                  {alert && <Alert alerts={alert} />}
+                    <StyledDarkParagraphText weight={700} size="14px" align="right" style={{ cursor: 'pointer', marginBottom: '15px' }} onClick={() => { }}>
+                      Forgot Password
+                    </StyledDarkParagraphText>
+                  </Link>
+
+                  {/* {alert && <Alert alerts={alert} />} */}
 
                   <div className="d-grid gap-2 mb-2">
-                    <Button type="submit" name="Log in" className="text-white fs-5 rounded-1" loading={loading} />
+                    <StyledButton overrides={{
+                      background: theme.colors.secondary,
+                      height: '50px',
+                      borderRadius: '7px',
+                      border: '.5px solid ' + theme.colors.dark,
+                      ...theme.typography.font(14)
+                    }}>{loading ? <PulseLoader color="#ffffff" size={10} /> : "Log In"}
+                    </StyledButton>
                   </div>
                 </form>
                 <ul className="nav justify-content-between">
+                  <StyledParagraphText color={theme.colors.dark} size="14px" weight={500}>Don&lsquo;t have an account?</StyledParagraphText>
                   <Link href="/register">
-                    <a className="text-decoration-none fs-4">Don&lsquo;t have an account?</a>
-                  </Link>
-                  <Link href="/forgot-password">
-                    <a className="text-decoration-none fs-4">Forgot password</a>
+                    <StyledParagraphText color={'#5a74ff'} size="14px" style={{ cursor: 'pointer' }} weight={800}>Sign Up</StyledParagraphText>
                   </Link>
                 </ul>
               </div>

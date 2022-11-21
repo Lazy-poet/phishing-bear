@@ -2354,6 +2354,11 @@ react-redux@^8.0.4:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
+react-spinners@^0.13.6:
+  version "0.13.6"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.6.tgz#f97df4f7fedea7a496b391cf952761e13256610b"
+  integrity sha512-+VoSs1wN6oMhJy7PzCPiHUt6zUi9fvnGQizem8q/NzXhGovbdXFDWNhspk6KEKXQEafInUtpvtDlp/zJ5sES/A==
+
 react-uid@^2.3.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/react-uid/-/react-uid-2.3.2.tgz#09107543bb3184b53ca70275adb919217b94974d"

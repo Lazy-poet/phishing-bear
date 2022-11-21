@@ -7,7 +7,7 @@ const Enterprise: NextPage = () => {
     <>
       <SEO />
       <PublicLayout>
-        <section className="pb-0">
+        <section className="pb-0" style={{ scrollSnapAlign: 'start' }}>
           <div className="container">
             <div className="row">
               <div className="col-10 mx-auto text-center">
@@ -19,7 +19,7 @@ const Enterprise: NextPage = () => {
           </div>
         </section>
 
-        <section className="bg-secondary py-0 card-bg">
+        <section className="bg-secondary py-0 card-bg" style={{ scrollSnapAlign: 'start' }}>
           <div className="container">
             <div className="accordion " id="accordionExample">
               <div className="accordion accordion-flush mt-0 px-0" id="accordionFlushExample">
@@ -73,7 +73,7 @@ const Enterprise: NextPage = () => {
           </div>
         </section>
 
-        <section>
+        <section style={{ scrollSnapAlign: 'start' }}>
           <div className="container">
             <div className="row">
               <div className="col-10 mx-auto text-center">
