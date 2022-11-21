@@ -212,8 +212,8 @@ export const StyledButton = customStyled<"button", Partial<ButtonProps>>(
 export const InputField: React.FC<
   {
     label: string,
-    placeholder: string,
-    type: "text" | "email" | "select" | "checkbox",
+    placeholder?: string,
+    type: "text" | "email" | "select" | "checkbox" | "password",
     options?: { name: string, value: string }[],
     name: string,
     value: string,

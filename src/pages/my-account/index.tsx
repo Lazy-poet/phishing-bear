@@ -135,8 +135,10 @@ const NextPage = () => {
                           type="email"
                           name="email"
                           label="Email Address"
-                          disabled="true"
+                          disabled={true}
                           value={formik.values.email}
+                          onChange={formik.handleChange}
+
                         />
                       </div>
 
