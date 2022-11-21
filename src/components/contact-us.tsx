@@ -41,15 +41,18 @@ const ContactUs: NextPage = () => {
             background: theme.colors.bgHover
           }
         })}>
-          <img src="/assets/images/contact.png" alt="Contact Us" className="img-fluid w-75 m-auto" />
+          <img src="/assets/images/contact.png" alt="Contact Us" className={css({ width: '75%', margin: 'auto', maxWidth: '100%', height: 'auto' })} />
         </ImageWrapper>
         <div className={css({
           flex: '0 0 50%',
           background: theme.colors.secondary,
-          padding: '50px 100px',
+          padding: '20px',
+          [theme.mediaQuery.xsmall]: {
+            padding: '50px',
+          },
           width: '100%'
         })}>
-          <form onSubmit={formik.handleSubmit} style={{ maxWidth: '500px' }}>
+          <form onSubmit={formik.handleSubmit} style={{ maxWidth: '500px', margin: 'auto' }}>
             <StyledParagraphText overrides={{ ...theme.typography.font(24, 700) }}>Drop us a line</StyledParagraphText>
             <InputField
               type="text"

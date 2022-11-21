@@ -8,14 +8,20 @@ $theme-colors: (
   danger: #c8102e,
   dark: #02042b,
 );
-@import "bootstrap/scss/bootstrap.scss";
+// @import "bootstrap/scss/bootstrap.scss";
 @import url("https://fonts.googleapis.com/css2?family=Exo:wght@100;400;500;600;700;900&family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 * {
   box-sizing: border-box;
 }
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
 body {
+  margin: 0;
+  padding: 0;
   font-size: 22px;
   font-family: "Raleway", sans-serif;
   background-color: #e3f5eb;

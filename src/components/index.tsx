@@ -122,6 +122,7 @@ export const StyledInput = customStyled("input", ({ $theme }) => ({
   borderBottom: "1px solid #fff",
   padding: "10px 20px",
   margin: "10px 0",
+  color: '#fff'
 }));
 
 export const StyledTextArea = customStyled('textarea', ({ $theme }) => ({
@@ -130,6 +131,8 @@ export const StyledTextArea = customStyled('textarea', ({ $theme }) => ({
   background: 'rgba(255, 255, 255, .15)',
   padding: '10px',
   width: '100%',
+  color: '#fff',
+  fontSize: "14px",
   '::placeholder': {
     color: 'rgba(255, 255, 255, .35)',
     ...$theme.typography.font(15, 400)
