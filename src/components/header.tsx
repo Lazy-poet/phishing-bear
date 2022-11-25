@@ -4,14 +4,14 @@ import { useRouter } from 'next/router'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setLogOut } from '../../redux/slices/session.slice'
+import { setLogOut } from '../../redux/slices/auth.slice'
 import { LinkButton, Button, NavPrivate, NavPublic } from '@components'
 
 const Header = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { isLoggedIn } = useSelector((state: any) => state.session)
+  const { isLoggedIn } = useSelector((state: any) => state.auth)
 
   const logOut = () => {
     dispatch(setLogOut())

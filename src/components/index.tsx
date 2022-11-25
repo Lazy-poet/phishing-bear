@@ -19,6 +19,8 @@ export { default as Cards } from './home/cards'
 export { default as FooterBanner } from './home/banner'
 export { default as Footer } from './footer/footer'
 export { default as SectionWrapper } from './about'
+export { default as Spinner } from './spinner'
+
 export * from './about'
 
 export {

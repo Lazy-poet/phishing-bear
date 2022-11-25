@@ -8,7 +8,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { authServices } from '../../../services'
-import { setLogOut } from '../../../redux/slices/session.slice'
+import { setLogOut } from '../../../redux/slices/auth.slice'
 import { PrivateLayout, LinkButton, InputField, Button, SEO, Alert } from '@components'
 
 const ChangePassword = () => {

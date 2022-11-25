@@ -7,15 +7,15 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 
 import { authServices } from '../../services';
-import { setToken } from '../../redux/slices/session.slice';
-import { FetchDataProps } from '../utils/type';
+import { handleLogin } from '../../redux/slices/auth.slice';
 import { Button, InputField, Alert, SEO, PublicLayout, StyledHeaderText, StyledButton, StyledParagraphText, StyledDarkParagraphText } from '@components';
 import { useCustomStyletron } from '../styles/custom-styles';
 import { PulseLoader } from 'react-spinners'
 
 const Login = () => {
   const dispatch = useDispatch()
-  const router = useRouter()
+  const router = useRouter();
+  const { redirect_path } = router.query as { redirect_path: string }
 
   const [alert, setAlert] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -36,18 +36,14 @@ const Login = () => {
     }),
     onSubmit: async (values: { [key: string]: string; }, { resetForm }) => {
       setLoading(true)
-      authServices.login(values).then((data: FetchDataProps | any) => {
-        console.log('data is', data)
-        dispatch(setToken(data?.access_token))
+      const data = await authServices.login(values) as unknown as { access_token: string };
+      if (data) {
+        dispatch(handleLogin(data?.access_token))
         setAlert(data)
-        setLoading(false)
-        if (data.error === false) {
-          setTimeout(() => {
-            data.error === false && router.push('/community')
-            resetForm({ values: {} })
-          }, 500)
-        }
-      })
+        router.push(redirect_path || '/community')
+        resetForm({ values: {} })
+      }
+      setLoading(false);
     },
   })
 

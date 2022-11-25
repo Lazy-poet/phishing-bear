@@ -7,7 +7,7 @@ import { ShowUsersData, FetchDataProps, FilteredData } from '../utils/type';
 import { PrivateLayout, Button, SEO, LinkButton, Pagination, Loading, SelectField } from '@components'
 
 const MyCommunity = () => {
-  const { profleData } = useSelector((state: any) => state.session)
+  const { profleData } = useSelector((state: any) => state.auth)
 
   const [loading, setLoading] = useState(false)
   const [usersList, setUsersList] = useState<FetchDataProps | [] | any>([])

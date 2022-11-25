@@ -3,28 +3,27 @@ import CommonService from './common.service';
 
 class AuthServices extends CommonService {
   async login(params: { [key: string]: string }) {
-    return await this.post('login', params)
+    return await this.post('auth/login', params)
   }
-
   async register(params: any) {
-    return await this.post('register', params)
+    return await this.post('auth/register', params)
   }
-  async accountVerify(params: any) {
-    return await this.put('account-verification', { token: params })
+  async accountVerify(token: string) {
+    return await this.put('users/verify', { token })
   }
   async updatePassword(params: any) {
-    return await this.post('update-password', params)
+    return await this.post('auth/update-password', params)
   }
   async forgotPassword(params: { [key: string]: string }) {
-    return await this.post('reset-password-email', params)
+    return await this.post('auth/reset-password-email', params)
   }
   async updateUserProfilePassword(params: any) {
     console.log('params', params);
 
-    return await this.put('account/change-password', params)
+    return await this.put('auth/account/change-password', params)
   }
   async getMe() {
-    return await this.get('me')
+    return await this.get('auth/me')
   }
 }
 

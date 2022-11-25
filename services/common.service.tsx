@@ -1,53 +1,95 @@
 import store from 'store'
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { toast } from 'react-toastify';
 
 export default class CommonService {
   axiosInstance: AxiosInstance;
+  token: string
 
   constructor() {
-    this.axiosInstance = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_BASE_URL
-    })
+    this.axiosInstance = this.createInstance();
+    this.token = this.getToken();
+  }
 
-    this.axiosInstance.interceptors.request.use(async (request: AxiosRequestConfig) => {
-      const accessToken = await store.get(process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY)
-
-      request.headers = {
+  createInstance = () => {
+    const instance = axios.create({
+      baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+      headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': accessToken
       }
-
-      return request
     })
 
-    this.axiosInstance.interceptors.response.use(
+    instance.interceptors.request.use(
+      (config: AxiosRequestConfig) => {
+        if (this.getToken()) {
+          config.headers = { ...config.headers, 'Authorization': `Bearer ${this.token}` }
+        }
+        return config
+      },
+      error => Promise.reject(error));
+
+    instance.interceptors.response.use(
       (results: AxiosResponse) => {
         return results.data
       },
-      (error: { [key: string]: AxiosResponse }) => {
-        if (error.response.status === 401) {
-          store.clearAll()
-          window.location.href = '/login'
+      error => {
+        if (error.response) {
+          if (error.response.status === 401) {
+            // store.clearAll()
+            // window.location.href = '/login'
+          } else {
+            toast.error(error.response?.data?.message || 'an error occured, please try again')
+          }
+        } else {
+          toast.error(error.message)
         }
-        return error?.response?.data
+        return Promise.reject(error)
       },
     )
+
+    return instance
+  }
+  getToken = () => {
+    const token = store.get(process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY!);
+    this.token = token;
+    return token;
   }
 
   async get(endpoint: string, params = '') {
-    return await this.axiosInstance.get(endpoint + params)
+    try {
+      const res = await this.axiosInstance.get(endpoint + params);
+      return res
+    }
+    catch (e) {
+    }
   }
 
-  async post(endpoint: string, params = {}) {
-    return await this.axiosInstance.post(endpoint, params && JSON.stringify(params))
+  async post(endpoint: string, data: Record<string, any>) {
+    try {
+      const res = await this.axiosInstance.post(endpoint, data);
+      return res
+    }
+    catch (e) {
+    }
   }
 
-  async put(endpoint: string, params = {}) {
-    return await this.axiosInstance.put(endpoint, params && JSON.stringify(params))
+  async put(endpoint: string, data: Record<string, any>) {
+    try {
+      const res = await this.axiosInstance.put(endpoint, data);
+      return res
+    }
+    catch (e) {
+    }
   }
 
   async delete(endpoint: string) {
-    return await this.axiosInstance.delete(endpoint)
+    try {
+      const res = await this.axiosInstance.delete(endpoint);
+      return res
+    }
+    catch (e) {
+
+    }
   }
 }

@@ -9,6 +9,8 @@ import { Provider as StyletronProvider } from "styletron-react";
 import { styletron } from '../styletron';
 import { BaseProvider } from "baseui";
 import { theme, CustomTheme } from "../theme";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps: { ...pageProps } }: any) {
   const [state, setState] = useState(false)
@@ -22,6 +24,7 @@ function MyApp({ Component, pageProps: { ...pageProps } }: any) {
     <StyletronProvider value={styletron}>
       <BaseProvider theme={theme as CustomTheme}>
         <Provider store={store}>
+          <ToastContainer autoClose={2000} limit={1} />
           {state ?
             <Component {...pageProps} />
             : null}

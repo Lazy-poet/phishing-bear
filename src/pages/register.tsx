@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -9,6 +9,8 @@ import { authServices } from '../../services';
 import { Button, InputField, Alert, SEO, StyledCheckbox, PublicLayout, StyledHeaderText, StyledButton, StyledParagraphText } from '@components';
 import { useCustomStyletron } from '../styles/custom-styles';
 import { PulseLoader } from 'react-spinners'
+import isObjectFilled from '../utils/isObjectFilled'
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
   const [css, theme] = useCustomStyletron()
@@ -19,9 +21,8 @@ const SignIn = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const [checked, setChecked] = useState({
-    data: {
-      value: []
-    }
+    checkbox1: false,
+    checkbox2: false
   })
 
   const formik = useFormik({
@@ -42,36 +43,26 @@ const SignIn = () => {
       ),
     }),
 
-    onSubmit: (values: any, { resetForm }) => {
+    onSubmit: async (values: any, { resetForm }) => {
       setLoading(true)
-      authServices.register(values).then((data: any) => {
-        setAlert(data)
-        if (data.error === false) {
-          setTimeout(() => {
-            setLoading(false)
-            resetForm({ values: '' })
-            router.push('/login')
-          }, 2000);
-        }
-      })
+      const data = await authServices.register(values);
+      if (data) {
+        toast.info('Verification details have been sent to provided email')
+        setTimeout(() => {
+          setLoading(false)
+          resetForm({ values: '' })
+          router.push('/login')
+        }, 2000);
+      }
+      setLoading(false)
     },
   })
-  const handleValue = (e) => {
-    const { value } = e.target
-    const checkedValue = checked.data.value
-    const find = checkedValue.findIndex(item => item === value)
-    if (find > -1) {
-      checkedValue.splice(find, 1)
-    } else {
-      checkedValue.push(value);
-    }
-    setChecked((e) => ({
-      ...e,
-      data: {
-        ...e.data,
-        value: checkedValue
-      }
-    }))
+  const disableButton = !checked.checkbox1 || !checked.checkbox2 || !isObjectFilled(formik.values)
+
+
+  const handleCheck = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setChecked(c => ({ ...c, [name]: checked }));
   }
 
   return (
@@ -177,19 +168,18 @@ const SignIn = () => {
                   </div>
                   <StyledCheckbox
                     name="checkbox1"
-                    onChange={(e) => handleValue(e)}
+                    onChange={(e) => handleCheck(e)}
                     label="By creating an account, I agree to this website's privacy policy and terms of service"
-                    checked={true}
+                    checked={checked.checkbox1}
                   />
                   <StyledCheckbox
                     name="checkbox2"
-                    onChange={(e) => handleValue(e)}
+                    onChange={(e) => handleCheck(e)}
                     label=' I consent to receive marketing emails.'
-                    checked={true}
+                    checked={checked.checkbox2}
                   />
-                  {alert && <Alert alerts={alert} />}
                   <div className="d-grid gap-2 mb-2">
-                    <StyledButton disabled={checked?.data?.value?.length < 2} overrides={{
+                    <StyledButton disabled={disableButton} overrides={{
                       background: theme.colors.secondary,
                       height: '50px',
                       borderRadius: '7px',

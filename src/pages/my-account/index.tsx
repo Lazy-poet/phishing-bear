@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 
 import { userServices, authServices } from '../../../services'
-import { setLogOut } from '../../../redux/slices/session.slice';
+import { setLogOut } from '../../../redux/slices/auth.slice';
 import { Button, InputField, PrivateLayout, LinkButton, SEO, Alert, Loading } from '@components'
 import { TextArea } from '../../components/form-inputs'
 
@@ -54,7 +54,7 @@ const NextPage = () => {
         bio: values.bio,
       }
       setLoading(true)
-      userServices.updateUserProfile(item).then(({data}) => {
+      userServices.updateUserProfile(item).then(({ data }) => {
         setAlert(data)
         if (data.error === false) {
           setLoading(false)

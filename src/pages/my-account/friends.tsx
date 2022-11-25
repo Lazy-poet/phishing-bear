@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 import { userServices } from '../../../services'
 
-import { setLogOut } from '../../../redux/slices/session.slice'
+import { setLogOut } from '../../../redux/slices/auth.slice'
 import { ShowUsersData, FetchDataProps } from '../../utils/type';
 import { PrivateLayout, LinkButton, SEO, Loading, Button } from '@components'
 
