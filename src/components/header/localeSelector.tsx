@@ -4,7 +4,9 @@ import { StyleObject } from 'styletron-react'
 import { useCustomStyletron } from '../../styles/custom-styles';
 import dropdown from '/assets/images/dropdown.svg'
 
-type Props = {}
+type Props = {
+  overrides?: StyleObject
+}
 
 
 const LocaleItem = ({ label, src, alt, onClick, style, isActive }: { isActive: boolean, label: string, src: string, alt: string, onClick: () => void, style?: StyleObject }) => {
@@ -31,7 +33,7 @@ const LocaleItem = ({ label, src, alt, onClick, style, isActive }: { isActive: b
 
   </div>
 }
-const LocaleSelector = (props: Props) => {
+const LocaleSelector = ({ overrides }: Props) => {
   const [useDefault, setUseDefault] = useState(true);
   const [showDropdown, setShowDropdown] = useState(false);
   const [css, theme] = useCustomStyletron();
@@ -44,7 +46,7 @@ const LocaleSelector = (props: Props) => {
   }
   return (
     <div className={css({ position: 'relative' })}>
-      <LocaleItem {...getLocaleProps(useDefault ? true : false)} isActive={true} onClick={() => setShowDropdown(!showDropdown)} />
+      <LocaleItem style={overrides} {...getLocaleProps(useDefault ? true : false)} isActive={true} onClick={() => setShowDropdown(!showDropdown)} />
 
       <LocaleItem style={{
         position: 'absolute',
@@ -52,7 +54,7 @@ const LocaleSelector = (props: Props) => {
         transform: 'translateY(100%)',
         opacity: Number(showDropdown),
         width: '100%',
-    background: '#fff',
+        background: '#fff',
 
 
       }} {...getLocaleProps(!useDefault ? true : false)} isActive={false} onClick={() => {

@@ -5,115 +5,93 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { authServices } from '../../../services'
-import { setLogOut, setMedata } from '../../../redux/slices/session.slice'
+import { setLogOut, setMedata } from '../../../redux/slices/auth.slice'
 import { Button } from '@components'
+import { useCustomStyletron } from '../../styles/custom-styles'
+import { DesktopHeaderWrapper, NavItem, MyAccountWrapper, MobileHeaderWrapper } from './header.style'
+import Sidebar from '../sidebar/sidebar'
 
 const NAV_ITEMS = [
-  { title: 'Dashboard', href: '/dashboard', logo: '/assets/images/dashboard.svg' },
-  { title: 'Handbook', href: '/handbook', logo: '/assets/images/handbook.svg' },
-  { title: 'FAQs', href: '/faq', logo: '/assets/images/faq.svg' },
-  { title: 'My community', href: '/community', logo: '/assets/images/community.svg' },
+  { label: 'Dashboard', href: '/dashboard', icon: '/assets/images/offcanvas-icons/dashboard.svg' },
+  { label: 'Handbook', href: '/handbook', icon: '/assets/images/offcanvas-icons/handbook.svg' },
+  { label: 'FAQs', href: '/faq', icon: '/assets/images/offcanvas-icons/faq.svg' },
+  { label: 'My community', href: '/community', icon: '/assets/images/offcanvas-icons/community.svg' },
 ]
-const NavPrivate = () => {
+const NavPrivate = ({ showSidebar, toggleSidebar }) => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { isLoggedIn, profleData } = useSelector((state: any) => state.session)
-
+  const { isLoggedIn, profleData } = useSelector((state: any) => state.auth)
+  const userName = `${profleData?.first_name}+${profleData?.last_name}`
+  const matches = userName.match(/\b(\w)/g)
+  const initials = matches?.join('').toUpperCase();
   useEffect(() => {
     if (isLoggedIn === true) {
       authServices.getMe().then((data: any) => {
         dispatch(setMedata(data.data))
       })
     }
-  }, [])
+  }, [isLoggedIn])
 
   const logOut = () => {
     dispatch(setLogOut())
-    router.push('http://newsite.phishingbear.com/login')
+    router.push('/login')
   }
 
-  const userName = `${profleData?.first_name}+${profleData?.last_name}`
-  const matches = userName.match(/\b(\w)/g)
-  const avtar = matches?.join('').toUpperCase();
+
+  const [css, theme] = useCustomStyletron()
 
   return (
-    <ul className="nav justify-content-end align-items-center private-nav">
-      <li className="nav-item me-5">
-        <Link href="/dashboard">
-          <a className="nav-link text-dark fw-normal fs-3">
-            <img src="/assets/images/dashboard.svg" alt="Dashboard" /> Dashboard
-          </a>
-        </Link>
-      </li>
-      <li className="nav-item me-5">
-        <Link href="#">
-          <a className="nav-link text-dark fw-normal fs-3">
-            <img src="/assets/images/handbook.svg" alt="Handbook" /> Handbook
-          </a>
-        </Link>
-      </li>
-      <li className="nav-item me-5">
-        <Link href="/faq">
-          <a className="nav-link text-dark fw-normal fs-3">
-            <img src="/assets/images/faq.svg" alt="FAQ" />  FAQs
-          </a>
-        </Link>
-      </li>
-      <li className="nav-item me-5">
-        <Link href="/community">
-          <a className="nav-link text-dark fw-normal fs-3">
-            <img src="/assets/images/community.svg" alt="Community" />  My community
-          </a>
-        </Link>
-      </li>
+    <>
+      <DesktopHeaderWrapper>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
+          <Link href="/">
+            <img src="/assets/images/logo.svg" alt="Logo" className={css({
+              width: '170px',
+              marginRight: '20px',
+              [theme.mediaQuery.medium]: {
+                marginRight: '50px',
 
-      <li className="nav-item avtar">
-        {profleData?.first_name && profleData?.last_name &&
-          <Link href="/community">
-            <button className="btn border-0 bg-primary  rounded-circle fs-3" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
-              <span className="text-white "> {avtar}</span>
-            </button>
+              },
+              cursor: 'pointer',
+              ':hover': {
+                transform: 'scale(1.01)'
+              }
+            })} />
           </Link>
-        }
-        <ul className="dropdown-menu rounded-0 p-0 border-0 shadow">
-          <li className="py-2">
-            <Link
-              href='/my-account'
-            >
-              <a className="dropdown-item py-3 px-4 fs-3">
-                <img src="/assets/images/my-account.svg" alt="My account" className="img-fluid me-2" />  My account
-
-              </a>
-            </Link>
-          </li>
-          <li className="px-3">
-
-            <Button className="btn border border-dark text-dark fs-4 rounded-1 py-2 w-100 bg-white" name="Logout" onClick={logOut} />
-          </li>
-          <li className="py-2 px-4 pt-4">
-            <ul className="nav">
-              <li className="nav-item pe-3">
-                <Link href="#">
-                  <a className="nav-link text-dark px-0 fs-5">
-                    <img src="/assets/images/eng.svg" alt="England" className="" />&nbsp; EN
-
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="#">
-                  <a className="nav-link text-dark px-0 fs-5">
-                    <img src="/assets/images/swe.svg" alt="Sweden" className="img-fluid" /> &nbsp; SWE
-                  </a>
-                </Link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-    </ul>
+          <NavItem href="/dashboard" label="Dashboard" logo='/assets/images/dashboard.svg' />
+          <NavItem href="/handbook" label="Handbook" logo='/assets/images/handbook.svg' />
+          <NavItem href="/faq" label="FAQs" logo="/assets/images/faq.svg" />
+          <NavItem href="/community" label="Community" logo="/assets/images/community.svg" />
+        </div>
+        <MyAccountWrapper onLogout={logOut} initials={initials} />
+      </DesktopHeaderWrapper>
+      <MobileHeaderWrapper>
+        <Link href="/">
+          <img src="/assets/images/logo.svg" alt="Logo" className={css({
+            width: '120px',
+            [theme.mediaQuery.xsmall]: {
+              width: '150px',
+            },
+            marginRight: '50px',
+            cursor: 'pointer',
+            ':hover': {
+              transform: 'scale(1.01)'
+            }
+          })} />
+        </Link>
+        <img src="/assets/images/hamburger.svg" alt="Logo" className={css({
+          width: '40px',
+          cursor: 'pointer',
+          ':hover': {
+            transform: 'scale(1.01)'
+          }
+        })}
+          onClick={toggleSidebar}
+        />
+        <Sidebar initials={initials} onLogout={logOut} isLoggedIn links={NAV_ITEMS} show={showSidebar} toggle={toggleSidebar} />
+      </MobileHeaderWrapper>
+    </>
 
   )
 }

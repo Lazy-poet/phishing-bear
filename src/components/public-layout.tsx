@@ -21,6 +21,9 @@ const PublicLayout = ({ children, strict, noHeader, noFooter }: { children: Reac
         overflowY: "scroll",
         minHeight: "100vh",
         height: "calc(var(--vh, 1vh) * 100)",
+        display: 'flex',
+        flexFlow: 'column',
+        justifyContent: 'space-between'
       }}>
         {!noHeader && <Header />}
         <main style={{ marginTop: noHeader ? 0 : '45px' }}>{children}</main>

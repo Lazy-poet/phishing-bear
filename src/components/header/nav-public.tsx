@@ -13,6 +13,13 @@ type Props = {
   showSidebar: boolean
   toggleSidebar: () => void
 }
+const links = [
+  { label: 'Home', href: '/' },
+  { label: 'About us', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Enterprise solutions', href: '/enterprise' },
+  { label: 'Private solutions', href: 'private' },
+]
 const NavPublic = ({ showSidebar, toggleSidebar }) => {
   const router = useRouter()
   const [css, theme] = useCustomStyletron()
@@ -41,7 +48,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
           <LocaleSelector />
-          <NavItem href="#" label="Try it for free" style={{
+          <NavItem href="#" label="Try it for free" wrapperStyle={{
             borderRadius: '5px',
             background: theme.colors.secondary,
             color: '#fff',
@@ -54,7 +61,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
           }} />
 
           {router?.pathname === '/login' ? null :
-            <NavItem href="/login" label="Log in" style={{
+            <NavItem href="/login" label="Log in" wrapperStyle={{
               borderRadius: '5px',
               // color: theme.colors.secondary,
               border: `1px solid ${theme.colors.dark}`,
@@ -95,7 +102,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
         })}
           onClick={toggleSidebar}
         />
-        <Sidebar show={showSidebar} toggle={toggleSidebar} />
+        <Sidebar links={links} show={showSidebar} toggle={toggleSidebar} />
 
       </MobileHeaderWrapper>
     </>

@@ -20,7 +20,7 @@ const sessionSlice = createSlice({
     },
     setLogOut: (state) => {
       state.isLoggedIn = false;
-      store.clearAll()
+      store.clearAll();
     }
   },
 })

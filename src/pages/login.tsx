@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <>
       <SEO />
-      <PublicLayout>
+      <PublicLayout strict>
         <section className="login-content">
           <div className="container">
             <div className="row">

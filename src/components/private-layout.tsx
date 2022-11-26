@@ -6,7 +6,7 @@ import Login from '../pages/login';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
-const PrivateLayout = ({ children }: any) => {
+const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.ReactNode, noHeader?: boolean, noFooter?: boolean }) => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
   const router = useRouter();
 
@@ -22,9 +22,21 @@ const PrivateLayout = ({ children }: any) => {
 
   return (
     <>
-      <Header />
-      {children}
-      <Footer />
+      <div style={{
+        scrollSnapType: "y mandatory",
+        ...(!noHeader && { scrollPaddingTop: '60px' }),
+        overflowY: "scroll",
+        minHeight: "100vh",
+        height: "calc(var(--vh, 1vh) * 100)",
+        display: 'flex',
+        flexFlow: 'column',
+        justifyContent: 'space-between'
+
+      }}>
+        {!noHeader && <Header />}
+        <main style={{ marginTop: noHeader ? 0 : '45px' }}>{children}</main>
+        {!noFooter && <Footer />}
+      </div>
     </>
   )
 }

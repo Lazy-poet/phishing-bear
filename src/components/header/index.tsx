@@ -10,7 +10,7 @@ const Header = (props: Props) => {
   const toggleSidebar = () => setShowSidebar(prevVal => !prevVal)
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: 'fit-content', zIndex: 10 }}>
-      {isLoggedIn ? <NavPrivate /> : <NavPublic showSidebar={showSidebar} toggleSidebar={toggleSidebar} />}
+      {isLoggedIn ? <NavPrivate showSidebar={showSidebar} toggleSidebar={toggleSidebar} /> : <NavPublic showSidebar={showSidebar} toggleSidebar={toggleSidebar} />}
     </div>
   )
 }
