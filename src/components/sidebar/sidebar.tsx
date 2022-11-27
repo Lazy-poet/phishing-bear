@@ -47,7 +47,7 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
                     onClick={toggle}
                 />
             </div>
-            <Link href='/my-account'>
+            {isLoggedIn && <Link href='/my-account'>
                 <div className={css({
                     width: 'calc(100% - 40px)',
                     height: '60px',
@@ -62,7 +62,7 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
                     cursor: 'pointer',
 
                 })}>
-                    {isLoggedIn && initials.length === 2 &&
+                    {initials.length === 2 &&
                         <div className={css({
                             width: '59px',
                             height: '59px',
@@ -79,7 +79,7 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
                         margin: '0 20px'
                     })} />
                 </div>
-            </Link>
+            </Link>}
             <div className={css({
                 width: '100%',
                 display: 'flex',
@@ -108,6 +108,7 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
                             width: 'calc(100% - 20px)',
                             margin: '10px'
                         }}
+                        onClick={toggle}
                     />))
                 }
 
@@ -200,7 +201,8 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
 
                     }}
                         onClick={() => {
-                            onLogout?.()
+                            onLogout?.();
+                            toggle()
                         }}>
                         <img src={`/assets/images/${isLoggedIn ? 'offcanvas-icons/logout' : 'login'}.svg`} className={css({
                             position: 'absolute',

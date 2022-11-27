@@ -287,8 +287,8 @@ export const InputField: React.FC<
                 value={value}
                 onChange={onChange}
                 name={name}
-                overrides={inputStyles}
                 {...others}
+                overrides={inputStyles}
               />}
             {error && <StyledParagraphText weight={400} size={'.7rem'} style={{
               color: 'red'

@@ -79,7 +79,7 @@ const Login = () => {
                       color: theme.colors.dark,
                       '::placeholder': {
                         color: 'rgba(0, 0, 0, .3)',
-                        fontSize: '13px '
+                        fontSize: '13px !important'
                       }
                     }}
                   />
@@ -102,7 +102,7 @@ const Login = () => {
                         color: theme.colors.dark,
                         '::placeholder': {
                           color: 'rgba(0, 0, 0, .3)',
-                          fontSize: '13px '
+                          fontSize: '13px !important'
                         }
                       }}
                     />
