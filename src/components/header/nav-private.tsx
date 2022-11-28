@@ -28,7 +28,9 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
   useEffect(() => {
     if (isLoggedIn === true) {
       authServices.getMe().then((data: any) => {
-        dispatch(setMedata(data.data))
+        if (data) {
+          dispatch(setMedata(data.data))
+        }
       })
     }
   }, [isLoggedIn])

@@ -36,7 +36,9 @@ const NextPage = () => {
     })
     setLoading(true)
     authServices.getMe().then((data) => {
-      setInitialData(data.data)
+      if (!data.error) {
+        setInitialData(data.data)
+      }
       setLoading(false)
     })
   }, [])

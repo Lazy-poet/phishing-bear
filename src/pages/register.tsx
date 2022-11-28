@@ -31,6 +31,7 @@ const SignIn = () => {
       first_name: '',
       last_name: '',
       password: '',
+      confirm_password: ''
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -41,6 +42,10 @@ const SignIn = () => {
         /^(?=.*)(?=.{6,})/,
         'Must Contain 6 Characters'
       ),
+      confirm_password: Yup.string()
+        .test('passwords-match', 'Passwords must match', function (value) {
+          return this.parent.password === value
+        })
     }),
 
     onSubmit: async (values: any, { resetForm }) => {
@@ -153,6 +158,29 @@ const SignIn = () => {
                       value={formik.values.password}
                       onChange={formik.handleChange}
                       error={formik?.touched.password && formik.errors.password && formik.errors.password}
+                      style={{ color: theme.colors.dark }}
+                      inputStyles={{
+                        height: '50px',
+                        borderRadius: '10px',
+                        background: '#FFF',
+                        color: theme.colors.dark,
+                        '::placeholder': {
+                          color: 'rgba(0, 0, 0, .3)',
+                          fontSize: '13px '
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="position-relative">
+                    <InputField
+                      type={`${showPassword ? 'text' : 'password'}`}
+                      name="confirm_password"
+                      placeholder="confirm password"
+                      label="Confirm Password"
+                      required={true}
+                      value={formik.values.confirm_password}
+                      onChange={formik.handleChange}
+                      error={formik?.touched.confirm_password && formik.errors.confirm_password && formik.errors.confirm_password}
                       style={{ color: theme.colors.dark }}
                       inputStyles={{
                         height: '50px',

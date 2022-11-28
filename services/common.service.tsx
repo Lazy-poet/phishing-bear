@@ -30,21 +30,26 @@ export default class CommonService {
       error => Promise.reject(error));
 
     instance.interceptors.response.use(
-      (results: AxiosResponse) => {
-        return results.data
+      (results: AxiosResponse & { error: boolean }) => {
+        return { ...results.data, error: false }
       },
       error => {
         if (error.response) {
           if (error.response.status === 401) {
-            // store.clearAll()
-            // window.location.href = '/login'
+
+            toast.error('Please login again', { toastId: 'login-again' })
           } else {
-            toast.error(error.response?.data?.message || 'an error occured, please try again')
+            toast.error(error.response?.data?.message || 'an error occured, please try again', { toastId: 'error-' })
           }
         } else {
-          toast.error(error.message)
+          toast.error(error.message, { toastId: 'no-response' })
         }
-        return Promise.reject(error)
+        return Promise.reject({
+          status: error.response?.status || 500,
+          message: error.response?.data.message,
+          error: true,
+          data: {}
+        })
       },
     )
 
@@ -58,10 +63,11 @@ export default class CommonService {
 
   async get(endpoint: string, params = '') {
     try {
-      const res = await this.axiosInstance.get(endpoint + params);
+      const res: AxiosResponse & { error: boolean } = await this.axiosInstance.get(endpoint + params);
       return res
     }
     catch (e) {
+      return e
     }
   }
 
@@ -71,6 +77,7 @@ export default class CommonService {
       return res
     }
     catch (e) {
+      return e
     }
   }
 
@@ -80,6 +87,7 @@ export default class CommonService {
       return res
     }
     catch (e) {
+      return e
     }
   }
 
@@ -90,6 +98,7 @@ export default class CommonService {
     }
     catch (e) {
 
+      return e
     }
   }
 }

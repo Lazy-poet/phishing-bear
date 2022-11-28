@@ -1,11 +1,11 @@
 import React from 'react'
-import { PublicLayout, SEO, Button, LinkButton } from '@components'
+import { PrivateLayout, SEO, Button, LinkButton } from '@components'
 
 const Dashboard = () => {
   return (
     <>
       <SEO />
-      <PublicLayout>
+      <PrivateLayout>
         <section className="text-white home-page pt-0">
           <div className="container-fluid px-5">
             <div className="row vh-100">
@@ -75,7 +75,7 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
-      </PublicLayout>
+      </PrivateLayout>
     </>
   )
 }
