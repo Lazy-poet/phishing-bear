@@ -81,25 +81,26 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
 
 }
 
+export const InitialsWrapper = customStyled('div', ({ $theme }) => ({
+    width: '54px',
+    height: '54px',
+    borderRadius: '50%',
+    backgroundColor: $theme.colors.secondary,
+    color: '#fff',
+    display: 'grid',
+    placeContent: 'center',
+    ...$theme.typography.font(24, 400)
+}))
 export const MyAccountWrapper = ({ onLogout, initials }) => {
     const [css, theme] = useCustomStyletron();
     const [show, setShow] = useState(false);
 
 
-    return <div className={css({ position: 'relative', cursor: 'pointer' })}>
+    return <div className={css({ position: 'relative', cursor: 'pointer', })}>
         {initials.length === 2 &&
-            <div onMouseOver={() => setShow(true)} onClick={() => setShow(!show)} className={css({
-                width: '54px',
-                height: '54px',
-                borderRadius: '50%',
-                backgroundColor: theme.colors.secondary,
-                color: '#fff',
-                display: 'grid',
-                placeContent: 'center',
-                ...theme.typography.font(24, 400)
-            })}> {initials}</div>
+            <InitialsWrapper onClick={() => setShow(!show)}> {initials}</InitialsWrapper>
         }
-        <div className={css({
+        {show && <div className={css({
             width: '190px',
             height: 'fit-content',
             backgroundColor: '#fff',
@@ -107,7 +108,6 @@ export const MyAccountWrapper = ({ onLogout, initials }) => {
             bottom: 0,
             right: '0',
             transform: 'translateY(calc(100% + 10px))',
-            opacity: Number(show),
             borderRadius: '5px',
             boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)'
 
@@ -117,6 +117,6 @@ export const MyAccountWrapper = ({ onLogout, initials }) => {
             <NavItem onClick={onLogout} style={{ width: '160px', justifyContent: 'start', gap: '20px' }} href='' label="Logout" logo="/assets/images/logout.svg" />
             <LocaleSelector overrides={{ justifyContent: 'space-between', padding: '15px' }} />
 
-        </div>
+        </div>}
     </div>
 }

@@ -36,8 +36,8 @@ const Login = () => {
     }),
     onSubmit: async (values: { [key: string]: string; }, { resetForm }) => {
       setLoading(true)
-      const data = await authServices.login(values) as unknown as { access_token: string };
-      if (data) {
+      const data = await authServices.login(values) as unknown as { access_token: string, error: boolean };
+      if (data && !data.error) {
         dispatch(handleLogin(data?.access_token))
         setAlert(data)
         router.push(redirect_path || '/community')

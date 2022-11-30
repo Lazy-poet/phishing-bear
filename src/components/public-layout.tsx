@@ -26,7 +26,7 @@ const PublicLayout = ({ children, strict, noHeader, noFooter }: { children: Reac
         justifyContent: 'space-between'
       }}>
         {!noHeader && <Header />}
-        <main style={{ marginTop: noHeader ? 0 : '45px' }}>{children}</main>
+        <main style={{ marginTop: noHeader ? 0 : '60px' }}>{children}</main>
         {!noFooter && <Footer />}
       </div>
     </>

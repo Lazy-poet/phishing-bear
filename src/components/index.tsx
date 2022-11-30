@@ -20,8 +20,11 @@ export { default as FooterBanner } from './home/banner'
 export { default as Footer } from './footer/footer'
 export { default as SectionWrapper } from './about'
 export { default as Spinner } from './spinner'
+export * from './dashboard'
 
 export * from './about'
+export * from './header/header.style'
+
 
 export {
   PrivateLayout, Header, PublicLayout, SEO, Button, CheckBox, LinkButton, SelectField, Alert, Loading,
@@ -261,7 +264,7 @@ export const InputField: React.FC<
       >
         {type === "select" ? (
           <>
-            <label htmlFor={name}>{label}</label>
+            {label && <label htmlFor={name}>{label}</label>}
             <StyledCustomSelect
               placeholder={placeholder}
               options={options!}
@@ -269,6 +272,7 @@ export const InputField: React.FC<
               name={name}
               value={value}
               {...others}
+              inputStyles={inputStyles}
             />
           </>
         ) : (
@@ -305,12 +309,13 @@ export const StyledCustomSelect: React.FC<{
   onSelect: (e: ChangeEvent<HTMLInputElement>) => void;
   name: string;
   value: string,
-}> = ({ placeholder, options, onSelect, name, value, ...others }) => {
+  inputStyles: StyleObject
+}> = ({ placeholder, options, onSelect, name, value, inputStyles, ...others }) => {
   const [css] = useCustomStyletron();
   const [optionsOpen, setOptionsOpen] = useState(false);
   const inputRef = useRef(null);
   const inputStyle = css({
-    background: "#fff !important",
+    background: "transparent",
     outline: 'none',
     "::placeholder": {
       color: "rgba(176, 176, 176, 1)",
@@ -318,7 +323,9 @@ export const StyledCustomSelect: React.FC<{
     ":hover": {
       cursor: "pointer",
     },
+    // ...inputStyles
   });
+  console.log('options', options);
   return (
     <div
       className={css({
@@ -326,6 +333,7 @@ export const StyledCustomSelect: React.FC<{
         height: "fit-content",
         position: "relative",
         gridArea: "input",
+        background: '#F6FFED'
 
       })}
     >
@@ -334,6 +342,7 @@ export const StyledCustomSelect: React.FC<{
           position: "relative",
           width: "100%",
           height: "fit-content",
+          background: 'transparent'
 
         })}
         onClick={(e) => {
@@ -348,6 +357,7 @@ export const StyledCustomSelect: React.FC<{
           value={value}
           placeholder={placeholder}
           name={name}
+          overrides={inputStyles}
         />
         <svg
           width="9"
@@ -374,14 +384,14 @@ export const StyledCustomSelect: React.FC<{
       <div
         className={css({
           position: "absolute",
-          bottom: "0",
-          transform: "translateY(calc(100% - 12px))",
+          top: "100%",
           left: 0,
           height: "fit-content",
           width: "100%",
           display: optionsOpen ? "flex" : "none",
           flexFlow: "column",
-          border: "1px solid rgba(139, 139, 139, 1)",
+          // border: "1px solid rgba(139, 139, 139, 1)",
+          background: 'F6FFED',
           zIndex: 1,
           maxHeight: '300px',
           overflowY: 'auto'
@@ -401,14 +411,15 @@ export const StyledCustomSelect: React.FC<{
               border: 'none',
               outline: 'none',
               margin: 0,
-              ':not(:last-child)': {
-                borderBottom: "1px solid rgba(139, 139, 139, 1)",
-              },
+              // ':not(:last-child)': {
+              //   borderBottom: "1px solid rgba(139, 139, 139, 1)",
+              // },
               ':hover': {
                 background: "rgba(241, 241, 241, 1)"
               },
               ...(value === opt.name && { background: 'rgba(241, 241, 241, 1) !important' })
             })}
+            overrides={inputStyles}
           />
         ))}
       </div>

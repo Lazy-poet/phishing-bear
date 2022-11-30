@@ -7,7 +7,7 @@ export const FooterWrapper: React.FC<{ children: React.ReactNode }> = ({ childre
         width: '100vw',
         height: 'max-content',
         scrollSnapAlign: "start",
-        scrollPaddingBottom: '100px',
+        scrollMargin: '100px',
         background: theme.colors.dark,
         color: "#fff",
         padding: '50px 20px 100px',
