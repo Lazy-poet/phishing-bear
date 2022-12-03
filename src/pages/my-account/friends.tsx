@@ -20,11 +20,11 @@ const GetFriends = () => {
 
   const logOut = () => {
     dispatch(setLogOut())
-    router.push('http://newsite.phishingbear.com/login')
+    router.push('login')
   }
   useEffect(() => {
     setLoading(true)
-    userServices.getFriends('').then((data) => {
+    userServices.getFriends().then((data) => {
       setShowFriends(data?.data)
       setLoading(false)
     })
@@ -33,7 +33,7 @@ const GetFriends = () => {
   const confirmFriend = (id) => {
     setLoading(true)
     userServices.updateFriends(id).then((data: FetchDataProps | any) => {
-      data?.error === false && userServices.getFriends('').then((data: FetchDataProps) => {
+      data?.error === false && userServices.getFriends().then((data: FetchDataProps) => {
         setShowFriends(data.data)
       })
     })
@@ -43,7 +43,7 @@ const GetFriends = () => {
   const removeFriend = (id) => {
     setLoading(true)
     userServices.updateFriends({ id, status: 'removed' }).then((data: FetchDataProps | any) => {
-      data?.error === false && userServices.getFriends('').then((data: FetchDataProps) => {
+      data?.error === false && userServices.getFriends().then((data: FetchDataProps) => {
         setShowFriends(data.data)
       })
     })

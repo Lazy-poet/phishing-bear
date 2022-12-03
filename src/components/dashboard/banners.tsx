@@ -3,8 +3,22 @@ import css from "styled-jsx/css"
 import { useCustomStyletron } from "../../styles/custom-styles"
 import image from './banner.svg'
 import { InitialsWrapper } from '@components'
+import { useSelector } from 'react-redux'
 export const GreetingBanner = ({ }) => {
-    const [css, theme] = useCustomStyletron()
+    const [css, theme] = useCustomStyletron();
+    const first_name = useSelector((state: any) => state.auth.profileData.first_name)
+
+    const time = Number(new Date().toLocaleString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+    }).slice(0, 2));
+    let message = 'Good Morning';
+    if (time >= 17) {
+        message = 'Good Evening'
+    } else if (time >= 12) {
+        message = "Good Afternoon"
+    }
     return <div className={css({
         backgroundColor: '#fff',
         padding: '25px',
@@ -35,7 +49,7 @@ export const GreetingBanner = ({ }) => {
 
             },
         }} >
-            Good Day {'Emmanuel' || ''}
+            {`${message} ${first_name}`}
         </StyledDarkParagraphText>
         <StyledDarkParagraphText overrides={{
             ...theme.typography.font(14, 400),
@@ -47,7 +61,7 @@ export const GreetingBanner = ({ }) => {
 
             },
         }} >
-            Have a nice day
+            {time < 12 ? 'Have a nice day' : time < 18 ? 'Enjoy the rest of your day' : 'Have a good night'}
         </StyledDarkParagraphText>
 
     </div>
@@ -134,7 +148,7 @@ export const TipBanner = () => {
     </div>
 }
 
-export const FriendsBanner = () => {
+export const FriendsBanner: React.FC<{ loading: boolean, friends: Record<string, string>[] }> = ({ loading, friends }) => {
     const [css, theme] = useCustomStyletron()
     return <div className={css({
         flex: 1,
@@ -153,24 +167,15 @@ export const FriendsBanner = () => {
             Friends activities</StyledDarkParagraphText>
 
         <div style={{ marginTop: 50, height: '340px', overflowY: 'scroll', }}>
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
-            <FriendItem />
+            {loading ? <StyledDarkParagraphText>Loading friends</StyledDarkParagraphText>
+                : !loading && friends.length === 0 ? <StyledDarkParagraphText size="14px">Add friends to see activities</StyledDarkParagraphText>
+                    : friends.map(friend => <FriendItem data={friend} />)}
         </div>
 
     </div>
 }
 
-const FriendItem = () => {
+const FriendItem: React.FC<{ data: Record<string, string> }> = ({ data }) => {
     const [css, theme] = useCustomStyletron()
     return <div className={css({
         margin: '20px 0',
@@ -181,11 +186,12 @@ const FriendItem = () => {
     })}>
         <InitialsWrapper className={css({
             ...theme.typography.font(20),
-        })}>SY</InitialsWrapper>
+        })}>{data.first_name[0]}{data.last_name[0]}</InitialsWrapper>
         <div>
             <StyledDarkParagraphText overrides={{
                 ...theme.typography.font(16, 500),
-            }}>Name</StyledDarkParagraphText>
+                textTransform: 'capitalize'
+            }}>{data.first_name} {data.last_name}</StyledDarkParagraphText>
             <StyledDarkParagraphText overrides={{
                 ...theme.typography.font(14),
             }}>See Achievements</StyledDarkParagraphText>
@@ -194,7 +200,7 @@ const FriendItem = () => {
     </div>
 }
 
-export const DesktopBanners = () => {
+export const DesktopBanners: React.FC<{ loadingFriends: boolean, friends: Record<string, string>[] }> = ({ loadingFriends, friends }) => {
     const [css, theme] = useCustomStyletron()
     return <div className={css({
         display: 'flex',
@@ -214,7 +220,7 @@ export const DesktopBanners = () => {
             <GreetingBanner />
             <TipBanner />
         </div>
-        <FriendsBanner />
+        <FriendsBanner loading={loadingFriends} friends={friends} />
 
     </div>
 }

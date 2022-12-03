@@ -12,8 +12,13 @@ export const DashboardWrapper = ({ children }) => {
         padding: '20px 20px 50px',
         gap: '20px',
         [theme.mediaQuery.medium]: {
+            padding: '50px',
+            gap: '30px',
+        },
+        [theme.mediaQuery.large]: {
             padding: '50px 100px',
             gap: '50px',
+
         },
         width: '100vw',
         height: '100%',
@@ -254,5 +259,7 @@ export const DesktopLayout = customStyled('div', ({ $theme }) => ({
         alignItems: 'start',
         justifyContent: 'start',
         gap: '50px',
+        width: '100%',
+        height: '100%'
     }
 }))

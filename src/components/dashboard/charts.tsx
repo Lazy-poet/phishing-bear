@@ -7,9 +7,9 @@ export const Guage: React.FC<{ value: number }> = ({ value = 100 }) => {
         width: '100%',
 
         height: 'fit-content',
-        padding: '0 25px 50px',
+        padding: '0 5px 50px',
         [theme.mediaQuery.small]: {
-            padding: '0 50px 100px',
+            padding: '0 10px 100px',
 
         },
         background: '#F8F8F8',
@@ -29,15 +29,15 @@ export const Guage: React.FC<{ value: number }> = ({ value = 100 }) => {
         >
             <div
                 style={{
-                    height: 200,
+                    height: 180,
                     overflow: "hidden"
                 }}
             >
                 <div
                     className="arc"
                     style={{
-                        width: 200,
-                        height: 200,
+                        width: 180,
+                        height: 180,
                         borderRadius: "50%",
                         border: "1px solid black",
                         margin: "0 auto",
@@ -72,9 +72,10 @@ export const Guage: React.FC<{ value: number }> = ({ value = 100 }) => {
                         <div style={{
                             position: 'absolute',
                             top: 0, right: 0,
-                            transform: 'translate(50%, calc(-100% - 10px))',
+                            transform: `translate(calc(50% ${value < 10 ? "+ 15px" : value > 90 ? "- 10px" : "+ 0px"}), calc(-100% - 10px))`,
                             width: '30px',
                             fontSize: '14px',
+                            zIndex: 10000,
                             textAlign: 'center', padding: '1px', borderRadius: '7px', background: theme.colors.dark, color: '#fff'
                         }}>{value}</div>
 
@@ -94,7 +95,7 @@ export const Guage: React.FC<{ value: number }> = ({ value = 100 }) => {
                     transform: "translate(-50%, 50%)"
                 }}
             />
-            <div style={{ width: 260, height: 4, background: theme.colors.secondary, margin: '0 auto' }} />
+            <div style={{ width: 240, height: 4, background: theme.colors.secondary, margin: '0 auto' }} />
             <div className={css({ width: '100%', padding: '5px 10px', ...theme.typography.font(15, 400), display: 'flex', position: "absolute", justifyContent: 'space-between', alignItems: 'center' })}>
                 <div style={{ width: '40px', textAlign: 'center', padding: '1px', borderRadius: '7px', background: theme.colors.dark, color: '#fff' }}>0</div>
                 <div style={{ width: '40px', textAlign: 'center', padding: '1px', borderRadius: '7px', background: theme.colors.dark, color: '#fff' }}>100</div>
@@ -104,7 +105,7 @@ export const Guage: React.FC<{ value: number }> = ({ value = 100 }) => {
 
 }
 
-export const Guages = () => {
+export const Guages = ({ data }) => {
     const [css, theme] = useCustomStyletron();
 
     return <div className={css({
@@ -118,24 +119,20 @@ export const Guages = () => {
 
     })}>
         <div style={{ flex: 1, maxWidth: '100%' }}>
-            <Guage value={50} />
-            <StyledDarkParagraphText align="center" weight={500}>Emails Opened</StyledDarkParagraphText>
+            <Guage value={data.clicked} />
+            <StyledDarkParagraphText align="center" weight={500}>Emails opened</StyledDarkParagraphText>
         </div>
         <div style={{ flex: 1, maxWidth: '100%' }}>
-            <Guage value={50} />
-            <StyledDarkParagraphText align="center" weight={500}>Emails Opened</StyledDarkParagraphText>
+            <Guage value={data.clicked} />
+            <StyledDarkParagraphText align="center" weight={500}>Clicked links</StyledDarkParagraphText>
         </div>
         <div style={{ flex: 1, maxWidth: '100%' }}>
-            <Guage value={50} />
-            <StyledDarkParagraphText align="center" weight={500}>Emails Opened</StyledDarkParagraphText>
+            <Guage value={0} />
+            <StyledDarkParagraphText align="center" weight={500}>Submitted data</StyledDarkParagraphText>
         </div>
         <div style={{ flex: 1, maxWidth: '100%' }}>
-            <Guage value={50} />
-            <StyledDarkParagraphText align="center" weight={500}>Emails Opened</StyledDarkParagraphText>
-        </div>
-        <div style={{ flex: 1, maxWidth: '100%' }}>
-            <Guage value={50} />
-            <StyledDarkParagraphText align="center" weight={500}>Emails Opened</StyledDarkParagraphText>
+            <Guage value={0} />
+            <StyledDarkParagraphText align="center" weight={500}>Emails reported</StyledDarkParagraphText>
         </div>
     </div>
 }

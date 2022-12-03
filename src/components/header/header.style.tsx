@@ -89,6 +89,7 @@ export const InitialsWrapper = customStyled('div', ({ $theme }) => ({
     color: '#fff',
     display: 'grid',
     placeContent: 'center',
+    textTransform: 'uppercase',
     ...$theme.typography.font(24, 400)
 }))
 export const MyAccountWrapper = ({ onLogout, initials }) => {
@@ -97,7 +98,7 @@ export const MyAccountWrapper = ({ onLogout, initials }) => {
 
 
     return <div className={css({ position: 'relative', cursor: 'pointer', })}>
-        {initials.length === 2 &&
+        {initials?.length === 2 &&
             <InitialsWrapper onClick={() => setShow(!show)}> {initials}</InitialsWrapper>
         }
         {show && <div className={css({

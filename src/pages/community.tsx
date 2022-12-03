@@ -7,7 +7,7 @@ import { ShowUsersData, FetchDataProps, FilteredData } from '../utils/type';
 import { PrivateLayout, Button, SEO, LinkButton, Pagination, Loading, SelectField } from '@components'
 
 const MyCommunity = () => {
-  const { profleData } = useSelector((state: any) => state.auth)
+  const { profileData } = useSelector((state: any) => state.auth)
 
   const [loading, setLoading] = useState(false)
   const [usersList, setUsersList] = useState<FetchDataProps | [] | any>([])
@@ -26,7 +26,7 @@ const MyCommunity = () => {
 
   useEffect(() => {
     setLoading(true)
-    userServices.getFriends('').then((data) => {
+    userServices.getFriends().then((data) => {
       setSelected(data?.data)
     })
     userServices.getUsers(filteredData).then((data: FetchDataProps) => {
@@ -118,7 +118,7 @@ const MyCommunity = () => {
                 {usersList?.items?.map((item: ShowUsersData) => {
                   return (
                     <>
-                      {profleData?._id === item._id ?
+                      {profileData?._id === item._id ?
                         usersList?.items?.length === 1 && <p className="text-center mt-5"> No record found</p>
                         :
                         <div className="v-container shadow border rounded-3 p-3 my-3">

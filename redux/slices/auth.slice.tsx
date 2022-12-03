@@ -4,7 +4,7 @@ import { useStore } from 'react-redux'
 
 const initialState = {
   isLoggedIn: store.get(`${process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY!}`) ? true : false,
-  profleData: { first_name: 'Emmanuel', last_name: 'Seyi' }
+  profileData: { first_name: '', last_name: '' }
 }
 
 const sessionSlice = createSlice({
@@ -16,7 +16,7 @@ const sessionSlice = createSlice({
       state.isLoggedIn = action?.payload ? true : false
     },
     setMedata: (state: any, action: any) => {
-      state.profleData = action?.payload
+      state.profileData = action?.payload
     },
     setLogOut: (state) => {
       state.isLoggedIn = false;

@@ -1,20 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   PrivateLayout, SEO, MobileLayout, DesktopLayout,
   DashboardWrapper, DesktopBanners, ChartsWrapper, Guages, OverviewButton, TestResultButton, RangeSelector,
   GreetingBanner, FriendsBanner, TipBanner
 } from '@components'
 import { useCustomStyletron } from '../styles/custom-styles'
+import { userServices } from '../../services';
 
 const Dashboard = () => {
-  const [css, theme] = useCustomStyletron()
+  const [css, theme] = useCustomStyletron();
+  const [friends, setFriends] = useState([]);
+  const [emailData, setEmailData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true)
+      const { data } = await userServices.getFriends();
+      setFriends(data)
+      setLoading(false)
+    })()
+  }, [])
+  useEffect(() => {
+    (async () => {
+      const { data } = await userServices.getEmailData();
+      setEmailData(data)
+    })()
+  }, [])
   return (
     <>
       <SEO />
       <PrivateLayout>
         <DashboardWrapper>
           <DesktopLayout>
-            <DesktopBanners />
+            <DesktopBanners friends={friends} loadingFriends={loading} />
             <ChartsWrapper>
               <div style={{
                 display: 'flex',
@@ -27,7 +46,7 @@ const Dashboard = () => {
                 <TestResultButton />
                 <RangeSelector />
               </div>
-              <Guages />
+              <Guages data={emailData} />
             </ChartsWrapper>
           </DesktopLayout>
 
@@ -64,12 +83,14 @@ const Dashboard = () => {
                   display: 'none',
                 }
               }} />
-              <Guages />
+              <Guages data={emailData} />
             </ChartsWrapper>
             <div className={css({
               height: 'fit-content',
               width: '100%'
-            })}><FriendsBanner /></div>
+            })}>
+              <FriendsBanner loading={loading} friends={friends} />
+            </div>
           </MobileLayout>
 
         </DashboardWrapper>

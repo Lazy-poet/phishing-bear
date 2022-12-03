@@ -21,15 +21,15 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const { isLoggedIn, profleData } = useSelector((state: any) => state.auth)
-  const userName = `${profleData?.first_name}+${profleData?.last_name}`
+  const { isLoggedIn, profileData } = useSelector((state: any) => state.auth)
+  const userName = `${profileData?.first_name}+${profileData?.last_name}`
   const matches = userName.match(/\b(\w)/g)
-  const initials = matches?.join('').toUpperCase();
+  const initials = matches?.join('').toUpperCase() || '';
   useEffect(() => {
     if (isLoggedIn === true) {
       authServices.getMe().then((data: any) => {
         if (data) {
-          dispatch(setMedata(data.data))
+          dispatch(setMedata(data.data));
         }
       })
     }

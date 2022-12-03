@@ -12,13 +12,17 @@ class UserServices extends CommonService {
     return await this.put('users/update-profile', params)
   }
   async sendFriendRequest(friend_id: string) {
-    return await this.post('friends', { friend_id })
+    return await this.post('users/friends/add', { friend_id })
   }
-  async getFriends(params: any) {
-    return await this.get(`friends/?${new URLSearchParams(params)}`)
+  async getFriends() {
+    return await this.get(`users/friends`)
   }
   async updateFriends(params: { [key: string]: string }) {
     return await this.put(params?.id ? `friends/${params.id}` : `friends/${params}`, { status: params?.status ? params?.status : 'active' })
+  }
+
+  async getEmailData() {
+    return await this.get(`clicked`)
   }
 }
 
