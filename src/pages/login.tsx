@@ -23,8 +23,8 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: 'neha.tiwari@piecodes.in',
-      password: '1234567',
+      email: '',
+      password: '',
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -39,9 +39,11 @@ const Login = () => {
       const data = await authServices.login(values) as unknown as { access_token: string, error: boolean };
       if (data && !data.error) {
         dispatch(handleLogin(data?.access_token))
-        setAlert(data)
-        router.push(redirect_path || '/community')
-        resetForm({ values: {} })
+        setAlert(data);
+        setTimeout(() => {
+          router.push(redirect_path || '/dashboard')
+          resetForm({ values: {} })
+        }, 100)
       }
       setLoading(false);
     },

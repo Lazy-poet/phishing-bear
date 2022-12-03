@@ -90,7 +90,8 @@ export const InitialsWrapper = customStyled('div', ({ $theme }) => ({
     display: 'grid',
     placeContent: 'center',
     textTransform: 'uppercase',
-    ...$theme.typography.font(24, 400)
+    margin: 0,
+    // ...$theme.typography.font(24, 400)
 }))
 export const MyAccountWrapper = ({ onLogout, initials }) => {
     const [css, theme] = useCustomStyletron();

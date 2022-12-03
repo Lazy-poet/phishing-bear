@@ -37,7 +37,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
 
   const logOut = () => {
     dispatch(setLogOut())
-    router.push('/login')
+    router.push('/login');
   }
 
 

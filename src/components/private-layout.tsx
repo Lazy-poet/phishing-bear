@@ -12,12 +12,12 @@ const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.React
 
   useEffect(() => {
     if (!isLoggedIn) {
-      console.log('llogin again')
       toast.info('You have to login first', { toastId: 'login-again' });
     }
-  }, [])
+  }, []);
+
+
   if (!isLoggedIn && router.isReady) {
-    console.log('logging')
     router.push(`login?redirect_path=${router.pathname}`);
     return
   }
