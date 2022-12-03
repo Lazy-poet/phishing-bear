@@ -323,7 +323,7 @@ footer .col-lg-5 {
   background-image: url(../../public/assets/images/accordion1.svg);
   background-size: contain;
   background-position: center;
-  width: 125px;
+  width: 100px;
   height: 32px;
 }
 
@@ -331,7 +331,7 @@ footer .col-lg-5 {
   background-image: url(../../public/assets/images/accordion2.svg);
   background-size: contain;
   background-position: center;
-  width: 125px;
+  width: 100px;
   height: 32px;
   transform: none;
 }
@@ -392,7 +392,6 @@ footer .col-lg-5 {
 .faq-content .accordion-collapse {
   color: #000;
   background-color: #eff1ff;
-  border-radius: 24px !important;
 }
 
 .accordion-button:not(.collapsed) {
