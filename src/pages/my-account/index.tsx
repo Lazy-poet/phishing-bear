@@ -8,14 +8,18 @@ import { useFormik } from 'formik';
 
 import { userServices, authServices } from '../../../services'
 import { setLogOut } from '../../../redux/slices/auth.slice';
-import { Button, InputField, PrivateLayout, LinkButton, SEO, Alert, Loading } from '@components'
+import { Button, InputField, PrivateLayout, LinkButton, SEO, Alert, Loading, AccountLinks, AccountWrapper } from '@components'
 import { TextArea } from '../../components/form-inputs'
+import { useCustomStyletron } from '../../styles/custom-styles';
+import { PulseLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 const NextPage = () => {
   const router = useRouter()
   const dispatch = useDispatch()
 
   const [loading, setLoading] = useState(false)
+  const [updating, setUpdating] = useState(false)
   const [alert, setAlert] = useState(null)
   const [initialData, setInitialData] = useState<any>('')
 
@@ -46,7 +50,7 @@ const NextPage = () => {
   const formik = useFormik({
     initialValues: initialData,
     enableReinitialize: true,
-    onSubmit(values) {
+    async onSubmit(values) {
       const item = {
         first_name: values.first_name,
         last_name: values.last_name,
@@ -55,62 +59,42 @@ const NextPage = () => {
         designation: values.designation,
         bio: values.bio,
       }
-      setLoading(true)
-      userServices.updateUserProfile(item).then(({ data }) => {
-        setAlert(data)
-        if (data.error === false) {
-          setLoading(false)
-          setTimeout(() => {
-            router.push('/community')
-          }, 1000)
-        }
-      })
+      setUpdating(true)
+      const { error } = await authServices.updateUserProfile(item);
+      if (!error) {
+        toast.info('Updated successfully')
+      }
+      setUpdating(false)
     },
   })
 
+  const [css, theme] = useCustomStyletron()
+
+  const inputStyles = {
+    className: css({
+      color: theme.colors.dark
+
+    }),
+    inputStyles: {
+      backgroundColor: theme.colors.bg,
+      border: `1px solid rgba(0, 0, 0, .3) !important`,
+      borderRadius: '5px',
+      color: theme.colors.dark
+    }
+  }
   return (
     <>
       <SEO />
       <PrivateLayout>
-        <section className="my-account">
-          <div className="container shadow rounded-1">
+        <AccountWrapper>
+          <div className="container shadow rounded-1 bg-white">
             <div className="row">
-              <div className="col-3 sidebar border-end border-dark pt-5 px-0">
-                <h4 className="ms-3 ps-1">My Account</h4>
-                <ul className="nav flex-column">
-                  <li className="nav-items">
-                    <Link href="/my-account">
-                      <a className="btn nav-link text-start rounded-0 text-dark ps-3 border-0"><i className="fa-solid fa-house me-2"></i> Account</a></Link>
-                  </li>
-
-                  <li className="nav-items">
-                    <Link href="/my-account/change-password">
-                      <a className="btn nav-link text-start rounded-0 text-dark ps-3  border-0">
-                        <i className="fa-solid fa-key me-3"></i>Password
-                      </a>
-                    </Link>
-                  </li>
-
-                  <li className="nav-items">
-                    <Link href="/my-account/friends">
-                      <a className="btn nav-link text-start rounded-0 text-dark ps-3  border-0">
-                        <i className="fa-solid fa-user me-3"></i> Friends
-                      </a>
-                    </Link>
-                  </li>
-
-                  <li className="nav-items">
-                    <Button className="btn nav-link text-start rounded-0 text-dark border-0 ps-3 w-100 bg-white" name="Logout" onClick={logOut}>
-                      <i className="fa-solid fa-right-from-bracket me-3"></i>
-                    </Button>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-9 p-5">
+              <AccountLinks />
+              <div className="col-12 col-sm-9 p-3 p-sm-5">
                 {loading ? <Loading /> :
                   <form onSubmit={formik.handleSubmit} className="my-4">
                     <div className="row">
-                      <div className="col-6">
+                      <div className="col-md-6 col-12 ">
                         <InputField
                           type="text"
                           name="first_name"
@@ -118,11 +102,14 @@ const NextPage = () => {
                           required={true}
                           value={formik.values.first_name}
                           onChange={formik.handleChange}
+                          {...inputStyles}
+
                         />
                       </div>
 
-                      <div className="col-6">
+                      <div className="col-md-6 col-12">
                         <InputField
+                          {...inputStyles}
                           type="text"
                           name="last_name"
                           label="Last Name"
@@ -132,8 +119,9 @@ const NextPage = () => {
                         />
                       </div>
 
-                      <div className="col-6">
+                      <div className="col-md-6 col-12">
                         <InputField
+                          {...inputStyles}
                           type="email"
                           name="email"
                           label="Email Address"
@@ -144,8 +132,9 @@ const NextPage = () => {
                         />
                       </div>
 
-                      <div className="col-6">
+                      <div className="col-md-6 col-12">
                         <InputField
+                          {...inputStyles}
                           type="text"
                           name="phone_number"
                           placeholder="Enter your phone_number"
@@ -156,8 +145,9 @@ const NextPage = () => {
                         />
                       </div>
 
-                      <div className="col-6">
+                      <div className="col-md-6 col-12">
                         <InputField
+                          {...inputStyles}
                           type="text"
                           name="company"
                           placeholder="Enter your company"
@@ -168,8 +158,9 @@ const NextPage = () => {
                         />
                       </div>
 
-                      <div className="col-6">
+                      <div className="col-md-6 col-12">
                         <InputField
+                          {...inputStyles}
                           type="text"
                           name="designation"
                           placeholder="Enter your designation"
@@ -191,16 +182,16 @@ const NextPage = () => {
                         />
                       </div>
                     </div>
-                    {alert && <Alert alerts={alert} />}
-                    <Button type="submit" name="Update" className="text-white rounded-1 fs-5 me-2" loading={loading} />
-                    <LinkButton path="/community" name="Cancel" className="border border-dark text-dark fs-5 rounded-1 text-decoration-none mx-2" />
+                    <Button type="submit" className="text-white rounded fs-6 me-2 mt-4 py-2 px-6" loading={loading}>{updating ? <PulseLoader color="#fff" size={10} /> : "Update"}</Button>
+
+                    {/* <LinkButton path="/community" name="Cancel" className="border border-dark text-dark fs-6 rounded text-decoration-none mx-2 mt-4 py-2 px-6" /> */}
                   </form>
                 }
 
               </div>
             </div>
           </div>
-        </section>
+        </AccountWrapper>
       </PrivateLayout>
     </>
   )

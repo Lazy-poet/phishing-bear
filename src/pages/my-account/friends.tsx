@@ -8,7 +8,7 @@ import { userServices } from '../../../services'
 
 import { setLogOut } from '../../../redux/slices/auth.slice'
 import { ShowUsersData, FetchDataProps } from '../../utils/type';
-import { PrivateLayout, LinkButton, SEO, Loading, Button } from '@components'
+import { PrivateLayout, LinkButton, SEO, Loading, Button, AccountLinks, AccountWrapper } from '@components'
 
 const GetFriends = () => {
   const dispatch = useDispatch()
@@ -60,44 +60,11 @@ const GetFriends = () => {
     <>
       <SEO />
       <PrivateLayout>
-        <section className="my-account">
-          <div className="container shadow rounded-1">
+        <AccountWrapper>
+          <div className="container shadow rounded-1 bg-white">
             <div className="row">
-              <div className="col-3 sidebar border-end border-dark pt-5 px-0">
-                <h4 className="ms-3 ps-1">My Account</h4>
-                <ul className="nav flex-column">
-                  <li className="nav-items">
-                    <Link href="/my-account">
-                      <a className="btn nav-link text-start rounded-0 text-dark ps-3 border-0">
-                        <i className="fa-solid fa-house me-3"></i>
-                        Account
-                      </a>
-                    </Link>
-                  </li>
-                  <li className="nav-items">
-                    <Link href="/my-account/change-password">
-                      <a className="btn nav-link text-start rounded-0 text-dark ps-3 border-0">
-                        <i className="fa-solid fa-key me-3"></i>Password
-                      </a>
-                    </Link>
-                  </li>
-
-                  <li className="nav-items">
-                    <Link href="/my-account/friends">
-                      <a className="btn nav-link text-start rounded-0 text-dark ps-3 border-0">
-                        <i className="fa-solid fa-user me-3"></i> Friends
-                      </a>
-                    </Link>
-                  </li>
-
-                  <li className="nav-items">
-                    <Button className="btn nav-link text-start rounded-0 text-dark border-0 ps-3 w-100 bg-white" name="Logout" onClick={logOut}>
-                      <i className="fa-solid fa-right-from-bracket me-3"></i>
-                    </Button>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-9 p-5">
+                <AccountLinks />
+              <div className="col-12 col-sm-9 p-3 p-sm-5">
                 {loading ? <Loading /> :
                   <>
 
@@ -157,7 +124,7 @@ const GetFriends = () => {
               </div>
             </div>
           </div>
-        </section>
+        </AccountWrapper>
       </PrivateLayout>
     </>
   )

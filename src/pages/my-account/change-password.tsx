@@ -9,7 +9,10 @@ import * as Yup from 'yup'
 
 import { authServices } from '../../../services'
 import { setLogOut } from '../../../redux/slices/auth.slice'
-import { PrivateLayout, LinkButton, InputField, Button, SEO, Alert } from '@components'
+import { PrivateLayout, LinkButton, InputField, Button, SEO, Alert, AccountLinks, AccountWrapper } from '@components'
+import { useCustomStyletron } from '../../styles/custom-styles'
+import { PulseLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 
 const ChangePassword = () => {
   const router = useRouter()
@@ -17,6 +20,7 @@ const ChangePassword = () => {
 
   const [alert, setAlert] = useState(null)
   const [loading, setLoading] = useState(false)
+
   const [showPassword, setShowPassword] = useState({
     oldPassword: false,
     newPassword: false,
@@ -36,7 +40,10 @@ const ChangePassword = () => {
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
-      old_password: Yup.string().required('Current password is required'),
+      old_password: Yup.string().required('Current password is required').matches(
+        /^(?=.*)(?=.{6,})/,
+        'At least 6 characters long'
+      ),
       new_password: Yup.string().required('New password is required').matches(
         /^(?=.*)(?=.{6,})/,
         'At least 6 characters long'
@@ -49,54 +56,38 @@ const ChangePassword = () => {
 
     onSubmit: async (values: any) => {
       setLoading(true)
-      authServices.updateUserProfilePassword(values).then((data: any) => {
-        setAlert(data)
-        setLoading(false)
-        setTimeout(() => {
-          router.push('/community')
-        }, 1000);
-      })
+      const { error } = await authServices.updateUserProfilePassword(values);
+      if (!error) {
+        toast.info('Updated successfully')
+      }
+      setLoading(false)
+
     },
   })
+  const [css, theme] = useCustomStyletron()
+
+  const inputStyles = {
+    className: css({
+      color: theme.colors.dark
+
+    }),
+    inputStyles: {
+      backgroundColor: theme.colors.bg,
+      border: `1px solid rgba(0, 0, 0, .3) !important`,
+      borderRadius: '5px',
+      color: theme.colors.dark
+    }
+  }
 
   return (
     <>
       <SEO />
       <PrivateLayout>
-        <section className="my-account">
-          <div className="container shadow rounded-1">
+        <AccountWrapper>
+          <div className="container shadow rounded-1 bg-white">
             <div className="row">
-              <div className="col-3 sidebar border-end border-dark pt-5 px-0">
-                <h4 className="ms-3 ps-1">My Account</h4>
-                <ul className="nav flex-column">
-                  <li className="nav-items">
-                    <Link href="/my-account">
-                      <a className="btn nav-link text-start rounded-0 text-dark border-0 ps-3"><i className="fa-solid fa-house me-2"></i> Account</a>
-                    </Link>
-                  </li>
-                  <li className="nav-items">
-                    <Link href="/my-account/change-password">
-                      <a className="btn nav-link text-start rounded-0 text-dark border-0 ps-3">
-                        <i className="fa-solid fa-key me-3"></i>Password
-                      </a>
-                    </Link>
-                  </li>
-                  <li className="nav-items">
-                    <Link href="/my-account/friends">
-                      <a className="btn nav-link text-start rounded-0 text-dark border-0 ps-3">
-                        <i className="fa-solid fa-user me-3"></i> Friends
-                      </a>
-                    </Link>
-                  </li>
-                  <li className="nav-items">
-                    <Button className="btn nav-link text-start rounded-0 text-dark border-0 ps-3 w-100 bg-white" name="Logout" onClick={logOut}>
-                      <i className="fa-solid fa-right-from-bracket me-3"></i>
-                    </Button>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-9 p-5">
-
+              <AccountLinks />
+              <div className="col-12 col-sm-9 p-3 p-sm-5">
                 <form onSubmit={formik.handleSubmit}>
                   <div className="col-md-12 col-lg-6 position-relative">
                     <InputField
@@ -108,6 +99,7 @@ const ChangePassword = () => {
                       value={formik.values.old_password}
                       onChange={formik.handleChange}
                       error={formik?.touched.old_password && formik.errors.old_password && formik.errors.old_password}
+                      {...inputStyles}
                     />
                     {showPassword.oldPassword === false && <button type="button" className="btn border-0 p-0 position-absolute m-auto eye-off" onClick={() => setShowPassword({ oldPassword: showPassword.oldPassword ? false : true, newPassword: false, confirmPassword: false, })}>
                       <i className="fa-solid fa-eye-slash" ></i>
@@ -130,6 +122,7 @@ const ChangePassword = () => {
                       value={formik.values.new_password}
                       onChange={formik.handleChange}
                       error={formik?.touched.new_password && formik.errors.new_password && formik.errors.new_password}
+                      {...inputStyles}
                     />
                     {showPassword.newPassword === false && <button type="button" className="btn border-0 p-0 position-absolute m-auto eye-off" onClick={() => setShowPassword({ newPassword: showPassword.newPassword ? false : true, confirmPassword: false, oldPassword: false })}>
                       <i className="fa-solid fa-eye-slash" ></i>
@@ -151,6 +144,7 @@ const ChangePassword = () => {
                       value={formik.values.confirm_password}
                       onChange={formik.handleChange}
                       error={formik?.touched.confirm_password && formik.errors.confirm_password && formik.errors.confirm_password}
+                      {...inputStyles}
                     />
                     {showPassword.confirmPassword === false && <button type="button" className="btn border-0 p-0 position-absolute m-auto eye-off" onClick={() => setShowPassword({ confirmPassword: showPassword.confirmPassword ? false : true, oldPassword: false, newPassword: false, })}>
                       <i className="fa-solid fa-eye-slash" ></i>
@@ -161,13 +155,13 @@ const ChangePassword = () => {
                     </button>}
                   </div>
                   {alert && <Alert alerts={alert} />}
-                  <Button type="submit" name="Update" className="text-white rounded-1 fs-5 me-2" loading={loading} />
-                  <LinkButton path="/my-account" name="Cancel" className="border border-dark text-dark fs-5 rounded-1 text-decoration-none mx-2" />
+                  <Button type="submit" className="text-white rounded fs-6 me-2 mt-4 py-2 px-6" >{loading ? <PulseLoader color="#fff" size={10} /> : "Update"}</Button>
+                  {/* <LinkButton path="/community" name="Cancel" className="border border-dark text-dark fs-6 rounded text-decoration-none mx-2 mt-4 py-2 px-6" /> */}
                 </form>
               </div>
             </div>
           </div>
-        </section>
+        </AccountWrapper>
       </PrivateLayout >
     </>
   )
