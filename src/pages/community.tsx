@@ -42,11 +42,11 @@ const MyCommunity = () => {
     return (
       <>
         {filteredUserData?.status === 'pending' ?
-          <Button className="bg-transparent text-decoration-none border-none disabled" name="Requested" /> :
+          <Button className="bg-transparent text-decoration-none border-none disabled " name="Requested" /> :
           filteredUserData?.status ?
             <LinkButton path="#" name={filteredUserData?.status === 'active' ? 'Already friend' : 'Rejected'} className="nav-link text-primary text-decoration-none fs-4 px-1 disabled" />
             :
-            <Button onClick={() => handleSelected(id)} className="bg-transparent text-decoration-none border-none" name="Send Request" />
+            <Button onClick={() => handleSelected(id)} className="bg-transparent text-decoration-none border-none px-4 py-2 fs-7" name="Send Request" />
         }
       </>
     )
@@ -122,12 +122,12 @@ const MyCommunity = () => {
                         usersList?.items?.length === 1 && <p className="text-center mt-5"> No record found</p>
                         :
                         <div className="v-container shadow border rounded-3 p-3 my-3">
-                          <div className="row align-items-center  scroll">
+                          <div className="row align-items-center scroll">
                             <div className="col-1">
-                              <img src="/assets/images/user-dauflt.svg" alt="Community User" className="img-fluid" />
+                              <img src="/assets/images/user-dauflt.svg" alt="Community User" className="img-fluid" style={{width: '80%'}} />
                             </div>
-                            <div className="col text-center"> <span>{item?.first_name} {item?.last_name}</span> </div>
-                            <div className="col text-center"> <span>{item?.email}</span> </div>
+                            <div className="col-4 text-center"> <span>{item?.first_name} {item?.last_name}</span> </div>
+                            <div className="col-4 text-center"> <span>{item?.email}</span> </div>
                             <div className="col-3 text-center">
                               {checkStatus(item?._id)}
                             </div>

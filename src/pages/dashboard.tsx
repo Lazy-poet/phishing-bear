@@ -16,15 +16,19 @@ const Dashboard = () => {
   useEffect(() => {
     (async () => {
       setLoading(true)
-      const { data } = await userServices.getFriends();
-      setFriends(data)
+      const { data, error } = await userServices.getFriends();
+      if (!error) {
+        setFriends(data)
+      }
       setLoading(false)
     })()
   }, [])
   useEffect(() => {
     (async () => {
-      const { data } = await userServices.getEmailData();
-      setEmailData(data)
+      const { data, error } = await userServices.getEmailData();
+      if (!error) {
+        setEmailData(data)
+      }
     })()
   }, [])
   return (

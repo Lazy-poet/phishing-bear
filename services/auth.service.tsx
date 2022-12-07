@@ -14,13 +14,16 @@ class AuthServices extends CommonService {
   async updatePassword(params: any) {
     return await this.post('auth/update-password', params)
   }
+  async updateUserProfile(params: any) {
+    return await this.put('auth/update-profile', params)
+  }
   async forgotPassword(params: { [key: string]: string }) {
     return await this.post('auth/reset-password-email', params)
   }
   async updateUserProfilePassword(params: any) {
     console.log('params', params);
 
-    return await this.put('auth/account/change-password', params)
+    return await this.put('auth/change-password', params)
   }
   async getMe() {
     return await this.get('auth/me')

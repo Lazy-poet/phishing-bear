@@ -16,7 +16,8 @@ const Home: NextPage = () => {
         <Hero />
         <section style={{
           scrollSnapAlign: "start",
-          padding: '0 20px 50px'
+          padding: '0 20px 50px',
+          backgroundColor: theme.colors.bg
 
         }}>
           <StyledDarkParagraphText overrides={{

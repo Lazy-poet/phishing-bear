@@ -8,9 +8,7 @@ class UserServices extends CommonService {
   async getUserDetail(UserId: any) {
     return await this.get(`users/${UserId}`)
   }
-  async updateUserProfile(params: any) {
-    return await this.put('users/update-profile', params)
-  }
+
   async sendFriendRequest(friend_id: string) {
     return await this.post('users/friends/add', { friend_id })
   }
