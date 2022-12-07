@@ -178,7 +178,7 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
 
             </div>
             <div className={css({
-                position: 'absolute',
+                // position: 'absolute',
                 bottom: 0,
                 left: 0, width: '100%',
                 borderTop: ".7px solid #E3F5EB",

@@ -45,7 +45,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
 
   return (
     <>
-      <DesktopHeaderWrapper>
+      <DesktopHeaderWrapper style={{ ...(router.pathname !== '/' && { background: '#fff' }) }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
           <Link href="/">
             <img src="/assets/images/logo.svg" alt="Logo" className={css({
@@ -68,7 +68,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
         </div>
         <MyAccountWrapper onLogout={logOut} initials={initials} />
       </DesktopHeaderWrapper>
-      <MobileHeaderWrapper>
+      <MobileHeaderWrapper style={{ ...(router.pathname !== '/' && { background: '#fff' }) }}>
         <Link href="/">
           <img src="/assets/images/logo.svg" alt="Logo" className={css({
             width: '120px',

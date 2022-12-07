@@ -6,8 +6,12 @@ export const SidebarWrapper = customStyled<'div', { show: boolean }>('div', ({ $
     left: show ? 0 : '100%',
     width: '100vw',
     height: '100vh',
+    overflowY: 'scroll',
     background: $theme.colors.secondary,
     color: '#fff',
     transition: 'all .3s ease-out',
     zIndex: 1000,
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'space-between',
 }))

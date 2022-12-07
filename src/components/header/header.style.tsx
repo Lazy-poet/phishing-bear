@@ -99,9 +99,9 @@ export const MyAccountWrapper = ({ onLogout, initials }) => {
 
 
     return <div className={css({ position: 'relative', cursor: 'pointer', })}>
-        {initials?.length === 2 &&
-            <InitialsWrapper onClick={() => setShow(!show)}> {initials}</InitialsWrapper>
-        }
+        {/* {initials?.length === 2 && */}
+        <InitialsWrapper onClick={() => setShow(!show)}> {initials}</InitialsWrapper>
+        {/* } */}
         {show && <div className={css({
             width: '190px',
             height: 'fit-content',
