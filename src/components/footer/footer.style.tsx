@@ -25,7 +25,8 @@ export const FooterWrapper: React.FC<{ children: React.ReactNode }> = ({ childre
         },
         alignItems: "flex-start",
         justifyContent: "center",
-        position: 'relative'
+        position: 'relative',
+        margin: '0 !important'
     })} >
         {children}
         <div className={css({

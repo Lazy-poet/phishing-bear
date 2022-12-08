@@ -80,6 +80,7 @@ const overrides = {
     secondary: "#35BA6E",
     accent: "#B4873F",
     overlay: "rgba(14, 41, 75, 0.7)",
+    // dark: '#1A2040',
     dark: '#381A46',
     bg: '#E3F5EB',
     bgHover: '#9FDEB8'

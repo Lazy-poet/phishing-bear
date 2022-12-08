@@ -25,6 +25,8 @@ export * from './dashboard'
 export * from './about'
 export * from './header/header.style'
 export * from './faq'
+export * from './my-account'
+export * from './handbook'
 
 export {
   PrivateLayout, Header, PublicLayout, SEO, Button, CheckBox, LinkButton, SelectField, Alert, Loading,

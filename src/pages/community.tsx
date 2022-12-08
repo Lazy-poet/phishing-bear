@@ -62,7 +62,7 @@ const MyCommunity = () => {
     <>
       <SEO />
       <PrivateLayout>
-        <section className="user-list">
+        <section className="user-list" style={{ padding: '100px 20px' }}>
           <div className="container">
 
             {usersList?.items?.length > 1 && <div className="row">
@@ -124,7 +124,7 @@ const MyCommunity = () => {
                         <div className="v-container shadow border rounded-3 p-3 my-3">
                           <div className="row align-items-center scroll">
                             <div className="col-1">
-                              <img src="/assets/images/user-dauflt.svg" alt="Community User" className="img-fluid" style={{width: '80%'}} />
+                              <img src="/assets/images/user-dauflt.svg" alt="Community User" className="img-fluid" style={{ width: '80%' }} />
                             </div>
                             <div className="col-4 text-center"> <span>{item?.first_name} {item?.last_name}</span> </div>
                             <div className="col-4 text-center"> <span>{item?.email}</span> </div>
