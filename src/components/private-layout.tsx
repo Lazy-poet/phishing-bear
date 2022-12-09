@@ -19,7 +19,7 @@ const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.React
 
 
   if (!isLoggedIn && router.isReady) {
-    router.push(`login?redirect_path=${router.pathname}`);
+    router.push(`/login?redirect_path=${router.pathname}`);
     return
   }
 

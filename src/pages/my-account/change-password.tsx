@@ -58,7 +58,9 @@ const ChangePassword = () => {
       setLoading(true)
       const { error } = await authServices.updateUserProfilePassword(values);
       if (!error) {
-        toast.info('Updated successfully')
+        toast.info('Updated successfully, please login again');
+        dispatch(setLogOut())
+        router.push('/login');
       }
       setLoading(false)
 
