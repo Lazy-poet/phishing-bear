@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
   PrivateLayout, SEO, MobileLayout, DesktopLayout,
   DashboardWrapper, DesktopBanners, ChartsWrapper, Guages, OverviewButton, TestResultButton, RangeSelector,
-  GreetingBanner, FriendsBanner, TipBanner
+  GreetingBanner, FriendsBanner, TipBanner, LineChart
 } from '@components'
 import { useCustomStyletron } from '../styles/custom-styles'
 import { userServices } from '../../services';
@@ -10,9 +10,11 @@ import { userServices } from '../../services';
 const Dashboard = () => {
   const [css, theme] = useCustomStyletron();
   const [friends, setFriends] = useState([]);
-  const [emailData, setEmailData] = useState([]);
+  const [emailData, setEmailData] = useState({} as { clicked: any[], labels: any[] });
   const [loading, setLoading] = useState(false);
-
+  const [loadingMailData, setLoadingMailData] = useState(false)
+  const [active, setActive] = useState(1);
+  const [range, setRange] = useState('1m')
   useEffect(() => {
     (async () => {
       setLoading(true)
@@ -25,12 +27,14 @@ const Dashboard = () => {
   }, [])
   useEffect(() => {
     (async () => {
-      const { data, error } = await userServices.getEmailData();
+      setLoadingMailData(true)
+      const { data, error } = await userServices.getEmailData(range);
       if (!error) {
         setEmailData(data)
       }
+      setLoadingMailData(false)
     })()
-  }, [])
+  }, [range])
   return (
     <>
       <SEO />
@@ -46,11 +50,12 @@ const Dashboard = () => {
                 gap: 20,
                 width: '100%'
               }}>
-                <OverviewButton />
-                <TestResultButton />
-                <RangeSelector />
+                <OverviewButton active={active === 1} onClick={() => setActive(1)} />
+                <TestResultButton active={active === 2} onClick={() => setActive(2)} />
+                <RangeSelector onChange={setRange} />
               </div>
-              <Guages data={emailData} />
+              <Guages loading={loadingMailData} data={emailData} />
+              <LineChart data={emailData.clicked} labels={emailData.labels} range={range} />
             </ChartsWrapper>
           </DesktopLayout>
 
@@ -71,9 +76,9 @@ const Dashboard = () => {
                 width: '100%',
 
               })}>
-                <OverviewButton />
-                <TestResultButton />
-                <RangeSelector overrides={{
+                <OverviewButton active={active === 1} onClick={() => setActive(1)} />
+                <TestResultButton active={active === 2} onClick={() => setActive(2)} />
+                <RangeSelector onChange={setRange} overrides={{
                   display: 'none',
                   [theme.mediaQuery.xsmall]: {
                     display: 'block',
@@ -81,13 +86,15 @@ const Dashboard = () => {
                 }} />
 
               </div>
-              <RangeSelector overrides={{
+              <RangeSelector onChange={setRange} overrides={{
                 display: 'block',
                 [theme.mediaQuery.xsmall]: {
                   display: 'none',
                 }
               }} />
-              <Guages data={emailData} />
+              <Guages loading={loadingMailData} data={emailData} />
+              <LineChart data={emailData.clicked} labels={emailData.labels} range={range} isMobile />
+
             </ChartsWrapper>
             <div className={css({
               height: 'fit-content',

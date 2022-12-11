@@ -19,8 +19,8 @@ class UserServices extends CommonService {
     return await this.put(params?.id ? `friends/${params.id}` : `friends/${params}`, { status: params?.status ? params?.status : 'active' })
   }
 
-  async getEmailData() {
-    return await this.get(`clicked`)
+  async getEmailData(filter: string = 'today') {
+    return await this.get(`emails?filter=${filter}`)
   }
 }
 

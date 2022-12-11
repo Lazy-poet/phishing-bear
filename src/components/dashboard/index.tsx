@@ -53,16 +53,17 @@ export const ChartsWrapper = ({ children }) => {
         alignItems: 'start',
         justifyContent: 'start',
         scrollSnapAlign: "start",
-        background: '#FFF'
+        background: '#FFF',
+        overflow: 'hidden'
     })}>
         {children}
 
     </div>
 }
 
-export const OverviewButton = () => {
+export const OverviewButton = ({ active, onClick }) => {
     const [css, theme] = useCustomStyletron()
-    return <StyledButton overrides={{
+    return <StyledButton onClick={onClick} overrides={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -71,9 +72,8 @@ export const OverviewButton = () => {
         height: 'fit-content',
         width: 'fit-content',
         ...theme.typography.font(13, 400),
-        color: theme.colors.dark,
-        // background: theme.colors.bg,
-        background: 'rgba(143, 204, 85, .11)',
+        color: active ? '#fff' : theme.colors.dark,
+        background: active ? '#8AC651' : 'rgba(143, 204, 85, .11)',
         border: '1px solid #8AC651',
         borderRadius: '12px',
         flex: 1,
@@ -88,13 +88,17 @@ export const OverviewButton = () => {
             width: '12px',
             height: '12px',
             borderRadius: '50%',
-            border: '1px solid black'
+            ...(active ? {
+                background: '#FFAE00'
+            } : {
+                border: '1px solid black'
+            })
         })} />
         Overview</StyledButton>
 }
-export const TestResultButton = () => {
+export const TestResultButton = ({ active, onClick }) => {
     const [css, theme] = useCustomStyletron()
-    return <StyledButton overrides={{
+    return <StyledButton onClick={onClick} overrides={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -103,33 +107,44 @@ export const TestResultButton = () => {
         height: 'fit-content',
         width: 'fit-content',
         ...theme.typography.font(13, 400),
-        color: '#fff',
-        // background: theme.colors.secondary,
-        background: '#8AC651',
+        color: active ? '#fff' : theme.colors.dark,
+        background: active ? '#8AC651' : 'rgba(143, 204, 85, .11)',
         border: '1px solid #8AC651',
         borderRadius: '12px',
         flex: 1,
         [theme.mediaQuery.xsmall]: {
+            padding: '12px 25px',
             flex: 'revert',
             ...theme.typography.font(16, 400),
-            padding: '12px 25px',
+
         },
     }} >
         <div className={css({
             width: '12px',
             height: '12px',
             borderRadius: '50%',
-            background: '#FFAE00'
+            ...(active ? {
+                background: '#FFAE00'
+            } : {
+                border: '1px solid black'
+            })
         })} />
         Test results</StyledButton>
 }
-export const RangeSelector = ({ overrides }: { overrides?: StyleObject }) => {
+export const RangeSelector = ({ overrides, onChange }: { overrides?: StyleObject, onChange: (val: string) => void }) => {
     const [css, theme] = useCustomStyletron();
-    const options = ['Today', 'Last 7 days', 'Last 30 days', 'Last 90 days', 'Last 1 year', 'All time']
+    const options = [
+        { name: 'today', label: 'Today' },
+        { name: '7d', label: 'Last 7 days' },
+        { name: '1m', label: 'Last 30 days' },
+        { name: '3m', label: 'Last 90 days' },
+        { name: '1y', label: 'Last 1 year' },
+        { name: 'all', label: 'All time' }]
     const [optionsOpen, setOptionsOpen] = useState(false);
-    const [currentValue, setCurrentValue] = useState(options[0])
-    const handleSelect = (value: string) => {
+    const [currentValue, setCurrentValue] = useState(options[2])
+    const handleSelect = (value: { label: string, name: string }) => {
         setCurrentValue(value);
+        onChange(value.name)
         setOptionsOpen(false)
     }
 
@@ -171,11 +186,11 @@ export const RangeSelector = ({ overrides }: { overrides?: StyleObject }) => {
         border: '1px solid #8AC651',
         padding: 0,
         marginLeft: 'auto',
-        zIndex: 1,
+        zIndex: 2,
         ...overrides
     })}>
         <div onClick={toggleOptions} style={{ cursor: 'pointer', width: 'fit-content', height: 'fit-content', margin: 0, padding: 0 }}>
-            <StyledInput readOnly type="text" value={currentValue} overrides={{
+            <StyledInput readOnly type="text" value={currentValue.label} overrides={{
                 ...inputOverrides, height: 'fit-content',
                 [theme.mediaQuery.xsmall]: {
                     ...theme.typography.font(18, 400),
@@ -220,9 +235,9 @@ export const RangeSelector = ({ overrides }: { overrides?: StyleObject }) => {
 
         })}>{
                 options.map(opt => (
-                    <StyledInput onClick={() => handleSelect(opt)} readOnly type="text" value={opt} overrides={{
+                    <StyledInput onClick={() => handleSelect(opt)} readOnly type="text" value={opt.label} overrides={{
                         ...inputOverrides,
-                        ...(currentValue === opt && {
+                        ...(currentValue.name === opt.name && {
                             background: '#FFAE00',
                             color: "#FFF"
 
