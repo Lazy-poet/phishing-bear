@@ -83,6 +83,7 @@ export const StyledHeaderText = customStyled<"h1", TextProps>("h1", ({ size, col
   letterSpacing: "1px",
   fontWeight: weight || 700,
   textTransform: uppercase ? 'uppercase' : 'capitalize',
+  margin: 0,
   ...overrides,
 }));
 export const StyledParagraphText = customStyled<"p", TextProps>(

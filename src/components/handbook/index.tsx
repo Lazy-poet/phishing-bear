@@ -5,8 +5,9 @@ import { StyleObject } from "styletron-react";
 import { customStyled, useCustomStyletron } from "../../styles/custom-styles";
 import { PhishingTab } from './tabs/phishing'
 import { PasswordTab } from './tabs/password'
+import { IdentityTheftTab } from './tabs/identity'
 export const HandbookWrapper = customStyled('div', ({ $theme }) => ({
-    padding: '100px 20px 0',
+    padding: '80px 0 0',
     gap: '20px',
     [$theme.mediaQuery.medium]: {
         // padding: '100px',
@@ -162,7 +163,7 @@ export const Section1 = () => {
         gap: '20px',
         alignItems: 'start',
         width: '100%',
-        padding: 0,
+        padding: '0 20px',
         position: 'relative',
         marginBottom: '50px',
 
@@ -241,6 +242,8 @@ const getActiveContent = (tab: string) => {
             return <PhishingTab />;
         case 'password':
             return <PasswordTab />
+        case 'identity theft':
+            return <IdentityTheftTab />
 
     }
 
@@ -267,7 +270,8 @@ export const Section2 = () => {
     return <section className={css({
         backgroundColor: theme.colors.dark,
         borderBottom: '.5px solid #aaa',
-        paddingBottom: '6rem'
+        paddingBottom: '50px',
+        width: '100%'
     })}>
         <div className={css({
             display: 'flex',
@@ -277,6 +281,7 @@ export const Section2 = () => {
             height: '60px',
             borderBottom: '2px solid #fff',
             padding: 0,
+            margin: 0,
         })}>
             {section2Links.map(({ label, svg }) => {
                 const isActive = activeTab == label;

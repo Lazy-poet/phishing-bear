@@ -9,7 +9,8 @@ export const PasswordTab = () => {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        padding: '100px 10px 0',
+        padding: '100px 0',
+        width: '100%',
         [theme.mediaQuery.small]: {
             padding: '100px'
         }
@@ -19,7 +20,7 @@ export const PasswordTab = () => {
         <StyledHeaderText overrides={{
             textTransform: 'uppercase',
             ...theme.typography.font(22, 700),
-            margin: '20px auto'
+            margin: '20px auto !important'
         }}>Creating a password</StyledHeaderText>
 
         <DesktopSteps />
@@ -109,7 +110,7 @@ const DesktopSteps = () => {
                         }}>{steps[activeIndex].index}</StyledParagraphText>
                     </div>
                     <StyledParagraphText weight={600} className={css({
-                        ...theme.typography.font(22, 600)
+                        ...theme.typography.font(20, 600)
                     })}>{steps[activeIndex].heading}</StyledParagraphText>
                 </div>
                 <StyledParagraphText size='15px' weight={400}>

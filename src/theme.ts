@@ -1,6 +1,7 @@
 import { createTheme, lightThemePrimitives, Theme } from "baseui";
 
 type Breakpoints = {
+  xxsmall: number | string,
   xsmall: number | string,
   small: number | string;
   medium: number | string
@@ -8,6 +9,7 @@ type Breakpoints = {
   xlarge: number | string
 }
 const breakpoints: Breakpoints = {
+  xxsmall: 420,
   xsmall: 678,
   small: 920,
   medium: 1200,
