@@ -21,8 +21,6 @@ class AuthServices extends CommonService {
     return await this.post('auth/reset-password-email', params)
   }
   async updateUserProfilePassword(params: any) {
-    console.log('params', params);
-
     return await this.put('auth/change-password', params)
   }
   async getMe() {

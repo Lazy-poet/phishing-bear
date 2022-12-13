@@ -328,7 +328,6 @@ export const StyledCustomSelect: React.FC<{
     },
     // ...inputStyles
   });
-  console.log('options', options);
   return (
     <div
       className={css({

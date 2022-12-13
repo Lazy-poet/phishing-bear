@@ -355,9 +355,6 @@ const filterData = (data, labels, range) => {
                 filterFunction()(new Date(d.createdAt), new Date(timestamp))
             ).length
     );
-    console.log('labels', labels);
-    console.log('data', data);
-    console.log('resu;lt', result);
     return result
 
 }

@@ -16,8 +16,6 @@ const GetFriends = () => {
 
   const [loading, setLoading] = useState(false)
   const [showFriends, setShowFriends] = useState<any>([])
-  console.log('showFriends', showFriends);
-
   const logOut = () => {
     dispatch(setLogOut())
     router.push('login')
