@@ -18,7 +18,6 @@ export const HandbookWrapper = customStyled('div', ({ $theme }) => ({
     },
     width: '100vw',
     margin: '0 auto',
-    maxWidth: '1080px',
     height: '100%',
     display: 'flex',
     flexFlow: 'column',
@@ -163,6 +162,7 @@ export const Section1 = () => {
         gap: '20px',
         alignItems: 'start',
         width: '100%',
+        maxWidth: '1080px',
         padding: '0 20px',
         position: 'relative',
         marginBottom: '50px',
@@ -201,7 +201,7 @@ export const Section1 = () => {
                 color: '#fff',
                 [theme.mediaQuery.small]: {
                     position: 'absolute',
-                    left: 0,
+                    left: '20px',
                     bottom: 0,
                     width: '140px'
                 }
