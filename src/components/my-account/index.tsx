@@ -2,7 +2,7 @@ import { StyledDarkParagraphText } from "@components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { setLogOut } from "../../../redux/slices/auth.slice";
+import { toggleLogoutModal } from "../../../redux/slices/auth.slice";
 import { customStyled, useCustomStyletron } from "../../styles/custom-styles"
 
 const links = [
@@ -106,8 +106,7 @@ export const AccountLinks = () => {
 
                 })}
                 onClick={() => {
-                    dispatch(setLogOut())
-                    router.push('/login');
+                    dispatch(toggleLogoutModal(true))
                 }}
             >Logout</div>
         </div>

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { userServices } from '../../services';
 import { ShowUsersData, FetchDataProps, FilteredData } from '../utils/type';
-import { PrivateLayout, Button, SEO, LinkButton, Pagination, Loading, SelectField } from '@components'
+import { PrivateLayout, Button, SEO, LinkButton, Pagination, Loading, SelectField, AddFriendCard, FriendsRankingCard, CommunityWrapper, CompeteCard } from '@components'
 
 const MyCommunity = () => {
   const { profileData } = useSelector((state: any) => state.auth)
@@ -62,8 +62,11 @@ const MyCommunity = () => {
     <>
       <SEO />
       <PrivateLayout>
-        <section className="user-list" style={{ padding: '100px 20px' }}>
-          <div className="container">
+        <CommunityWrapper>
+          <AddFriendCard />
+          <FriendsRankingCard />
+          <CompeteCard />
+          {/* <div className="container">
 
             {usersList?.items?.length > 1 && <div className="row">
               <div className="col-9">
@@ -156,9 +159,8 @@ const MyCommunity = () => {
               />
             }
 
-          </div>
-        </section>
-
+          </div> */}
+        </CommunityWrapper>
       </PrivateLayout>
     </>
   )

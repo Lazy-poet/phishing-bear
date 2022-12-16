@@ -4,7 +4,7 @@ import { SidebarWrapper } from './sidebar.style'
 import { NavItem } from '../header/header.style'
 import { StyledButton, StyledParagraphText } from '@components'
 import LocaleSelector from '../header/localeSelector'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link'
 type Props = {
     show: boolean,
@@ -16,7 +16,9 @@ type Props = {
 }
 
 const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props) => {
-    const [css, theme] = useCustomStyletron()
+    const [css, theme] = useCustomStyletron();
+    const { isLoggedIn: loggedIn } = useSelector((state: any) => state.auth);
+
     return (
         <SidebarWrapper show={show}>
             <div className={css({
@@ -114,21 +116,23 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
 
 
             </div>
-            <StyledButton overrides={{
-                background: theme.colors.primary,
-                height: '54px',
-                borderRadius: '50px',
-                margin: '0 10px',
-                width: 'calc(100% - 20px)',
-                position: 'relative',
-                ...theme.typography.font(18, 500),
-                ':hover': {
-                    boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)',
-                    transform: 'translateY(-1px)'
-                }
-            }}>
-                Try it for free
-            </StyledButton>
+            <Link href="/pricing">
+                <StyledButton overrides={{
+                    background: theme.colors.primary,
+                    height: '54px',
+                    borderRadius: '50px',
+                    margin: '0 10px',
+                    width: 'calc(100% - 20px)',
+                    position: 'relative',
+                    ...theme.typography.font(18, 500),
+                    ':hover': {
+                        boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)',
+                        transform: 'translateY(-1px)'
+                    }
+                }}>
+                    Try it for free
+                </StyledButton>
+            </Link>
 
             <div className={css({
                 ...theme.typography.font(16),
@@ -202,7 +206,7 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
                     }}
                         onClick={() => {
                             onLogout?.();
-                            toggle()
+                            // toggle()
                         }}>
                         <img src={`/assets/images/${isLoggedIn ? 'offcanvas-icons/logout' : 'login'}.svg`} className={css({
                             position: 'absolute',
@@ -211,7 +215,7 @@ const Sidebar = ({ toggle, show, links, isLoggedIn, onLogout, initials }: Props)
                             height: '30px',
                             alignSelf: 'center',
                         })} />
-                        {isLoggedIn ? 'Log out' : "Log in"}
+                        {isLoggedIn || loggedIn ? 'Log out' : "Log in"}
                     </StyledButton>
                 </Link>
             </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import type { NextPage } from 'next'
 import { Button, PublicLayout, LinkButton, SEO, SectionWrapper, StyledParagraphText, ImageWrapper, SectionText, StyledButton, StyledDarkParagraphText } from '@components'
 import { useCustomStyletron } from '../styles/custom-styles'
+import Link from 'next/link'
 
 const About: NextPage = () => {
   const [css, theme] = useCustomStyletron()
@@ -101,29 +102,33 @@ const About: NextPage = () => {
             }}>
               Targeted attacks with malicious payload use social engineering and phishing to bypass email gateways. Our Email Protection prevents these attacks to protect your business and data.
             </StyledParagraphText>
-            <StyledButton small overrides={{
-              background: theme.colors.secondary,
-              color: '#fff',
-              borderRadius: '30px',
-              border: '2px solid #fff',
-              height: 'fit-content',
-              width: 'fit-content',
-              padding: '10px 25px',
-              transition: 'all .3s ease',
-              margin: '0 auto',
-              boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
-              ...theme.typography.font(14, 700),
-              ':hover': {
-                color: theme.colors.secondary,
-                background: '#fff',
-                borderColor: theme.colors.secondary,
-                boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
+            <Link href="/pricing">
+              <StyledButton small overrides={{
+                background: theme.colors.secondary,
+                color: '#fff',
+                borderRadius: '30px',
+                border: '2px solid #fff',
+                height: 'fit-content',
+                width: 'fit-content',
+                padding: '10px 25px',
+                transition: 'all .3s ease',
+                margin: '0 auto',
+                boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
+                ...theme.typography.font(14, 700),
+                ':hover': {
+                  color: theme.colors.secondary,
+                  background: '#fff',
+                  borderColor: theme.colors.secondary,
+                  boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
 
-              }
-            }}>
-              Try it for free
-            </StyledButton>
-            <StyledDarkParagraphText overrides={{ textDecoration: 'underline' }}>View plans</StyledDarkParagraphText>
+                }
+              }}>
+                Try it for free
+              </StyledButton>
+            </Link>
+            <Link href="/pricing">
+              <StyledDarkParagraphText overrides={{ textDecoration: 'underline' }}>View plans</StyledDarkParagraphText>
+            </Link>
           </div>
         </SectionWrapper>
       </PublicLayout>

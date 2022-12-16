@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 
 import { userServices } from '../../../services'
 
-import { setLogOut } from '../../../redux/slices/auth.slice'
 import { ShowUsersData, FetchDataProps } from '../../utils/type';
 import { PrivateLayout, LinkButton, SEO, Loading, Button, AccountLinks, AccountWrapper } from '@components'
 
@@ -16,10 +15,7 @@ const GetFriends = () => {
 
   const [loading, setLoading] = useState(false)
   const [showFriends, setShowFriends] = useState<any>([])
-  const logOut = () => {
-    dispatch(setLogOut())
-    router.push('login')
-  }
+
   useEffect(() => {
     setLoading(true)
     userServices.getFriends().then((data) => {

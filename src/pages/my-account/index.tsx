@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 
 import { userServices, authServices } from '../../../services'
-import { setLogOut } from '../../../redux/slices/auth.slice';
 import { Button, InputField, PrivateLayout, LinkButton, SEO, Alert, Loading, AccountLinks, AccountWrapper } from '@components'
 import { TextArea } from '../../components/form-inputs'
 import { useCustomStyletron } from '../../styles/custom-styles';
@@ -22,11 +21,6 @@ const NextPage = () => {
   const [updating, setUpdating] = useState(false)
   const [alert, setAlert] = useState(null)
   const [initialData, setInitialData] = useState<any>('')
-
-  const logOut = () => {
-    dispatch(setLogOut())
-    router.push('http://newsite.phishingbear.com/login')
-  }
 
   useEffect(() => {
     setInitialData({

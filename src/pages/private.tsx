@@ -1,6 +1,7 @@
 import React from 'react'
 import type { NextPage } from 'next'
 import { Button, PublicLayout, LinkButton, SEO } from '@components'
+import Link from 'next/link'
 
 const Private: NextPage = () => {
   return (
@@ -80,8 +81,8 @@ const Private: NextPage = () => {
             <div className="row">
               <div className="col-10 mx-auto text-center">
                 <p className="fs-2 mb-5">Targeted attacks with malicious payload use social engineering and phishing to bypass email gateways. Our Email Protection prevents these attacks to protect your business and data. </p>
-                <Button type={'button'} name={'Try it for free'} className={'bg-primary text-white btn-pill fs-2'} />
-                <LinkButton name={'View plans'} className={'text-dark d-block fs-3'} path={''} />
+                <Link href="/pricing"><Button type={'button'} name={'Try it for free'} className={'bg-primary text-white btn-pill fs-2'} /></Link>
+                <LinkButton name={'View plans'} className={'text-dark d-block fs-3'} path={'/pricing'} />
               </div>
             </div>
           </div>

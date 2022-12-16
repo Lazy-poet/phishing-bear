@@ -3,7 +3,8 @@ import Link from 'next/link'
 
 import { useRouter } from 'next/router';
 
-import { LinkButton } from '../form-inputs';
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleLogoutModal } from '../../../redux/slices/auth.slice'
 import { NavItem, DesktopHeaderWrapper, MobileHeaderWrapper } from './header.style'
 import LocaleSelector from './localeSelector';
 import { useCustomStyletron } from '../../styles/custom-styles'
@@ -13,7 +14,7 @@ type Props = {
   showSidebar: boolean
   toggleSidebar: () => void
 }
-const links = [
+export const links = [
   { label: 'Home', href: '/' },
   { label: 'About us', href: '/about' },
   { label: 'Pricing', href: '/pricing' },
@@ -22,7 +23,9 @@ const links = [
 ]
 const NavPublic = ({ showSidebar, toggleSidebar }) => {
   const router = useRouter()
-  const [css, theme] = useCustomStyletron()
+  const [css, theme] = useCustomStyletron();
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch()
   return (
     <>
       <DesktopHeaderWrapper>
@@ -48,7 +51,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
           <LocaleSelector />
-          <NavItem href="#" label="Try it for free" wrapperStyle={{
+          <NavItem href="/pricing" label="Try it for free" wrapperStyle={{
             borderRadius: '5px',
             background: theme.colors.secondary,
             color: '#fff',
@@ -61,7 +64,11 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
           }} />
 
           {router?.pathname === '/login' ? null :
-            <NavItem href="/login" label="Log in" wrapperStyle={{
+            <NavItem onClick={() => {
+              if (isLoggedIn) {
+                dispatch(toggleLogoutModal(true))
+              }
+            }} href={isLoggedIn ? "" : "/login"} label={`Log ${isLoggedIn ? "out" : "in"}`} wrapperStyle={{
               borderRadius: '5px',
               // color: theme.colors.secondary,
               border: `1px solid ${theme.colors.dark}`,
@@ -102,7 +109,11 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
         })}
           onClick={toggleSidebar}
         />
-        <Sidebar links={links} show={showSidebar} toggle={toggleSidebar} />
+        <Sidebar links={links} show={showSidebar} toggle={toggleSidebar} onLogout={() => {
+          if (isLoggedIn) {
+            dispatch(toggleLogoutModal(true))
+          }
+        }} />
 
       </MobileHeaderWrapper>
     </>

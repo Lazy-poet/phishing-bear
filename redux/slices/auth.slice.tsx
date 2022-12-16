@@ -4,7 +4,8 @@ import { useStore } from 'react-redux'
 
 const initialState = {
   isLoggedIn: store.get(`${process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY!}`) ? true : false,
-  profileData: { first_name: '', last_name: '' }
+  profileData: { first_name: '', last_name: '' },
+  openLogoutModal: false
 }
 
 const sessionSlice = createSlice({
@@ -20,11 +21,16 @@ const sessionSlice = createSlice({
     },
     setLogOut: (state) => {
       state.isLoggedIn = false;
+      state.openLogoutModal = false
       store.clearAll();
+    },
+    toggleLogoutModal: (state, action) => {
+      state.openLogoutModal = action.payload;
     }
+
   },
 })
 
-export const { handleLogin, setMedata, setLogOut } = sessionSlice.actions;
+export const { handleLogin, setMedata, setLogOut, toggleLogoutModal } = sessionSlice.actions;
 
 export default sessionSlice.reducer

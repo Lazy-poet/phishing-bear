@@ -11,6 +11,7 @@ import { BaseProvider } from "baseui";
 import { theme, CustomTheme } from "../theme";
 import { ToastContainer } from "react-toastify";
 import { AuthProvider } from '../context/authContext'
+import { LogoutModal } from '@components'
 import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps: { ...pageProps } }: any) {
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps: { ...pageProps } }: any) {
             {state ?
               <Component {...pageProps} />
               : null}
+            <LogoutModal />
           </AuthProvider>
         </Provider>
       </BaseProvider>

@@ -27,6 +27,9 @@ export * from './header/header.style'
 export * from './faq'
 export * from './my-account'
 export * from './handbook'
+export * from './community'
+export * from './logout'
+export * from './platform'
 
 export {
   PrivateLayout, Header, PublicLayout, SEO, Button, CheckBox, LinkButton, SelectField, Alert, Loading,
@@ -88,13 +91,14 @@ export const StyledHeaderText = customStyled<"h1", TextProps>("h1", ({ size, col
 }));
 export const StyledParagraphText = customStyled<"p", TextProps>(
   "p",
-  ({ size, color, weight, align, overrides }) => ({
+  ({ size, color, weight, align, overrides, uppercase }) => ({
     color: color || "white",
     fontSize: (size || "18px") + " !important",
     letterSpacing: ".5px",
     fontWeight: weight || 300,
     lineHeight: 1.5,
     textAlign: align,
+    textTransform: uppercase ? 'uppercase' : 'none',
     alignSelf: align === "left" ? "start" : align === "right" ? "end" : align,
     margin: 0,
     ...overrides
@@ -444,3 +448,4 @@ export const StyledCheckbox: React.FC<{ checked: boolean, label?: string, name: 
   </div>
 
 }
+

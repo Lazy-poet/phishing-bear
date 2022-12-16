@@ -8,7 +8,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { authServices } from '../../../services'
-import { setLogOut } from '../../../redux/slices/auth.slice'
+import { toggleLogoutModal } from '../../../redux/slices/auth.slice'
 import { PrivateLayout, LinkButton, InputField, Button, SEO, Alert, AccountLinks, AccountWrapper } from '@components'
 import { useCustomStyletron } from '../../styles/custom-styles'
 import { PulseLoader } from 'react-spinners';
@@ -28,8 +28,7 @@ const ChangePassword = () => {
   })
 
   const logOut = () => {
-    dispatch(setLogOut())
-    router.push('http://newsite.phishingbear.com/login')
+    dispatch(toggleLogoutModal(true))
   }
 
   const formik = useFormik({
@@ -59,8 +58,7 @@ const ChangePassword = () => {
       const { error } = await authServices.updateUserProfilePassword(values);
       if (!error) {
         toast.info('Updated successfully, please login again');
-        dispatch(setLogOut())
-        router.push('/login');
+        dispatch(toggleLogoutModal(true))
       }
       setLoading(false)
 

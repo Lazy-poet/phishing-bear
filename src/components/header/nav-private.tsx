@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { authServices } from '../../../services'
-import { setLogOut, setMedata } from '../../../redux/slices/auth.slice'
+import { toggleLogoutModal, setMedata } from '../../../redux/slices/auth.slice'
 import { Button } from '@components'
 import { useCustomStyletron } from '../../styles/custom-styles'
 import { DesktopHeaderWrapper, NavItem, MyAccountWrapper, MobileHeaderWrapper } from './header.style'
@@ -36,8 +36,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
   }, [isLoggedIn])
 
   const logOut = () => {
-    dispatch(setLogOut())
-    router.push('/login');
+    dispatch(toggleLogoutModal(true))
   }
 
 

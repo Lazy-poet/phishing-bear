@@ -1,4 +1,5 @@
 import { StyledHeaderText, StyledParagraphText, StyledButton, addSpace } from '@components';
+import Link from 'next/link';
 import React from 'react'
 import { useCustomStyletron } from '../../styles/custom-styles'
 
@@ -102,47 +103,51 @@ const Banner = (props: Props) => {
 
                 </StyledParagraphText>
                 <div className={css({ display: 'flex', gap: '10px', marginTop: '20px' })}>
-                    <StyledButton small overrides={{
-                        background: '#fff',
-                        color: theme.colors.dark,
-                        borderRadius: '30px',
-                        border: '2px solid ' + theme.colors.dark,
-                        height: 'fit-content',
-                        width: 'fit-content',
-                        padding: '10px 25px',
-                        transition: 'all .3s ease',
-                        boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
-                        ...theme.typography.font(14, 700),
-                        ':hover': {
-                            color: theme.colors.secondary,
+                   <Link href="/pricing">
+                        <StyledButton small overrides={{
                             background: '#fff',
-                            borderColor: theme.colors.secondary,
-                            boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
-
-                        }
-                    }}>
-                        Try it for free
-                    </StyledButton>
-                    <StyledButton small overrides={{
-                        background: 'none',
-                        color: '#FFF',
-                        borderRadius: '30px',
-                        border: '2px solid #fff',
-
-                        height: 'fit-content',
-                        width: 'max-content',
-                        padding: '10px 25px',
-                        transition: 'all .3s ease',
-                        boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
-                        ...theme.typography.font(14, 700),
-                        ':hover': {
-                            color: theme.colors.secondary,
-                            background: '#fff',
-                            boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
-                        }
-                    }}>
-                        View plans
-                    </StyledButton>
+                            color: theme.colors.dark,
+                            borderRadius: '30px',
+                            border: '2px solid ' + theme.colors.dark,
+                            height: 'fit-content',
+                            width: 'fit-content',
+                            padding: '10px 25px',
+                            transition: 'all .3s ease',
+                            boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
+                            ...theme.typography.font(14, 700),
+                            ':hover': {
+                                color: theme.colors.secondary,
+                                background: '#fff',
+                                borderColor: theme.colors.secondary,
+                                boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
+    
+                            }
+                        }}>
+                            Try it for free
+                        </StyledButton>
+                   </Link>
+                    <Link href="/pricing">
+                        <StyledButton small overrides={{
+                            background: 'none',
+                            color: '#FFF',
+                            borderRadius: '30px',
+                            border: '2px solid #fff',
+    
+                            height: 'fit-content',
+                            width: 'max-content',
+                            padding: '10px 25px',
+                            transition: 'all .3s ease',
+                            boxShadow: `0 -8px 3px rgba(0, 0, 0, .1) inset`,
+                            ...theme.typography.font(14, 700),
+                            ':hover': {
+                                color: theme.colors.secondary,
+                                background: '#fff',
+                                boxShadow: `0 3px 5px rgba(0, 0, 0, .2)`,
+                            }
+                        }}>
+                            View plans
+                        </StyledButton>
+                    </Link>
                 </div>
             </div>
             <div className={css({

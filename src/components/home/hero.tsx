@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
 import { useCustomStyletron } from '../../styles/custom-styles';
 import { addSpace, StyledButton, StyledHeaderText, StyledParagraphText } from '../index'
@@ -98,27 +99,29 @@ const Hero = (props: Props) => {
                     Targeted attacks with malicious payload use social engineering and phishing to bypass email gateways. Our Email Protection prevents these attacks to protect your business and data.
 
                 </StyledParagraphText>
-                <StyledButton top="20px" small overrides={{
-                    background: theme.colors.primary,
-                    color: theme.colors.dark,
-                    borderRadius: '5px',
-                    height: '40px',
-                    width: '100%',
-                    padding: '0 30px',
-                    transition: 'all .3s ease',
-                    ...theme.typography.font(16, 700),
-                    ':hover': {
-                        color: theme.colors.secondary,
-                        background: '#fff',
-                    },
-                    [theme.mediaQuery.xsmall]: {
-                        height: '60px',
-                        width: 'fit-content',
-
-                    }
-                }}>
-                    Try it for free
-                </StyledButton>
+                <Link href="/pricing">
+                    <StyledButton top="20px" small overrides={{
+                        background: theme.colors.primary,
+                        color: theme.colors.dark,
+                        borderRadius: '5px',
+                        height: '40px',
+                        width: '100%',
+                        padding: '0 30px',
+                        transition: 'all .3s ease',
+                        ...theme.typography.font(16, 700),
+                        ':hover': {
+                            color: theme.colors.secondary,
+                            background: '#fff',
+                        },
+                        [theme.mediaQuery.xsmall]: {
+                            height: '60px',
+                            width: 'fit-content',
+    
+                        }
+                    }}>
+                        Try it for free
+                    </StyledButton>
+                </Link>
             </div>
             <div className={css({ flex: 1 })} ref={wrapper}>
                 <img src="/assets/images/astro-bear-ninja.svg" ref={imgRef} className={css({
