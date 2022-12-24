@@ -183,56 +183,62 @@ export const IdentityTheftTab = () => {
             backgroundColor: 'rgba(255, 255, 255, .1)',
             borderRadius: '10px',
             width: '100vw',
-            padding: '50px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '20px',
-            flexDirection: 'column',
-            [theme.mediaQuery.small]: {
-                flexDirection: 'row',
-                padding: '20px 50px',
 
-            }
 
         })}>
             <div className={css({
+                maxWidth: '1200px',
+                padding: '50px',
                 display: 'flex',
-                alignItems: 'start', gap: '10px',
-                maxWidth: '300px',
-                marginBottom: '20px',
-                borderRadius: '20px',
-                flex: 1,
-                flexFlow: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '20px',
+                flexDirection: 'column',
+                margin: '0 auto',
                 [theme.mediaQuery.small]: {
-                    maxWidth: '100%',
+                    flexDirection: 'row',
+                    padding: '20px 50px',
 
                 }
-
             })}>
-                <StyledParagraphText overrides={{ ...theme.typography.font(14, 600), color: theme.colors.secondary }}>Don't click links sketchy buttons</StyledParagraphText>
-                <StyledParagraphText overrides={{ ...theme.typography.font(12, 400), opacity: .8, margin: '10px 0 0 ' }}>Don't click links, open attachments, respond to emails from unfamiliar or untrusted sources. These may contain malware.</StyledParagraphText>
-            </div>
-            <div className={css({
-                display: 'flex',
-                alignItems: 'start', gap: '10px',
-                maxWidth: '300px',
-                borderRadius: '20px',
-                flex: 1,
-                flexFlow: 'column',
-                [theme.mediaQuery.small]: {
-                    maxWidth: '100%',
+                <div className={css({
+                    display: 'flex',
+                    alignItems: 'start', gap: '10px',
+                    maxWidth: '300px',
+                    marginBottom: '20px',
+                    borderRadius: '20px',
+                    flex: 1,
+                    flexFlow: 'column',
+                    [theme.mediaQuery.small]: {
+                        maxWidth: '100%',
 
-                }
+                    }
 
-            })}>
-                <StyledParagraphText overrides={{ ...theme.typography.font(14, 600), color: theme.colors.secondary }}>Set up alerts</StyledParagraphText>
-                <StyledParagraphText overrides={{ ...theme.typography.font(12, 400), opacity: .8, margin: '10px 0 0 ' }}> Set up alerts on your banking and credit card accounts. For example, your bank may notify you each time there's a withdrawal from your checking account.</StyledParagraphText>
+                })}>
+                    <StyledParagraphText overrides={{ ...theme.typography.font(14, 600), color: theme.colors.secondary }}>Don't click links sketchy buttons</StyledParagraphText>
+                    <StyledParagraphText overrides={{ ...theme.typography.font(12, 400), opacity: .8, margin: '10px 0 0 ' }}>Don't click links, open attachments, respond to emails from unfamiliar or untrusted sources. These may contain malware.</StyledParagraphText>
+                </div>
+                <div className={css({
+                    display: 'flex',
+                    alignItems: 'start', gap: '10px',
+                    maxWidth: '300px',
+                    borderRadius: '20px',
+                    flex: 1,
+                    flexFlow: 'column',
+                    [theme.mediaQuery.small]: {
+                        maxWidth: '100%',
+
+                    }
+
+                })}>
+                    <StyledParagraphText overrides={{ ...theme.typography.font(14, 600), color: theme.colors.secondary }}>Set up alerts</StyledParagraphText>
+                    <StyledParagraphText overrides={{ ...theme.typography.font(12, 400), opacity: .8, margin: '10px 0 0 ' }}> Set up alerts on your banking and credit card accounts. For example, your bank may notify you each time there's a withdrawal from your checking account.</StyledParagraphText>
+                </div>
+                <img src="/assets/images/identity_bear2.svg" className={css({
+                    flex: 1,
+                    maxHeight: '250px',
+                })} />
             </div>
-            <img src="/assets/images/identity_bear2.svg" className={css({
-                flex: 1,
-                maxHeight: '250px',
-            })} />
         </div>
     </div>
 }

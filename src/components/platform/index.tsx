@@ -114,7 +114,7 @@ const bannerItems = [
         body: 'We use nano-learning, short snippets of 1-3 minutes that repeatedly helps you remember and learn how to best protect yourself against phishing. Nano-learning has been proven to maximize the usefulness of learning while minimizing the effort required and time taken, perfect for protecting both your cyber security and your precious time.',
         labelSvg: '/assets/images/vector_4.svg',
         background: '#ffa726',
-        image: '/assets/images/platform_logo_4.png',
+        image: '/assets/images/platform_logo_4.svg',
         color: 'white',
         alternate: true
 
