@@ -1,11 +1,11 @@
 export * from './banners'
 export * from './charts'
-import { StyledButton, InputField, StyledInput } from '@components';
+import { StyledButton, InputField, StyledInput, Spinner } from '@components';
 import { useState, MouseEvent } from 'react';
 import { StyleObject } from 'styletron-react';
 import { customStyled, useCustomStyletron } from "../../styles/custom-styles"
 
-export const DashboardWrapper = ({ children }) => {
+export const DashboardWrapper = ({ children, hasAccess, loading }) => {
     const [css, theme] = useCustomStyletron();
 
     return <div className={css({
@@ -29,6 +29,19 @@ export const DashboardWrapper = ({ children }) => {
         scrollSnapAlign: "start",
         // background: '#fefeff'
     })}>
+        {!hasAccess && <>
+            <div style={{
+                width: '100vw',
+                height: '100vh',
+                left: 0, top: 0,
+                position: 'fixed',
+                zIndex: 10,
+                display: hasAccess ? 'none' : 'block',
+                background: 'rgba(0, 0, 0, .1)',
+                backdropFilter: 'blur(10px)'
+            }} />
+            {loading && <Spinner />}
+        </>}
         {children}
 
     </div>

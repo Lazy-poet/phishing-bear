@@ -37,7 +37,6 @@ const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.React
         background: '#F8F8F8',
         [theme.mediaQuery.small]: {
           ...(!noHeader && { scrollPaddingTop: '60px' }),
-
         }
 
       })}>

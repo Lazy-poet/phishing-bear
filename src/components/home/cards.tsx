@@ -1,12 +1,26 @@
 import { StyledDarkParagraphText, addSpace } from '@components'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useCustomStyletron } from '../../styles/custom-styles'
-import Card from './card'
+import PricingCard from './card'
+import useSWR from 'swr';
+import { subscriptionServices } from '../../../services/subscription.service'
+import { useSelector } from 'react-redux';
+
 
 type Props = {}
 
 const Cards = (props: Props) => {
-    const [css, theme] = useCustomStyletron()
+    const [css, theme] = useCustomStyletron();
+    const [currentPlanId, setCurrentPlanId] = useState('');
+    const { isLoggedIn } = useSelector((state: any) => state.auth);
+
+    const { data, isLoading } = useSWR(isLoggedIn ? subscriptionServices.getCurrentPlanRoute : null, subscriptionServices.getCurrentPlan);
+    useEffect(() => {
+        if (data && data.data) {
+            const price_id = data.data.price_id;
+            setCurrentPlanId(price_id);
+        }
+    }, [data])
 
     return (
         <div className={css({
@@ -20,7 +34,7 @@ const Cards = (props: Props) => {
                 gap: '20px'
             }
         })}>
-            <Card logo="/assets/images/monthly_plan.svg" cta="Try it for free" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} price_id="price_1MG4GzEjvRVEwcgy7MUBK5cx" logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.primary,
                 color: theme.colors.dark,
 
@@ -66,8 +80,8 @@ const Cards = (props: Props) => {
                         Monthly billing
                     </StyledDarkParagraphText>
                 </div>
-            </Card>
-            <Card logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
+            </PricingCard>
+            <PricingCard currentPlanId={currentPlanId} price_id="price_1MGmU8EjvRVEwcgyq9ivY6sP" logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.secondary,
                 color: '#fff',
 
@@ -129,14 +143,14 @@ const Cards = (props: Props) => {
 
                 })}>
                     <StyledDarkParagraphText weight={700}>
-                        US$ 29.00 USD
+                        US$ 19.00 USD
                     </StyledDarkParagraphText>
                     <StyledDarkParagraphText size={'14px'} weight={500}>
-                        Monthly billing
+                        Annual billing
                     </StyledDarkParagraphText>
                 </div>
-            </Card>
-            <Card logo="/assets/images/enterprise_plan.svg" cta="Contact us" btnStyle={{
+            </PricingCard>
+            <PricingCard currentPlanId={currentPlanId} logo="/assets/images/enterprise_plan.svg" cta="Contact us" btnStyle={{
                 background: theme.colors.dark,
                 color: '#fff'
 
@@ -144,7 +158,7 @@ const Cards = (props: Props) => {
                 <StyledDarkParagraphText overrides={{
                     ...theme.typography.font(20, 600)
                 }}>
-                    Monthly Plan
+                    Enterprise
                 </StyledDarkParagraphText>
                 {addSpace("vert", '20px')}
 
@@ -154,7 +168,7 @@ const Cards = (props: Props) => {
                     textAlign: 'center'
 
                 }}>
-                    If you are really serious about protecting your organization or your team.
+                    If you are really serious about protecting your organization or your team, contact us and we'll find a perfect solution for you.
                 </StyledDarkParagraphText>
                 {addSpace("vert", '40px')}
                 <div className={css({
@@ -168,6 +182,7 @@ const Cards = (props: Props) => {
                     bottom: '50px',
                     left: '50%',
                     transform: 'translateX(-50%)',
+                    display: 'none'
 
                 })}>
                     <StyledDarkParagraphText weight={700}>
@@ -177,7 +192,7 @@ const Cards = (props: Props) => {
                         Monthly billing
                     </StyledDarkParagraphText>
                 </div>
-            </Card>
+            </PricingCard>
         </div>
     )
 }

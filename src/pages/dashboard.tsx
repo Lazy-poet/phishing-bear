@@ -5,7 +5,10 @@ import {
   GreetingBanner, FriendsBanner, TipBanner, LineChart
 } from '@components'
 import { useCustomStyletron } from '../styles/custom-styles'
-import { userServices } from '../../services';
+import { userServices, subscriptionServices } from '../../services';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 const Dashboard = () => {
   const [css, theme] = useCustomStyletron();
@@ -14,18 +17,32 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const [loadingMailData, setLoadingMailData] = useState(false)
   const [active, setActive] = useState(1);
-  const [range, setRange] = useState('1m')
+  const [range, setRange] = useState('1m');
+  const [hasAccess, setHasAccess] = useState(false);
+  const router = useRouter()
+
   useEffect(() => {
     (async () => {
       setLoading(true)
-      const { data, error } = await userServices.getFriends();
-      if (!error) {
-        setFriends(data)
+      const resp = await subscriptionServices.verifySubscription();
+      console.log('resp is', resp)
+      if (!resp.error) {
+        setHasAccess(true)
+        const { data, error } = await userServices.getFriends();
+        if (!error) {
+          setFriends(data)
+        }
+      } else {
+        setTimeout(() => {
+          toast.info('Select a pricing option',);
+          router.push('/pricing')
+        }, 2000)
       }
       setLoading(false)
     })()
   }, [])
   useEffect(() => {
+    if (!hasAccess) return;
     (async () => {
       setLoadingMailData(true)
       const { data, error } = await userServices.getEmailData(range);
@@ -34,12 +51,12 @@ const Dashboard = () => {
       }
       setLoadingMailData(false)
     })()
-  }, [range])
+  }, [range, hasAccess])
   return (
     <>
       <SEO />
       <PrivateLayout>
-        <DashboardWrapper>
+        <DashboardWrapper hasAccess={hasAccess} loading={loading}>
           <DesktopLayout>
             <DesktopBanners friends={friends} loadingFriends={loading} />
             <ChartsWrapper>
@@ -74,7 +91,6 @@ const Dashboard = () => {
                 },
                 gap: '20px',
                 width: '100%',
-
               })}>
                 <OverviewButton active={active === 1} onClick={() => setActive(1)} />
                 <TestResultButton active={active === 2} onClick={() => setActive(2)} />
