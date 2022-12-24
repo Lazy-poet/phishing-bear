@@ -34,7 +34,7 @@ const Cards = (props: Props) => {
                 gap: '20px'
             }
         })}>
-            <PricingCard currentPlanId={currentPlanId} price_id="price_1MG4GzEjvRVEwcgy7MUBK5cx" logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} price_id="price_1MIabgEjvRVEwcgykOioVaSR" logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.primary,
                 color: theme.colors.dark,
 
@@ -81,7 +81,7 @@ const Cards = (props: Props) => {
                     </StyledDarkParagraphText>
                 </div>
             </PricingCard>
-            <PricingCard currentPlanId={currentPlanId} price_id="price_1MGmU8EjvRVEwcgyq9ivY6sP" logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} price_id="price_1MIaaiEjvRVEwcgy37pCP4w1" logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.secondary,
                 color: '#fff',
 
