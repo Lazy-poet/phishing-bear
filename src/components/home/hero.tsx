@@ -43,7 +43,7 @@ const Hero = (props: Props) => {
         }
     }, [imgRef.current, wrapper.current])
     return (
-        <section className={css({
+        <section data-scroll-section className={css({
             width: '100vw',
             height: 'fit-content',
             background: 'url(/assets/images/hero.svg) no-repeat 100% 100%/cover',
@@ -68,7 +68,7 @@ const Hero = (props: Props) => {
 
 
         })}>
-            <div className={css({ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px', alignSelf: 'start', })}>
+            <div data-scroll data-scroll-speed='-1' data-scroll-position="top" className={css({ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px', alignSelf: 'start', })}>
                 <StyledHeaderText overrides={{
                     lineHeight: 1.5,
                     fontSize: '24px',

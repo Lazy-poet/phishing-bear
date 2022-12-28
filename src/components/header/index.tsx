@@ -13,7 +13,7 @@ const Header = (props: Props) => {
   const { pathname } = useRouter();
 
   return (
-    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: 'fit-content', zIndex: 10 }}>
+    <div data-scroll-sticky style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: 'fit-content', zIndex: 10 }}>
       {isLoggedIn && !links.map(l => l.href).includes(pathname) ? <NavPrivate showSidebar={showSidebar} toggleSidebar={toggleSidebar} /> : <NavPublic showSidebar={showSidebar} toggleSidebar={toggleSidebar} />}
     </div>
   )

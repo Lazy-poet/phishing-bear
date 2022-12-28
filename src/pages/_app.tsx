@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import '../styles/app.scss'
 import PropTypes from 'prop-types'
 
@@ -13,14 +13,19 @@ import { ToastContainer } from "react-toastify";
 import { AuthProvider } from '../context/authContext'
 import { LogoutModal } from '@components'
 import "react-toastify/dist/ReactToastify.css";
-
+import { SmoothScrollProvider } from '../context/smoothScoll.context'
+import { useRouter } from 'next/router'
 function MyApp({ Component, pageProps: { ...pageProps } }: any) {
-  const [state, setState] = useState(false)
-
+  const [state, setState] = useState(false);
+  const router = useRouter()
+  const options = {
+    smooth: true,
+  }
+  const containerRef = useRef(null)
   useEffect(() => {
     require('bootstrap/dist/js/bootstrap');
     // require('@fortawesome/fontawesome-free/js/all.js')
-    setState(true)
+    setState(true);
   }, []);
   return (
     <StyletronProvider value={styletron}>
@@ -28,8 +33,13 @@ function MyApp({ Component, pageProps: { ...pageProps } }: any) {
         <Provider store={store}>
           <ToastContainer autoClose={2000} limit={1} />
           <AuthProvider>
+
             {state ?
-              <Component {...pageProps} />
+              <SmoothScrollProvider options={options} >
+                <div data-scroll-container ref={containerRef}>
+                  <Component {...pageProps} />
+                </div>
+              </SmoothScrollProvider>
               : null}
             <LogoutModal />
           </AuthProvider>

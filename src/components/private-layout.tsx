@@ -26,7 +26,6 @@ const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.React
   return (
     <>
       <div className={css({
-        scrollSnapType: "y mandatory",
         ...(!noHeader && { scrollPaddingTop: '45px' }),
         overflowY: "scroll",
         minHeight: "100vh",
@@ -41,11 +40,13 @@ const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.React
 
       })}>
         {!noHeader && <Header />}
-        <main className={css({
-          marginTop: noHeader ? 0 : '45px', [theme.mediaQuery.small]: {
-            marginTop: noHeader ? 0 : '60px'
-          }
-        })}>{children}</main>
+        <main
+          data-scroll-section
+          className={css({
+            marginTop: noHeader ? 0 : '45px', [theme.mediaQuery.small]: {
+              marginTop: noHeader ? 0 : '60px'
+            }
+          })}>{children}</main>
         {!noFooter && <Footer />}
       </div>
     </>

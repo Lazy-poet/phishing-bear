@@ -18,7 +18,6 @@ const PublicLayout = ({ children, strict, noHeader, noFooter }: { children: Reac
   return (
     <>
       <div className={css({
-        scrollSnapType: "y mandatory",
         ...(!noHeader && { scrollPaddingTop: '45px' }),
         overflowY: "scroll",
         minHeight: "100vh",
@@ -28,17 +27,19 @@ const PublicLayout = ({ children, strict, noHeader, noFooter }: { children: Reac
         justifyContent: 'space-between',
         background: '#F8F8F8',
         [theme.mediaQuery.small]: {
-          ...(!noHeader && { scrollPaddingTop: '60px' }),
-
+          ...(!noHeader && { scrollPaddingTop: '60px' })
         }
-
       })}>
+
         {!noHeader && <Header />}
-        <main className={css({
-          marginTop: noHeader ? 0 : '45px', [theme.mediaQuery.small]: {
-            marginTop: noHeader ? 0 : '60px'
-          }
-        })}>{children}</main>
+        <main
+          data-scroll-section
+          data-scroll-speed='-1'
+          className={css({
+            marginTop: noHeader ? 0 : '45px', [theme.mediaQuery.small]: {
+              marginTop: noHeader ? 0 : '60px'
+            }
+          })}>{children}</main>
         {!noFooter && <Footer />}
       </div>
     </>

@@ -6,7 +6,6 @@ export const FooterWrapper: React.FC<{ children: React.ReactNode }> = ({ childre
     return <footer className={css({
         width: '100vw',
         height: 'max-content',
-        scrollSnapAlign: "start",
         scrollMargin: '100px',
         background: theme.colors.dark,
         color: "#fff",
