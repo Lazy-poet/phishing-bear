@@ -7,6 +7,7 @@ class SubscriptionServices extends CommonService {
     getCurrentPlanRoute = 'subscription/active'
     validateSessionRoute = 'subscription/validate'
     verifySubscriptionRoute = 'subscription/status'
+    getPlansRoute = 'subscription/plans'
     async createCheckout(price_id: string) {
         return await this.post(this.createCheckoutRoute, { price_id })
     }
@@ -21,6 +22,9 @@ class SubscriptionServices extends CommonService {
     }
     openPortal = async () => {
         return await this.get(this.openPortalRoute)
+    }
+    getPlans = async () => {
+        return await this.get(this.getPlansRoute)
     }
 
 }

@@ -25,7 +25,6 @@ const Card = ({ children, cta, btnStyle, logo, price_id, currentPlanId }: Props)
 
     const router = useRouter()
     const isCurrentPlan = isLoggedIn && currentPlanId && currentPlanId === price_id
-
     const handleClick = async () => {
         if (!price_id) return
         const update_sub = currentPlanId && price_id !== currentPlanId

@@ -12,15 +12,22 @@ type Props = {}
 const Cards = (props: Props) => {
     const [css, theme] = useCustomStyletron();
     const [currentPlanId, setCurrentPlanId] = useState('');
+    const [plans, setPlans] = useState({} as Record<string, any>);
     const { isLoggedIn } = useSelector((state: any) => state.auth);
 
-    const { data, isLoading } = useSWR(isLoggedIn ? subscriptionServices.getCurrentPlanRoute : null, subscriptionServices.getCurrentPlan);
+    const { data: currentPlanData, } = useSWR(isLoggedIn ? subscriptionServices.getCurrentPlanRoute : null, subscriptionServices.getCurrentPlan);
+    const { data: allPlans, isLoading } = useSWR(isLoggedIn ? subscriptionServices.getPlansRoute : null, subscriptionServices.getPlans);
     useEffect(() => {
-        if (data && data.data) {
-            const price_id = data.data.price_id;
+        if (currentPlanData && currentPlanData.data) {
+            const price_id = currentPlanData.data.price_id;
             setCurrentPlanId(price_id);
         }
-    }, [data])
+    }, [currentPlanData])
+    useEffect(() => {
+        if (allPlans && allPlans.data) {
+            setPlans(allPlans.data);
+        }
+    }, [allPlans])
 
     return (
         <div className={css({
@@ -34,7 +41,7 @@ const Cards = (props: Props) => {
                 gap: '20px'
             }
         })}>
-            <PricingCard currentPlanId={currentPlanId} price_id="price_1MIabgEjvRVEwcgykOioVaSR" logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} price_id={plans?.month?.price_id} logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.primary,
                 color: theme.colors.dark,
 
@@ -81,7 +88,7 @@ const Cards = (props: Props) => {
                     </StyledDarkParagraphText>
                 </div>
             </PricingCard>
-            <PricingCard currentPlanId={currentPlanId} price_id="price_1MIaaiEjvRVEwcgy37pCP4w1" logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} price_id={plans?.year?.price_id} logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.secondary,
                 color: '#fff',
 
