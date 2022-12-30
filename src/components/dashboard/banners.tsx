@@ -4,6 +4,7 @@ import { useCustomStyletron } from "../../styles/custom-styles"
 import image from './banner.svg'
 import { InitialsWrapper } from '@components'
 import { useSelector } from 'react-redux'
+import Link from "next/link"
 export const GreetingBanner = ({ }) => {
     const [css, theme] = useCustomStyletron();
     const first_name = useSelector((state: any) => state.auth.profileData.first_name)
@@ -122,29 +123,31 @@ export const TipBanner = () => {
         }}>
             Drive greater awareness to avoid clicking on future Phishing campaign
         </StyledParagraphText>
-        <StyledButton small overrides={{
-            background: '#fff',
-            color: theme.colors.secondary,
-            ...theme.typography.font(14, 600),
-            borderRadius: '25px',
-            width: '100%',
-            maxWidth: '200px',
-            height: '38px',
-            [theme.mediaQuery.xsmall]: {
-                width: '130px',
-                height: '42px',
-                ...theme.typography.font(16, 600),
+        <Link href="/handbook">
+            <StyledButton small overrides={{
+                background: '#fff',
+                color: theme.colors.secondary,
+                ...theme.typography.font(14, 600),
+                borderRadius: '25px',
+                width: '100%',
+                maxWidth: '200px',
+                height: '38px',
+                [theme.mediaQuery.xsmall]: {
+                    width: '130px',
+                    height: '42px',
+                    ...theme.typography.font(16, 600),
 
 
-            },
-            transition: 'all .4s ease',
-            ':hover': {
-                color: '#fff',
-                background: '#FFAE00'
-            }
-        }}>
-            Next Tip
-        </StyledButton>
+                },
+                transition: 'all .4s ease',
+                ':hover': {
+                    color: '#fff',
+                    background: '#FFAE00'
+                }
+            }}>
+                Learn More
+            </StyledButton>
+        </Link>
     </div>
 }
 
