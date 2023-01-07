@@ -17,11 +17,10 @@ export const DesktopHeaderWrapper = customStyled('div', ({ $theme }) => ({
         padding: '0 50px',
 
     },
-    background: $theme.colors.bg,
+    background: 'transparent',
     height: '60px',
     alignItems: 'center',
     justifyContent: 'space-between',
-    boxShadow: '0 3px 5px rgba(0, 0, 0, 0.1)'
 }))
 
 export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
@@ -29,7 +28,7 @@ export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
     [$theme.mediaQuery.small]: {
         display: 'none',
     },
-    background: $theme.colors.bg,
+    background: 'transparent',
     height: '45px',
     alignItems: 'center',
     justifyContent: 'space-between',
