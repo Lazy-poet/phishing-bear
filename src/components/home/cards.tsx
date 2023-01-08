@@ -41,7 +41,7 @@ const Cards = (props: Props) => {
                 gap: '20px'
             }
         })}>
-            <PricingCard currentPlanId={currentPlanId} price_id={plans?.month?.price_id} logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} price_id={plans?.month?.price_id} bg="rgba(255, 245, 211, 1)" logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.primary,
                 color: theme.colors.dark,
 
@@ -52,59 +52,30 @@ const Cards = (props: Props) => {
                     Monthly Plan
                 </StyledDarkParagraphText>
                 {addSpace("vert", '20px')}
-
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(14, 500),
-                    margin: 0
-
-                }}>
-                    Unlimited freedom
-                </StyledDarkParagraphText>
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(14, 500),
-                    margin: 0
-                }}>
-                    Cancel anytime
-                </StyledDarkParagraphText>
-                {addSpace("vert", '40px')}
                 <div className={css({
-                    background: theme.colors.bg,
+                    background: 'rgba(249, 235, 192, 1)',
                     borderRadius: '15px',
                     width: 'calc(100% - 40px)',
                     padding: '7px 10px',
                     textAlign: 'center',
-                    alignSelf: 'flex-end',
-                    position: 'absolute',
-                    bottom: '50px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
+                    height: '60px',
+                    display: 'grid',
+                    placeItems: 'center'
 
                 })}>
                     <StyledDarkParagraphText weight={700}>
-                        US$ 29.00 USD
-                    </StyledDarkParagraphText>
-                    <StyledDarkParagraphText size={'14px'} weight={500}>
-                        Monthly billing
+                        $39.00/month
                     </StyledDarkParagraphText>
                 </div>
+                {addSpace("vert", '20px')}
+
             </PricingCard>
-            <PricingCard currentPlanId={currentPlanId} price_id={plans?.year?.price_id} logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} price_id={plans?.year?.price_id} bg="rgba(214, 255, 231, 1)" logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
                 background: theme.colors.secondary,
                 color: '#fff',
 
             }}>
                 <div style={{ position: 'relative' }}>
-                    <span
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: '50%',
-                            transform: 'translate(-50%, calc(-100% - 10px))',
-                            background: theme.colors.primary,
-                            borderRadius: 10,
-                            padding: '3px 7px',
-                            fontSize: 10
-                        }}>Popular</span>
                     <StyledDarkParagraphText overrides={{
                         ...theme.typography.font(20, 600)
                     }}>
@@ -112,52 +83,27 @@ const Cards = (props: Props) => {
                     </StyledDarkParagraphText>
                 </div>
                 {addSpace("vert", '20px')}
-
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(14, 500),
-                    margin: 0
-
-                }}>
-                    1 month for FREE!
-                </StyledDarkParagraphText>
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(14, 500),
-                    margin: 0
-                }}>
-                    Cancel anytime during trial
-                </StyledDarkParagraphText>
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(14, 500),
-                    margin: 0
-                }}>
-                    12 months subscription
-
-                </StyledDarkParagraphText>
-                {addSpace("vert", '40px')}
                 <div className={css({
-                    background: theme.colors.bg,
+                    background: 'rgba(181, 245, 208, 1)',
                     borderRadius: '15px',
                     width: 'calc(100% - 40px)',
                     padding: '7px 10px',
                     textAlign: 'center',
-                    alignSelf: 'flex-end',
-                    position: 'absolute',
-                    bottom: '50px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
+                    height: '60px',
+                    display: 'grid',
+                    placeItems: 'center'
 
 
 
                 })}>
                     <StyledDarkParagraphText weight={700}>
-                        US$ 19.00 USD
-                    </StyledDarkParagraphText>
-                    <StyledDarkParagraphText size={'14px'} weight={500}>
-                        Annual billing
+                        $19.00/month
                     </StyledDarkParagraphText>
                 </div>
+                {addSpace("vert", '20px')}
+
             </PricingCard>
-            <PricingCard currentPlanId={currentPlanId} logo="/assets/images/enterprise_plan.svg" cta="Contact us" btnStyle={{
+            <PricingCard currentPlanId={currentPlanId} bg="rgba(242, 235, 255, 1)" logo="/assets/images/enterprise_plan.svg" cta="Contact us" btnStyle={{
                 background: theme.colors.dark,
                 color: '#fff'
 
@@ -168,37 +114,29 @@ const Cards = (props: Props) => {
                     Enterprise
                 </StyledDarkParagraphText>
                 {addSpace("vert", '20px')}
-
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(14, 500),
-                    margin: 0,
-                    textAlign: 'center'
-
-                }}>
-                    If you are really serious about protecting your organization or your team, contact us and we'll find a perfect solution for you.
-                </StyledDarkParagraphText>
-                {addSpace("vert", '40px')}
                 <div className={css({
-                    background: theme.colors.bg,
+                    background: 'rgba(232, 221, 249, 1)',
                     borderRadius: '15px',
                     width: 'calc(100% - 40px)',
                     padding: '7px 10px',
                     textAlign: 'center',
-                    alignSelf: 'flex-end',
-                    position: 'absolute',
-                    bottom: '50px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    display: 'none'
+                    height: '60px',
+                    display: 'grid',
+                    placeItems: 'center'
 
                 })}>
-                    <StyledDarkParagraphText weight={700}>
-                        US$ 29.00 USD
-                    </StyledDarkParagraphText>
-                    <StyledDarkParagraphText size={'14px'} weight={500}>
-                        Monthly billing
+                    <StyledDarkParagraphText overrides={{
+                        ...theme.typography.font(12, 500),
+                        margin: 0,
+                        textAlign: 'center'
+
+                    }}>
+                        Contact us and we'll find a perfect solution for you.
                     </StyledDarkParagraphText>
                 </div>
+                {addSpace("vert", '20px')}
+
+
             </PricingCard>
         </div>
     )

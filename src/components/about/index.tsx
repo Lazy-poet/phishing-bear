@@ -33,7 +33,7 @@ const SectionWrapper = ({ children, overrides }: Props) => {
 
             },
             [theme.mediaQuery.large]: {
-                padding: '100px 300px'
+                padding: '50px 300px'
             },
             ...overrides
         })}>

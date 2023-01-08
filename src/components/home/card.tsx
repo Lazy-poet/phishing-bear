@@ -15,10 +15,11 @@ type Props = {
     btnStyle: StyleObject,
     logo: string;
     price_id?: string,
-    currentPlanId: string
+    currentPlanId: string,
+    bg: string
 }
 
-const Card = ({ children, cta, btnStyle, logo, price_id, currentPlanId }: Props) => {
+const Card = ({ children, cta, btnStyle, logo, price_id, currentPlanId, bg }: Props) => {
     const [css, theme] = useCustomStyletron();
     const [loading, setLoading] = useState(false)
     const { isLoggedIn } = useSelector((state: any) => state.auth);
@@ -40,7 +41,7 @@ const Card = ({ children, cta, btnStyle, logo, price_id, currentPlanId }: Props)
     return (
         <>
             <div className={css({
-                height: '400px',
+                height: 'fit-content',
                 width: '100%',
                 maxWidth: '350px',
                 [theme.mediaQuery.small]: {
@@ -49,7 +50,7 @@ const Card = ({ children, cta, btnStyle, logo, price_id, currentPlanId }: Props)
                 [theme.mediaQuery.large]: {
                     maxWidth: '300px'
                 },
-                background: '#fff',
+                background: bg,
                 position: 'relative',
                 borderRadius: '20px',
                 display: 'flex',
@@ -60,12 +61,11 @@ const Card = ({ children, cta, btnStyle, logo, price_id, currentPlanId }: Props)
 
             })}>
                 <img src={logo} className={css({
-                    height: 'auto',
-                    maxHeight: '200px',
+                    height: '200px',
+                    width: '100%',
                     margin: '0 auto',
                     marginTop: '-50%',
-                    marginBottom: '50px',
-                    // transform: 'translateY(-50%)',
+                    marginBottom: '20px',
                     objectFit: 'cover'
                 })} />
                 {children}

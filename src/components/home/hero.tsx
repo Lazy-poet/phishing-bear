@@ -47,7 +47,7 @@ const Hero = (props: Props) => {
             width: '100vw',
             height: 'fit-content',
             background: 'url(/assets/images/hero.svg) no-repeat 100% 100%/cover',
-            padding: '50px 20px',
+            padding: '100px 20px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -57,18 +57,19 @@ const Hero = (props: Props) => {
             [theme.mediaQuery.xsmall]: {
                 flexDirection: 'row',
                 textAlign: 'left',
-                gap: 0
+                gap: '100px',
+                padding: '100px 50px',
+
 
             },
             [theme.mediaQuery.medium]: {
-                padding: '100px 200px',
+                padding: '150px 200px',
             },
-            scrollSnapAlign: "start",
 
 
 
         })}>
-            <div data-scroll data-scroll-speed='-1' data-scroll-position="top" className={css({ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px', alignSelf: 'start', })}>
+            <div data-scroll data-scroll-speed='-1' data-scroll-position="top" className={css({ flex: 1, display: 'flex', flexDirection: 'column', gap: '20px', })}>
                 <StyledHeaderText overrides={{
                     lineHeight: 1.5,
                     fontSize: '24px',
@@ -78,7 +79,7 @@ const Hero = (props: Props) => {
                     },
                     [theme.mediaQuery.large]: {
                         lineHeight: 1.6,
-                        fontSize: '34px'
+                        fontSize: '30px'
                     },
 
                 }}>
@@ -93,7 +94,7 @@ const Hero = (props: Props) => {
                     },
                     [theme.mediaQuery.large]: {
                         lineHeight: 1.6,
-                        fontSize: '20px'
+                        fontSize: '17px'
                     },
                 }}>
                     Targeted attacks with malicious payload use social engineering and phishing to bypass email gateways. Our Email Protection prevents these attacks to protect your business and data.
@@ -103,10 +104,12 @@ const Hero = (props: Props) => {
                     <StyledButton top="20px" small overrides={{
                         background: theme.colors.primary,
                         color: theme.colors.dark,
-                        borderRadius: '5px',
-                        height: '40px',
+                        borderRadius: '30px',
+                        height: '36px',
                         width: '100%',
                         padding: '0 30px',
+                        border: '2px solid #000',
+
                         transition: 'all .3s ease',
                         ...theme.typography.font(16, 700),
                         ':hover': {
@@ -114,9 +117,9 @@ const Hero = (props: Props) => {
                             background: '#fff',
                         },
                         [theme.mediaQuery.xsmall]: {
-                            height: '60px',
+                            height: '54px',
                             width: 'fit-content',
-    
+
                         }
                     }}>
                         Try it for free
