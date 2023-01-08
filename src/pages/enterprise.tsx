@@ -7,19 +7,27 @@ const Enterprise: NextPage = () => {
     <>
       <SEO />
       <PublicLayout>
-        <section className="pb-0" style={{ scrollSnapAlign: 'start' }}>
+        <section className="pb-0" style={{
+          background: 'url(/assets/images/common-hero.svg) no-repeat 100% 100%/cover',
+          height: '400px',
+          color: "#fff",
+          display: 'grid',
+          placeItems: 'center',
+
+
+        }}>
           <div className="container">
             <div className="row">
               <div className="col-10 mx-auto text-center">
                 <p className="fs-1">Entreprise solutions.</p>
                 <h2>We have the team for you.</h2>
-                <img src="/assets/images/astro-group.png" alt="Astro Group" className="img-fluid" />
+                {/* <img src="/assets/images/astro-group.png" alt="Astro Group" className="img-fluid" /> */}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="bg-secondary py-0 card-bg" style={{ scrollSnapAlign: 'start' }}>
+        <section className="bg-secondary py-0 card-bg">
           <div className="container">
             <div className="accordion " id="accordionExample">
               <div className="accordion accordion-flush mt-0 px-0" id="accordionFlushExample">
