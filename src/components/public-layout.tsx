@@ -17,7 +17,7 @@ const PublicLayout = ({ children, strict, noHeader, noFooter }: { children: Reac
   }
   return (
     <>
-      <div className={css({
+      <div id="container-ref" className={css({
         overflowY: "scroll",
         minHeight: "100vh",
         height: "calc(var(--vh, 1vh) * 100)",

@@ -21,9 +21,6 @@ const LocaleItem = ({ label, src, alt, onClick, style, isActive }: { isActive: b
     cursor: 'pointer',
     transition: 'all .2s ease',
     ...theme.typography.font(14, 500),
-    ':hover': {
-      background: theme.colors.bgHover
-    },
     ...style
   })}>
     <img src={src} alt={alt} className={css({ width: '25px', height: '25px', objectFit: 'cover', borderRadius: '50%', border: `1px solid ${theme.colors.dark}` })} />
@@ -55,19 +52,13 @@ const LocaleSelector = ({ overrides }: Props) => {
         opacity: Number(showDropdown),
         width: '100%',
         background: '#fff',
+        color: theme.colors.dark,
 
 
       }} {...getLocaleProps(!useDefault ? true : false)} isActive={false} onClick={() => {
         setShowDropdown(!showDropdown)
         setUseDefault(!useDefault)
       }} />
-      {/* <button className="btn dropdown-toggle border-0 p-0 fs-5 fw-normal" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="/assets/images/eng.svg" alt="England" className="" />&nbsp; EN
-      </button>
-      <button className="btn dropdown-toggle border-0 p-0 fs-5 fw-normal" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="/assets/images/swe.svg" alt="Sweden" className="img-fluid" /> &nbsp; SWE
-
-      </button> */}
 
     </div>
   )

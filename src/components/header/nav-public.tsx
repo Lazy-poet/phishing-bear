@@ -52,11 +52,12 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
           <LocaleSelector />
           <NavItem href="/pricing" label="Try it for free" wrapperStyle={{
-            borderRadius: '5px',
-            background: theme.colors.secondary,
-            color: '#fff',
+            borderRadius: '25px',
+            background: '#fff',
+            color: theme.colors.dark,
             opacity: 1,
             margin: '10px',
+            padding: '0 20px',
             height: '80%',
             ':hover': {
               opacity: .8
@@ -69,9 +70,9 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
                 dispatch(toggleLogoutModal(true))
               }
             }} href={isLoggedIn ? "" : "/login"} label={`Log ${isLoggedIn ? "out" : "in"}`} wrapperStyle={{
-              borderRadius: '5px',
-              // color: theme.colors.secondary,
-              border: `1px solid ${theme.colors.dark}`,
+              borderRadius: '25px',
+              color: '#fff',
+              border: `1px solid #fff`,
               width: '100px',
               background: 'transparent',
               opacity: 1,
@@ -100,7 +101,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
             }
           })} />
         </Link>
-        <img src="/assets/images/hamburger.svg" alt="Logo" className={css({
+        <img src="/assets/images/hamburger-light.svg" alt="Logo" className={css({
           width: '40px',
           cursor: 'pointer',
           ':hover': {

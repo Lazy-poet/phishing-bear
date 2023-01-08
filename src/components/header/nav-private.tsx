@@ -44,10 +44,10 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
 
   return (
     <>
-      <DesktopHeaderWrapper style={{ ...(router.pathname !== '/' && { background: '#fff' }) }}>
+      <DesktopHeaderWrapper style={{ ...(router.pathname !== '/' && { background: '#fff', color: theme.colors.dark }) }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
           <Link href="/">
-            <img src="/assets/images/logo.svg" alt="Logo" className={css({
+            <img src="/assets/images/private_logo.svg" alt="Logo" className={css({
               width: '170px',
               marginRight: '20px',
               [theme.mediaQuery.medium]: {
@@ -69,7 +69,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
       </DesktopHeaderWrapper>
       <MobileHeaderWrapper style={{ ...(router.pathname !== '/' && { background: '#fff' }) }}>
         <Link href="/">
-          <img src="/assets/images/logo.svg" alt="Logo" className={css({
+          <img src="/assets/images/private_logo.svg" alt="Logo" className={css({
             width: '120px',
             [theme.mediaQuery.xsmall]: {
               width: '150px',
@@ -81,7 +81,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
             }
           })} />
         </Link>
-        <img src="/assets/images/hamburger.svg" alt="Logo" className={css({
+        <img src="/assets/images/hamburger-dark.svg" alt="Logo" className={css({
           width: '40px',
           cursor: 'pointer',
           ':hover': {

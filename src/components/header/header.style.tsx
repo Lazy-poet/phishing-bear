@@ -7,7 +7,7 @@ import { useState } from 'react';
 import LocaleSelector from './localeSelector';
 
 
-export const DesktopHeaderWrapper = customStyled('div', ({ $theme }) => ({
+export const DesktopHeaderWrapper = customStyled('div', ({ $theme, }) => ({
     display: 'none',
     padding: '0 20px',
     [$theme.mediaQuery.small]: {
@@ -15,12 +15,13 @@ export const DesktopHeaderWrapper = customStyled('div', ({ $theme }) => ({
     },
     [$theme.mediaQuery.medium]: {
         padding: '0 50px',
-
     },
     background: 'transparent',
+    backdropFilter: 'blur(1px)',
     height: '60px',
     alignItems: 'center',
     justifyContent: 'space-between',
+    color: '#fff'
 }))
 
 export const MobileHeaderWrapper = customStyled('div', ({ $theme }) => ({
@@ -45,24 +46,22 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
         <div onClick={onClick} className={css({
             height: '100%',
             width: 'fit-content',
-            padding: '10px',
+            padding: 0,
             cursor: 'pointer',
             transition: 'all .2s ease-in-out',
             display: 'grid',
             placeContent: 'center',
-            background: isActive ? theme.colors.bgHover : 'none',
+            margin: '0 10px',
             ...theme.typography.font(12, 500),
             ":hover": {
-                background: 'rgba(168, 225, 190,.5)',
             },
+            borderBottom: isActive ? `3px solid ${theme.colors.primary}` : '',
             [theme.mediaQuery.small]: {
                 ...theme.typography.font(14, 500),
-                padding: '15px',
 
             },
             [theme.mediaQuery.large]: {
                 ...theme.typography.font(16, 500),
-                padding: '15px',
 
             },
             ...wrapperStyle,
