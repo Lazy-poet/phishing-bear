@@ -33,12 +33,18 @@ const ContactUs: NextPage = () => {
   return (
     <>
       <SectionWrapper overrides={{ padding: '0 !important', gap: '0 !important', background: theme.colors.bgHover }}>
+
         <ImageWrapper className={css({
           display: 'grid',
           placeItems: 'center',
           width: 'fit-content',
+          paddingTop: '50px',
+
           [theme.mediaQuery.xsmall]: {
             background: theme.colors.bgHover
+          },
+          [theme.mediaQuery.medium]: {
+            paddingTop: '100px',
           }
         })}>
           <img src="/assets/images/contact.png" alt="Contact Us" className={css({ width: '75%', margin: 'auto', maxWidth: '100%', height: 'auto' })} />
@@ -46,14 +52,15 @@ const ContactUs: NextPage = () => {
         <div className={css({
           flex: '0 0 50%',
           background: theme.colors.secondary,
-          padding: '20px',
+          padding: '50px 20px 20px',
           [theme.mediaQuery.xsmall]: {
-            padding: '50px',
+            padding: '150px 50px 50px',
           },
           width: '100%'
         })}>
+
           <form onSubmit={formik.handleSubmit} style={{ maxWidth: '500px', margin: 'auto' }}>
-            <StyledParagraphText overrides={{ ...theme.typography.font(24, 700) }}>Drop us a line</StyledParagraphText>
+            <StyledParagraphText overrides={{ ...theme.typography.font(26, 700) }}>Drop us a line</StyledParagraphText>
             <InputField
               type="text"
               name="name"
@@ -124,6 +131,18 @@ const ContactUs: NextPage = () => {
             </StyledButton>
           </form>
         </div>
+        <img
+          style={{
+            position: 'absolute',
+            top: -10,
+            left: 0,
+            width: '100%',
+            height: 'auto',
+            zIndex: 1,
+            objectFit: 'cover'
+          }}
+          src='/assets/images/curve.svg'
+        />
       </SectionWrapper>
 
     </>
