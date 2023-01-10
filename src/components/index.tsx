@@ -221,7 +221,7 @@ export const StyledButton = customStyled<"button", Partial<ButtonProps>>(
     cursor: "pointer",
     fontWeight: 500,
     ":disabled": {
-      opacity: .5,
+      opacity: .7,
       cursor: 'not-allowed'
     },
     ...overrides

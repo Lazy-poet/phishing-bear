@@ -1,4 +1,4 @@
-import { StyledDarkParagraphText, addSpace } from '@components'
+import { StyledDarkParagraphText, addSpace, StyledButton } from '@components'
 import React, { useState, useEffect } from 'react'
 import { useCustomStyletron } from '../../styles/custom-styles'
 import PricingCard from './card'
@@ -31,113 +31,118 @@ const Cards = (props: Props) => {
 
     return (
         <div className={css({
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexFlow: 'column',
-            gap: '200px',
-            [theme.mediaQuery.small]: {
-                flexFlow: 'row',
-                gap: '20px'
-            }
+            maxWidth: '650px',
+            margin: '0 auto'
         })}>
-            <PricingCard currentPlanId={currentPlanId} price_id={plans?.month?.price_id} bg="rgba(255, 245, 211, 1)" logo="/assets/images/monthly_plan.svg" cta="Get this plan" btnStyle={{
-                background: theme.colors.primary,
-                color: theme.colors.dark,
+            <div className={css({
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexFlow: 'column',
+                gap: '200px',
+                [theme.mediaQuery.small]: {
+                    flexFlow: 'row',
+                    gap: '50px'
+                }
+            })}>
+                <PricingCard currentPlanId={currentPlanId} price_id={plans?.month?.price_id} bg="rgba(255, 245, 211, 1)" logo="/assets/images/monthly_plan.svg" cta="Start today" btnStyle={{
+                    background: theme.colors.primary,
+                    color: theme.colors.dark,
 
-            }}>
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(20, 600)
                 }}>
-                    Monthly Plan
-                </StyledDarkParagraphText>
-                {addSpace("vert", '20px')}
-                <div className={css({
-                    background: 'rgba(249, 235, 192, 1)',
-                    borderRadius: '15px',
-                    width: 'calc(100% - 40px)',
-                    padding: '7px 10px',
-                    textAlign: 'center',
-                    height: '60px',
-                    display: 'grid',
-                    placeItems: 'center'
-
-                })}>
-                    <StyledDarkParagraphText weight={700}>
-                        $39.00/month
-                    </StyledDarkParagraphText>
-                </div>
-                {addSpace("vert", '20px')}
-
-            </PricingCard>
-            <PricingCard currentPlanId={currentPlanId} price_id={plans?.year?.price_id} bg="rgba(214, 255, 231, 1)" logo="/assets/images/annual_plan.svg" cta="Get this plan" btnStyle={{
-                background: theme.colors.secondary,
-                color: '#fff',
-
-            }}>
-                <div style={{ position: 'relative' }}>
                     <StyledDarkParagraphText overrides={{
                         ...theme.typography.font(20, 600)
                     }}>
-                        Annual Plan
+                        Monthly Plan
                     </StyledDarkParagraphText>
-                </div>
-                {addSpace("vert", '20px')}
-                <div className={css({
-                    background: 'rgba(181, 245, 208, 1)',
-                    borderRadius: '15px',
-                    width: 'calc(100% - 40px)',
-                    padding: '7px 10px',
-                    textAlign: 'center',
-                    height: '60px',
-                    display: 'grid',
-                    placeItems: 'center'
+                    {addSpace("vert", '20px')}
+                    <div className={css({
+                        background: 'rgba(249, 235, 192, 1)',
+                        borderRadius: '15px',
+                        width: 'calc(100% - 40px)',
+                        padding: '7px 10px',
+                        textAlign: 'center',
+                        height: '60px',
+                        display: 'grid',
+                        placeItems: 'center'
 
+                    })}>
+                        <StyledDarkParagraphText weight={700}>
+                            $39.00/month
+                        </StyledDarkParagraphText>
+                    </div>
+                    {addSpace("vert", '20px')}
 
+                </PricingCard>
+                <PricingCard currentPlanId={currentPlanId} price_id={plans?.year?.price_id} bg="rgba(214, 255, 231, 1)" logo="/assets/images/annual_plan.svg" cta="Try it for free" btnStyle={{
+                    background: theme.colors.secondary,
+                    color: '#fff',
 
-                })}>
-                    <StyledDarkParagraphText weight={700}>
-                        $19.00/month
-                    </StyledDarkParagraphText>
-                </div>
-                {addSpace("vert", '20px')}
-
-            </PricingCard>
-            <PricingCard currentPlanId={currentPlanId} bg="rgba(242, 235, 255, 1)" logo="/assets/images/enterprise_plan.svg" cta="Contact us" btnStyle={{
-                background: theme.colors.dark,
-                color: '#fff'
-
-            }}>
-                <StyledDarkParagraphText overrides={{
-                    ...theme.typography.font(20, 600)
                 }}>
-                    Enterprise
-                </StyledDarkParagraphText>
-                {addSpace("vert", '20px')}
-                <div className={css({
-                    background: 'rgba(232, 221, 249, 1)',
-                    borderRadius: '15px',
-                    width: 'calc(100% - 40px)',
-                    padding: '7px 10px',
-                    textAlign: 'center',
-                    height: '60px',
-                    display: 'grid',
-                    placeItems: 'center'
+                    <div style={{ position: 'relative' }}>
+                        <StyledDarkParagraphText overrides={{
+                            ...theme.typography.font(20, 600)
+                        }}>
+                            Annual Plan
+                        </StyledDarkParagraphText>
+                    </div>
+                    {addSpace("vert", '20px')}
+                    <div className={css({
+                        background: 'rgba(181, 245, 208, 1)',
+                        borderRadius: '15px',
+                        width: 'calc(100% - 40px)',
+                        padding: '7px 10px',
+                        textAlign: 'center',
+                        height: '60px',
+                        display: 'grid',
+                        placeItems: 'center'
 
-                })}>
-                    <StyledDarkParagraphText overrides={{
-                        ...theme.typography.font(12, 500),
-                        margin: 0,
-                        textAlign: 'center'
 
+                    })}>
+                        <StyledDarkParagraphText weight={700}>
+                            $19.00/month
+                        </StyledDarkParagraphText>
+                    </div>
+                    {addSpace("vert", '20px')}
+
+                </PricingCard>
+            </div>
+            {addSpace("vert", '70px')}
+
+            <div className={css({
+                background: '#F8F8F8',
+                padding: '40px',
+                width: '100%',
+                borderRadius: '30px',
+                textAlign: 'center',
+                position: 'relative'
+            })}>
+                <StyledButton
+                    overrides={{
+                        position: 'absolute',
+                        bottom: 0,
+                        right: '50%',
+                        transform: 'translate(50%, 50%)',
+                        width: 'max-content',
+                        height: 'fit-content',
+                        padding: '10px 30px',
+                        borderRadius: '30px',
+                        color: theme.colors.dark,
+                        border: `2px solid ${theme.colors.dark}`,
+                        background: '#fff',
+                        ...theme.typography.font(15, 500),
                     }}>
-                        Contact us and we'll find a perfect solution for you.
-                    </StyledDarkParagraphText>
-                </div>
-                {addSpace("vert", '20px')}
+                    Contact us
+                </StyledButton>
+                <StyledDarkParagraphText weight={600} size="16px">
+                    Enterprise customer
+                </StyledDarkParagraphText>
+                {addSpace("vert", '5px')}
 
-
-            </PricingCard>
+                <StyledDarkParagraphText weight={400} size="14px">
+                    Contact us, and we'll find the perfect solution for you
+                </StyledDarkParagraphText>
+            </div>
         </div>
     )
 }

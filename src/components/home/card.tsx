@@ -89,16 +89,16 @@ const Card = ({ children, cta, btnStyle, logo, price_id, currentPlanId, bg }: Pr
                         padding: '10px 20px',
                         borderRadius: '20px',
                         border: `2px solid ${theme.colors.dark}`,
-                        boxShadow: `0 -8px 5px rgba(0, 0, 0, .2) inset`,
+                        background: isCurrentPlan ? '#444' : '#fff',
+                        color: isCurrentPlan ? '#fff' : theme.colors.dark,
                         ...(!isCurrentPlan && {
                             ':hover': {
-                                boxShadow: `0 8px 5px rgba(0, 0, 0, .2)`,
-                                transform: `translate(50%, calc(50% - 2px))`
+                                boxShadow: `0 5px 5px rgba(0, 0, 0, .2)`,
+                                transform: `translate(50%, calc(50% - 1px))`
                             }
                         }),
 
                         ...theme.typography.font(16, 600),
-                        ...btnStyle,
                     }}>
                     {isCurrentPlan ? 'Current Plan' : cta}
                 </StyledButton>
