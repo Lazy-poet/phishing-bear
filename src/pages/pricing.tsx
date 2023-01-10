@@ -10,8 +10,11 @@ const Pricing: NextPage = () => {
     <>
       <SEO />
       <PublicLayout>
-        <SectionWrapper overrides={{ background: theme.colors.dark, color: '#ff' }}>
-          <div>
+        <SectionWrapper overrides={{
+          background: 'url(/assets/images/about-hero.svg) no-repeat 100% 100%/cover',
+          color: '#ff'
+        }}>
+          <div style={{ padding: '50px' }}>
             <StyledParagraphText overrides={{
               ...theme.typography.font(24, 700),
               maxWidth: '400px',
@@ -26,15 +29,11 @@ const Pricing: NextPage = () => {
             }}>Simple, straight forward pricing.</StyledParagraphText>
             <StyledParagraphText overrides={{
               ...theme.typography.font(14, 400),
-              maxWidth: '1000px',
+              maxWidth: '600px',
               margin: '0 auto 20px',
               textAlign: 'center',
               [theme.mediaQuery.medium]: {
                 ...theme.typography.font(16, 400),
-
-              },
-              [theme.mediaQuery.large]: {
-                ...theme.typography.font(20, 400),
 
               },
             }}>
@@ -43,14 +42,15 @@ const Pricing: NextPage = () => {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper>
+        <SectionWrapper overrides={{ backgroundColor: "#fff" }}>
           <div className={css({
-            padding: '100px 0'
+            padding: '50px 0',
+            width: '100%'
           })}>
             <Cards />
           </div>
         </SectionWrapper>
-
+       
         <ContactUs />
       </PublicLayout>
     </>

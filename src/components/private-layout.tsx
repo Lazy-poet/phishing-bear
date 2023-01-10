@@ -32,7 +32,7 @@ const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.React
         display: 'flex',
         flexFlow: 'column',
         justifyContent: 'space-between',
-        background: '#F8F8F8',
+        background: '#fff',
 
       })}>
         {!noHeader && <Header />}

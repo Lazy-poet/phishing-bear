@@ -24,7 +24,7 @@ const PublicLayout = ({ children, strict, noHeader, noFooter }: { children: Reac
         display: 'flex',
         flexFlow: 'column',
         justifyContent: 'space-between',
-        background: '#F8F8F8',
+        background: '#fff',
       })}>
 
         {!noHeader && <Header />}
