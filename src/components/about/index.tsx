@@ -13,7 +13,7 @@ const SectionWrapper = ({ children, overrides }: Props) => {
     return (
         <section className={css({
             scrollSnapAlign: "start",
-            padding: '100px 20px',
+            padding: '80px 20px',
             display: 'flex',
             alignItems: "center",
             justifyContent: "center",
@@ -21,19 +21,19 @@ const SectionWrapper = ({ children, overrides }: Props) => {
             gap: '30px',
             position: 'relative',
             [theme.mediaQuery.xsmall]: {
-                padding: '50px',
+                padding: '80px 50px',
                 flexDirection: "row",
             },
             [theme.mediaQuery.small]: {
-                padding: '50px 100px'
+                padding: '80px'
             },
             [theme.mediaQuery.medium]: {
-                padding: '50px 250px',
+                padding: '80px 250px',
                 gap: '100px',
 
             },
             [theme.mediaQuery.large]: {
-                padding: '50px 300px'
+                padding: '80px 300px'
             },
             ...overrides
         })}>

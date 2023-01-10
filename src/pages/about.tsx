@@ -33,11 +33,11 @@ const About: NextPage = () => {
             <StyledParagraphText overrides={{
               color: '#fff',
               ...theme.typography.font(14, 400),
-              maxWidth: '700px',
+              maxWidth: '600px',
               margin: '0 auto 20px',
               textAlign: 'center',
               [theme.mediaQuery.medium]: {
-                ...theme.typography.font(18, 400),
+                ...theme.typography.font(16, 400),
 
               },
               // [theme.mediaQuery.large]: {
