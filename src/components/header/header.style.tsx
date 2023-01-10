@@ -96,7 +96,7 @@ export const MyAccountWrapper = ({ onLogout, initials }) => {
     const [show, setShow] = useState(false);
 
 
-    return <div className={css({ position: 'relative', cursor: 'pointer', })}>
+    return <div className={css({ position: 'relative', cursor: 'pointer', flex: 1, display: 'flex', justifyContent: 'end' })}>
         {/* {initials?.length === 2 && */}
         <InitialsWrapper onClick={() => setShow(!show)}> {initials}</InitialsWrapper>
         {/* } */}

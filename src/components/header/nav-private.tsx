@@ -45,7 +45,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
   return (
     <>
       <DesktopHeaderWrapper style={{ ...(router.pathname !== '/' && { background: '#fff', color: theme.colors.dark }) }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
+        <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'start', justifySelf: 'flex-end', height: '100%' }}>
           <Link href="/">
             <img src="/assets/images/private_logo.svg" alt="Logo" className={css({
               width: '170px',
@@ -60,6 +60,8 @@ const NavPrivate = ({ showSidebar, toggleSidebar }) => {
               }
             })} />
           </Link>
+        </div>
+        <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
           <NavItem href="/dashboard" label="Dashboard" logo='/assets/images/dashboard.svg' />
           <NavItem href="/handbook" label="Handbook" logo='/assets/images/handbook.svg' />
           <NavItem href="/faq" label="FAQs" logo="/assets/images/faq.svg" />
