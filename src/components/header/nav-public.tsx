@@ -20,6 +20,7 @@ export const links = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'Enterprise solutions', href: '/enterprise' },
   { label: 'Private solutions', href: 'private' },
+  { label: 'Contact us', href: 'contact' },
 ]
 const NavPublic = ({ showSidebar, toggleSidebar }) => {
   const router = useRouter()
@@ -46,7 +47,7 @@ const NavPublic = ({ showSidebar, toggleSidebar }) => {
           </Link>
 
         </div>
-        <div style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
+        <div style={{ display: 'flex', flex: 1, gap: '7px', alignItems: 'center', justifyContent: 'center', justifySelf: 'flex-end', height: '100%' }}>
           <NavItem href="/about" label="About us" />
           <NavItem href="/pricing" label="Pricing" />
           <NavItem href="/platform" label="User Platform" logo="/assets/images/user-platform.svg" />

@@ -3,11 +3,12 @@ import NavPublic, { links } from './nav-public'
 import NavPrivate from './nav-private'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { L } from 'chart.js/dist/chunks/helpers.core'
 import { useCustomStyletron } from '../../styles/custom-styles'
-type Props = {}
+type Props = {
+  isPrivate?: boolean
+}
 
-const Header = (props: Props) => {
+const Header = ({isPrivate}: Props) => {
   const { isLoggedIn } = useSelector((state: any) => state.auth)
 
   const [showSidebar, setShowSidebar] = useState(false);
@@ -17,7 +18,6 @@ const Header = (props: Props) => {
   const { pathname } = useRouter();
 
   useEffect(() => {
-    console.log('loaded');
     const container = document.getElementById('container-ref');
     const scrollListener = () => {
       setHasScrolled(container.scrollTop >= 60)
@@ -38,7 +38,7 @@ const Header = (props: Props) => {
         backdropFilter: 'blur(15px)'
       })
     }}>
-      {isLoggedIn && !links.map(l => l.href).includes(pathname) ? <NavPrivate showSidebar={showSidebar} toggleSidebar={toggleSidebar} /> : <NavPublic showSidebar={showSidebar} toggleSidebar={toggleSidebar} />}
+      {isPrivate ? <NavPrivate showSidebar={showSidebar} toggleSidebar={toggleSidebar} /> : <NavPublic showSidebar={showSidebar} toggleSidebar={toggleSidebar} />}
     </div>
   )
 }

@@ -47,7 +47,7 @@ const ContactUs: NextPage = () => {
             paddingTop: '100px',
           }
         })}>
-          <img src="/assets/images/contact.png" alt="Contact Us" className={css({ width: '75%', margin: 'auto', maxWidth: '100%', height: 'auto' })} />
+          <img src="/assets/images/contact.png" alt="Contact Us" className={css({ width: '75%', margin: 'auto', maxWidth: 'min(100%, 500px)', height: 'auto' })} />
         </ImageWrapper>
         <div className={css({
           flex: '0 0 50%',

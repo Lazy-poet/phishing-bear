@@ -35,10 +35,10 @@ const PrivateLayout = ({ children, noHeader, noFooter }: { children: React.React
         background: '#fff',
 
       })}>
-        {!noHeader && <Header />}
+        {!noHeader && <Header isPrivate />}
         <main
           data-scroll-section
-         >{children}</main>
+        >{children}</main>
         {!noFooter && <Footer />}
       </div>
     </>

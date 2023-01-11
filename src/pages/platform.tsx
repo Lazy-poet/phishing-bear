@@ -1,18 +1,18 @@
 
 import React from 'react'
 import type { NextPage } from 'next'
-import { PrivateLayout, SEO, PlatformWrapper, PlatformHero, PlatformBanners } from '@components'
+import { PublicLayout, SEO, PlatformWrapper, PlatformHero, PlatformBanners } from '@components'
 
 const Platform: NextPage = () => {
     return (
         <>
             <SEO />
-            <PrivateLayout>
+            <PublicLayout>
                 <PlatformWrapper>
                     <PlatformHero />
                     <PlatformBanners />
                 </PlatformWrapper>
-            </PrivateLayout>
+            </PublicLayout>
         </>
     )
 }
