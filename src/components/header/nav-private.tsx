@@ -67,7 +67,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar, headerTheme }) => {
       <DesktopHeaderWrapper
         style={{
           ...(router.pathname !== "/" && {
-            background: headerTheme === "light" ? "#fff" : theme.colors.dark,
+            background: headerTheme === "light" ? "#fff" : "",
             color: headerTheme === "light" ? theme.colors.dark : "#fff",
           }),
         }}
@@ -115,18 +115,30 @@ const NavPrivate = ({ showSidebar, toggleSidebar, headerTheme }) => {
           <NavItem
             href="/dashboard"
             label="Dashboard"
-            logo="/assets/images/dashboard.svg"
+            logo={`/assets/images/${
+              headerTheme === "dark" ? "offcanvas-icons/" : ""
+            }dashboard.svg`}
           />
           <NavItem
             href="/handbook"
             label="Handbook"
-            logo="/assets/images/handbook.svg"
+            logo={`/assets/images/${
+              headerTheme === "dark" ? "offcanvas-icons/" : ""
+            }handbook.svg`}
           />
-          <NavItem href="/faq" label="FAQs" logo="/assets/images/faq.svg" />
+          <NavItem
+            href="/faq"
+            label="FAQs"
+            logo={`/assets/images/${
+              headerTheme === "dark" ? "offcanvas-icons/" : ""
+            }faq.svg`}
+          />
           <NavItem
             href="/community"
             label="Community"
-            logo="/assets/images/community.svg"
+            logo={`/assets/images/${
+              headerTheme === "dark" ? "offcanvas-icons/" : ""
+            }community.svg`}
           />
         </div>
         <MyAccountWrapper onLogout={logOut} initials={initials} />

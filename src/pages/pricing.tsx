@@ -12,7 +12,7 @@ const Pricing: NextPage = () => {
       <PublicLayout>
         <SectionWrapper overrides={{
           background: 'url(/assets/images/about-hero.svg) no-repeat 100% 100%/cover',
-          color: '#ff'
+          color: '#fff'
         }}>
           <div style={{ padding: '50px' }}>
             <StyledParagraphText overrides={{

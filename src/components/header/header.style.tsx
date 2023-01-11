@@ -60,10 +60,6 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
                 ...theme.typography.font(14, 500),
 
             },
-            [theme.mediaQuery.large]: {
-                ...theme.typography.font(16, 500),
-
-            },
             ...wrapperStyle,
             ...(isActive && activeStyle),
 
@@ -71,7 +67,7 @@ export const NavItem: React.FC<{ href: string, logo?: string, label: string, onC
         })}>
 
             <div className={css({ display: 'flex', alignItems: 'center', justifyContent: 'start', gap: '5px', ...style })}>
-                {logo && <img src={logo} alt="" className={css({ width: '20px', height: '20px' })} />}
+                {logo && <img src={logo} alt="" className={css({ width: '15px', height: '15px' })} />}
                 {label}
             </div>
         </div>

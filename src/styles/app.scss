@@ -561,14 +561,14 @@ footer .col-lg-5 {
 }
 
 .info_item:hover {
-  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
   padding-bottom: 20px;
+  background: rgba(184, 156, 197, 0.2);
   > div {
-    background: #fdd244;
+    // background: #fdd244;
     & img {
-      width: 50%;
-      height: 50%;
+      width: 40%;
+      height: 40%;
     }
   }
   > p {
