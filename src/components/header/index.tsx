@@ -6,9 +6,10 @@ import { useRouter } from 'next/router'
 import { useCustomStyletron } from '../../styles/custom-styles'
 type Props = {
   isPrivate?: boolean
+  headerTheme: 'light' | 'dark'
 }
 
-const Header = ({isPrivate}: Props) => {
+const Header = ({isPrivate, headerTheme}: Props) => {
   const { isLoggedIn } = useSelector((state: any) => state.auth)
 
   const [showSidebar, setShowSidebar] = useState(false);
@@ -38,7 +39,7 @@ const Header = ({isPrivate}: Props) => {
         backdropFilter: 'blur(15px)'
       })
     }}>
-      {isPrivate ? <NavPrivate showSidebar={showSidebar} toggleSidebar={toggleSidebar} /> : <NavPublic showSidebar={showSidebar} toggleSidebar={toggleSidebar} />}
+      {isPrivate ? <NavPrivate showSidebar={showSidebar} toggleSidebar={toggleSidebar} headerTheme={headerTheme} /> : <NavPublic headerTheme={headerTheme} showSidebar={showSidebar} toggleSidebar={toggleSidebar} />}
     </div>
   )
 }
