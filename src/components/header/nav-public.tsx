@@ -18,9 +18,10 @@ export const links = [
   { label: 'Home', href: '/' },
   { label: 'About us', href: '/about' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'Enterprise solutions', href: '/enterprise' },
-  { label: 'Private solutions', href: 'private' },
-  { label: 'Contact us', href: 'contact' },
+  // { label: 'Enterprise solutions', href: '/enterprise' },
+  // { label: 'Private solutions', href: 'private' },
+  { label: 'Contact us', href: '/contact' },
+  { label: 'User platform', href: '/platform' },
 ]
 const NavPublic = ({ showSidebar, toggleSidebar }) => {
   const router = useRouter()
