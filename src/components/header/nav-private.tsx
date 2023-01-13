@@ -5,7 +5,11 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
 import { authServices } from "../../../services";
-import { toggleLogoutModal, setMedata } from "../../../redux/slices/auth.slice";
+import {
+  toggleModal,
+  setMedata,
+  ActiveModal,
+} from "../../../redux/slices/auth.slice";
 import { Button } from "@components";
 import { useCustomStyletron } from "../../styles/custom-styles";
 import {
@@ -57,7 +61,7 @@ const NavPrivate = ({ showSidebar, toggleSidebar, headerTheme }) => {
   }, [isLoggedIn]);
 
   const logOut = () => {
-    dispatch(toggleLogoutModal(true));
+    dispatch(toggleModal(ActiveModal.LOGOUT));
   };
 
   const [css, theme] = useCustomStyletron();

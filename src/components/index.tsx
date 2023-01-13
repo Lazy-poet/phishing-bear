@@ -30,6 +30,7 @@ export * from './handbook'
 export * from './community'
 export * from './logout'
 export * from './platform'
+export * from './modals'
 
 export {
   PrivateLayout, Header, PublicLayout, SEO, Button, CheckBox, LinkButton, SelectField, Alert, Loading,
@@ -132,7 +133,6 @@ export const StyledInput = customStyled<'input', { overrides?: StyleObject }>("i
     fontSize: "14px",
     fontWeight: 300,
   },
-  borderBottom: "1px solid #fff",
   padding: "10px 20px",
   margin: "10px 0",
   color: '#fff',

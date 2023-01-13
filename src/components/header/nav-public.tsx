@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toggleLogoutModal } from "../../../redux/slices/auth.slice";
+import { toggleModal, ActiveModal } from "../../../redux/slices/auth.slice";
 import {
   NavItem,
   DesktopHeaderWrapper,
@@ -125,11 +125,13 @@ const NavPublic = ({ showSidebar, toggleSidebar, headerTheme }) => {
           {router?.pathname === "/login" ? null : (
             <NavItem
               onClick={() => {
-                if (isLoggedIn) {
-                  dispatch(toggleLogoutModal(true));
-                }
+                dispatch(
+                  toggleModal(
+                    isLoggedIn ? ActiveModal.LOGOUT : ActiveModal.LOGIN
+                  )
+                );
               }}
-              href={isLoggedIn ? "" : "/login"}
+              href={""}
               label={`Log ${isLoggedIn ? "out" : "in"}`}
               wrapperStyle={{
                 borderRadius: "25px",
@@ -187,7 +189,7 @@ const NavPublic = ({ showSidebar, toggleSidebar, headerTheme }) => {
           toggle={toggleSidebar}
           onLogout={() => {
             if (isLoggedIn) {
-              dispatch(toggleLogoutModal(true));
+              dispatch(toggleModal(ActiveModal.LOGOUT));
             }
           }}
         />

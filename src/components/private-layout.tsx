@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Header, Footer } from "@components";
-import Login from "../pages/login";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { useCustomStyletron } from "../styles/custom-styles";
+import { toggleModal, ActiveModal } from "../../redux/slices/auth.slice";
 
 const PrivateLayout = ({
   children,
@@ -21,6 +21,7 @@ const PrivateLayout = ({
   const { isLoggedIn } = useSelector((state: any) => state.auth);
   const router = useRouter();
   const [css, theme] = useCustomStyletron();
+  const dispatch = useDispatch()
   useEffect(() => {
     if (!isLoggedIn) {
       toast.info("You have to login first", { toastId: "login-again" });
@@ -28,7 +29,8 @@ const PrivateLayout = ({
   }, []);
 
   if (!isLoggedIn && router.isReady) {
-    router.push(`/login?redirect_path=${router.pathname}`);
+    router.push(`/?redirect_path=${router.pathname}`);
+    dispatch(toggleModal(ActiveModal.LOGIN));
     return;
   }
 

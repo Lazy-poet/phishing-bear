@@ -20,27 +20,28 @@ const Dashboard = () => {
   const [range, setRange] = useState('1m');
   const [hasAccess, setHasAccess] = useState(false);
   const router = useRouter()
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
+    if (!isLoggedIn) return;
     (async () => {
-      setLoading(true)
+      setLoading(true);
       const resp = await subscriptionServices.verifySubscription();
-      console.log('resp is', resp)
       if (!resp.error) {
-        setHasAccess(true)
+        setHasAccess(true);
         const { data, error } = await userServices.getFriends();
         if (!error) {
-          setFriends(data)
+          setFriends(data);
         }
       } else {
         setTimeout(() => {
-          toast.info('Select a pricing option',);
-          router.push('/pricing')
-        }, 2000)
+          toast.info("Select a pricing option");
+          router.push("/pricing");
+        }, 2000);
       }
-      setLoading(false)
-    })()
-  }, [])
+      setLoading(false);
+    })();
+  }, [isLoggedIn]);
   useEffect(() => {
     if (!hasAccess) return;
     (async () => {

@@ -77,7 +77,6 @@ const ForgotPassword = () => {
                 </form>
                 <Link href="/login">
                   <StyledParagraphText color={'#5a74ff'} size="16px" style={{ cursor: 'pointer' }} weight={800}>Back to login</StyledParagraphText>
-
                 </Link>
               </div>
             </div>

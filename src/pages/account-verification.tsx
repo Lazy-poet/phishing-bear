@@ -29,7 +29,8 @@ const userAccountVerify = () => {
         const res = await authServices.accountVerify(token as string);
         if (!res) {
           setError(true)
-          push('/login');
+          push('/');
+
         }
         setLoading(false)
       })()
