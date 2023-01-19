@@ -1,15 +1,8 @@
-import {
-  StyledDarkParagraphText,
-  StyledButton,
-  InputField,
-} from "@components";
+import { StyledDarkParagraphText, StyledButton, InputField } from "@components";
 import { PulseLoader } from "react-spinners";
 import { useCustomStyletron } from "../../styles/custom-styles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  toggleModal,
-  ActiveModal,
-} from "../../../redux/slices/auth.slice";
+import { toggleModal, ActiveModal } from "../../../redux/slices/auth.slice";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -48,16 +41,19 @@ export const ForgotPassword = () => {
       <>
         <div
           className={css({
-            background: theme.colors.secondary,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "end",
-            padding: "0 30px",
-            gap: "10px",
-            maxWidth: "100%",
-            flex: 1,
-            height: "100%",
+            display: "none",
+            width: "100%",
+            [theme.mediaQuery.xsmall]: {
+              background: theme.colors.secondary,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "30px",
+              gap: "50px",
+              maxWidth: "100%",
+              flex: 1,
+            },
           })}
         >
           <img

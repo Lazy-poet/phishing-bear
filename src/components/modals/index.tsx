@@ -3,16 +3,28 @@ import Portal from "../portal";
 import { LoginModal } from "./login.modal";
 import { Signup } from "./signup.modal";
 import { ForgotPassword } from "./forgot-password.modal";
+import { CreatePassword } from "./create-password.modal";
+import { VerificationMailSent } from "./verification.modal";
 import { StyleObject } from "styletron-standard";
 import { useDispatch } from "react-redux";
 import { toggleModal } from "../../../redux/slices/auth.slice";
+import { useState } from "react";
+import { PricingModal } from "./pricing.modal";
+import { PersonalIno } from "./personal-info.modal";
 type Props = {
   children: React.ReactNode;
   open?: boolean;
   onClose?: () => void;
   overrides?: StyleObject;
+  closable?: boolean;
 };
-export const BaseModal = ({ open, onClose, children, overrides }: Props) => {
+export const BaseModal = ({
+  open,
+  onClose,
+  children,
+  overrides,
+  closable=true,
+}: Props) => {
   const [css, theme] = useCustomStyletron();
   const dispatch = useDispatch();
   return (
@@ -37,13 +49,13 @@ export const BaseModal = ({ open, onClose, children, overrides }: Props) => {
         <div
           className={css({
             width: "800px",
-            maxHeight: "calc(100vh - 200px)",
+            maxWidth: "calc(100vw - 40px)",
+            maxHeight: "calc(100vh - 100px)",
             overflowY: "scroll",
             position: "relative",
             zIndex: 3,
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            alignItems: "center",
+            display: "flex",
+            alignItems: "top",
             justifyContent: "center",
             transition: "all 0.2s ease",
             background: "#fff",
@@ -58,6 +70,7 @@ export const BaseModal = ({ open, onClose, children, overrides }: Props) => {
               top: "15px",
               right: "15px",
               cursor: "pointer",
+              display: closable ? "block" : "none",
             }}
             width="16"
             height="16"
@@ -95,11 +108,16 @@ export const BaseModal = ({ open, onClose, children, overrides }: Props) => {
 };
 
 export const Modals = () => {
+  const [email, setEmail] = useState("");
   return (
     <>
       <LoginModal />
-      <Signup />
+      <Signup setEmail={setEmail} />
       <ForgotPassword />
+      <CreatePassword />
+      <PricingModal />
+      <PersonalIno />
+      <VerificationMailSent email={email} />
     </>
   );
 };

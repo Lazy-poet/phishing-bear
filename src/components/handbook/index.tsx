@@ -290,7 +290,13 @@ const getActiveContent = (tab: string) => {
   }
 };
 
-export const ListItem = ({ text }) => {
+export const ListItem = ({
+  text,
+  textOverrides,
+}: {
+  text: string;
+  textOverrides?: StyleObject;
+}) => {
   const [css, theme] = useCustomStyletron();
   return (
     <li
@@ -314,7 +320,12 @@ export const ListItem = ({ text }) => {
           display: "block",
         }}
       />
-      <StyledParagraphText size="12px" weight={400} style={{}}>
+      <StyledParagraphText
+        overrides={textOverrides}
+        size="12px"
+        weight={400}
+        style={{}}
+      >
         {text}
       </StyledParagraphText>
     </li>

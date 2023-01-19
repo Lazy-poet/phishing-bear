@@ -1,45 +1,55 @@
-import PrivateLayout from './private-layout'
-import PublicLayout from './public-layout'
-import Header from './header/index'
+import PrivateLayout from "./private-layout";
+import PublicLayout from "./public-layout";
+import Header from "./header/index";
 // import Footer from './footer'
-import SEO from './seo'
-import Button from './form-inputs/button'
-import CheckBox from './form-inputs/checkbox'
-import LinkButton from './form-inputs/link'
-import SelectField from './form-inputs/select'
-import Alert from './alert'
-import Loading from './loading'
-import Pagination from './pagination'
-import NavPrivate from './header/nav-private'
-import NavPublic from './header/nav-public'
+import SEO from "./seo";
+import Button from "./form-inputs/button";
+import CheckBox from "./form-inputs/checkbox";
+import LinkButton from "./form-inputs/link";
+import SelectField from "./form-inputs/select";
+import Alert from "./alert";
+import Loading from "./loading";
+import Pagination from "./pagination";
+import NavPrivate from "./header/nav-private";
+import NavPublic from "./header/nav-public";
 import { customStyled, useCustomStyletron } from "../styles/custom-styles";
 import { ChangeEvent, useRef, useState } from "react";
-export { default as Hero } from './home/hero'
-export { default as Cards } from './home/cards'
-export { default as FooterBanner } from './home/banner'
-export { default as Footer } from './footer/footer'
-export { default as SectionWrapper } from './about'
-export { default as Spinner } from './spinner'
-export * from './dashboard'
+export { default as Hero } from "./home/hero";
+export { default as Cards } from "./home/cards";
+export { default as FooterBanner } from "./home/banner";
+export { default as Footer } from "./footer/footer";
+export { default as SectionWrapper } from "./about";
+export { default as Spinner } from "./spinner";
+export * from "./dashboard";
 
-export * from './about'
-export * from './header/header.style'
-export * from './faq'
-export * from './my-account'
-export * from './handbook'
-export * from './community'
-export * from './logout'
-export * from './platform'
-export * from './modals'
+export * from "./about";
+export * from "./header/header.style";
+export * from "./faq";
+export * from "./my-account";
+export * from "./handbook";
+export * from "./community";
+export * from "./logout";
+export * from "./platform";
+export * from "./modals";
 
 export {
-  PrivateLayout, Header, PublicLayout, SEO, Button, CheckBox, LinkButton, SelectField, Alert, Loading,
-  Pagination, NavPrivate, NavPublic,
-}
-
+  PrivateLayout,
+  Header,
+  PublicLayout,
+  SEO,
+  Button,
+  CheckBox,
+  LinkButton,
+  SelectField,
+  Alert,
+  Loading,
+  Pagination,
+  NavPrivate,
+  NavPublic,
+};
 
 import { DatePicker } from "baseui/datepicker";
-import { StyleObject } from 'styletron-react'
+import { StyleObject } from "styletron-react";
 
 interface TextProps {
   isMobile?: boolean;
@@ -47,9 +57,8 @@ interface TextProps {
   weight?: number;
   align?: "left" | "center" | "right";
   size?: string;
-  uppercase?: boolean,
-  overrides?: StyleObject
-
+  uppercase?: boolean;
+  overrides?: StyleObject;
 }
 interface ButtonProps {
   top: string;
@@ -57,7 +66,7 @@ interface ButtonProps {
   left: string;
   right: string;
   small: boolean;
-  overrides?: StyleObject
+  overrides?: StyleObject;
 }
 
 export const addSpace = (
@@ -81,15 +90,18 @@ export const addSpace = (
   );
 };
 
-export const StyledHeaderText = customStyled<"h1", TextProps>("h1", ({ size, color, weight, uppercase, overrides }) => ({
-  color: color || "white",
-  fontSize: (size || "38px") + " !important",
-  letterSpacing: "1px",
-  fontWeight: weight || 700,
-  textTransform: uppercase ? 'uppercase' : 'capitalize',
-  margin: 0,
-  ...overrides,
-}));
+export const StyledHeaderText = customStyled<"h1", TextProps>(
+  "h1",
+  ({ size, color, weight, uppercase, overrides }) => ({
+    color: color || "white",
+    fontSize: (size || "38px") + " !important",
+    letterSpacing: "1px",
+    fontWeight: weight || 700,
+    textTransform: uppercase ? "uppercase" : "capitalize",
+    margin: 0,
+    ...overrides,
+  })
+);
 export const StyledParagraphText = customStyled<"p", TextProps>(
   "p",
   ({ size, color, weight, align, overrides, uppercase }) => ({
@@ -99,10 +111,10 @@ export const StyledParagraphText = customStyled<"p", TextProps>(
     fontWeight: weight || 300,
     lineHeight: 1.5,
     textAlign: align,
-    textTransform: uppercase ? 'uppercase' : 'none',
+    textTransform: uppercase ? "uppercase" : "none",
     alignSelf: align === "left" ? "start" : align === "right" ? "end" : align,
     margin: 0,
-    ...overrides
+    ...overrides,
   })
 );
 export const StyledDarkParagraphText = customStyled<any, TextProps>(
@@ -116,52 +128,55 @@ export const StyledDarkParagraphText = customStyled<any, TextProps>(
     textAlign: align,
     alignSelf: align === "left" ? "start" : align === "right" ? "end" : align,
     margin: 0,
-    ...overrides
+    ...overrides,
   })
 );
 
-export const StyledInput = customStyled<'input', { overrides?: StyleObject }>("input", ({ $theme, overrides }) => ({
-  boxSizing: "border-box",
+export const StyledInput = customStyled<"input", { overrides?: StyleObject }>(
+  "input",
+  ({ $theme, overrides }) => ({
+    boxSizing: "border-box",
+    width: "100%",
+    height: "fit-content",
+    background: "transparent",
+    border: "none",
+    outline: "none",
+    position: "relative",
+    "::placeholder": {
+      color: $theme.colors.bg,
+      fontSize: "14px",
+      fontWeight: 300,
+    },
+    padding: "10px 20px",
+    margin: "10px 0",
+    color: "#fff",
+    ...overrides,
+  })
+);
+
+export const StyledTextArea = customStyled("textarea", ({ $theme }) => ({
+  border: "1px solid rgba(255, 255, 255, .3)",
+  borderRadius: "7px",
+  background: "rgba(255, 255, 255, .15)",
+  padding: "10px",
   width: "100%",
-  height: "fit-content",
-  background: "transparent",
-  border: 'none',
-  outline: 'none',
-  position: 'relative',
-  "::placeholder": {
-    color: $theme.colors.bg,
-    fontSize: "14px",
-    fontWeight: 300,
-  },
-  padding: "10px 20px",
-  margin: "10px 0",
-  color: '#fff',
-  ...overrides
-}));
-
-export const StyledTextArea = customStyled('textarea', ({ $theme }) => ({
-  border: '1px solid rgba(255, 255, 255, .3)',
-  borderRadius: '7px',
-  background: 'rgba(255, 255, 255, .15)',
-  padding: '10px',
-  width: '100%',
-  color: '#fff',
+  color: "#fff",
   fontSize: "14px",
-  '::placeholder': {
-    color: 'rgba(255, 255, 255, .35)',
-    ...$theme.typography.font(15, 400)
-
-  }
-}))
-export const StyledPasswordInput: React.FC<{ overrides?: StyleObject, placeholder: string, value: string, name?: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }> = ({
-  placeholder,
-  onChange,
-  value, name,
-  overrides
-}) => {
+  "::placeholder": {
+    color: "rgba(255, 255, 255, .35)",
+    ...$theme.typography.font(15, 400),
+  },
+}));
+export const StyledPasswordInput: React.FC<{
+  overrides?: StyleObject;
+  placeholder: string;
+  value: string;
+  name?: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}> = ({ placeholder, onChange, value, name, overrides }) => {
   const [style] = useCustomStyletron();
-  const [showPassword, setShowPassword] = useState(false)
-  const passwordRef = useRef<HTMLInputElement>(null)
+  const [showPassword, setShowPassword] = useState(false);
+  const passwordRef = useRef<HTMLInputElement>(null);
   return (
     <div
       className={style({
@@ -196,7 +211,7 @@ export const StyledPasswordInput: React.FC<{ overrides?: StyleObject, placeholde
           cursor: "pointer",
         })}
         onClick={() => {
-          setShowPassword(!showPassword)
+          setShowPassword(!showPassword);
         }}
       >
         <path
@@ -216,30 +231,29 @@ export const StyledButton = customStyled<"button", Partial<ButtonProps>>(
     height: "35px",
     outline: "none",
     border: "none",
-    padding: '0 20px',
+    padding: "0 20px",
     margin: `${top || 0} ${right || 0} ${bottom || 0} ${left || 0}`,
     cursor: "pointer",
     fontWeight: 500,
     ":disabled": {
-      opacity: .7,
-      cursor: 'not-allowed'
+      opacity: 0.7,
+      cursor: "not-allowed",
     },
-    ...overrides
-
+    ...overrides,
   })
 );
 export const InputField: React.FC<
   {
-    label: string,
-    placeholder?: string,
-    type: "text" | "email" | "select" | "checkbox" | "password",
-    options?: { name: string, value: string }[],
-    name: string,
-    value: string,
-    error?: any,
-    inputStyles?: StyleObject,
-    isPassword?: boolean,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    label: string;
+    placeholder?: string;
+    type: "text" | "email" | "select" | "checkbox" | "password";
+    options?: { name: string; value: string }[];
+    name: string;
+    value: string;
+    error?: any;
+    inputStyles?: StyleObject;
+    isPassword?: boolean;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   } & React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
@@ -257,73 +271,110 @@ export const InputField: React.FC<
   inputStyles,
   ...others
 }) => {
-    const [css, theme] = useCustomStyletron()
-    return (
-      <div
-        className={css({
-          fontSize: "16px",
-          fontWeight: 400,
-          textTransform: "capitalize",
-          margin: '10px 0',
-          color: '#fff'
-        })}
-        {...others}
-      >
-        {type === "select" ? (
-          <>
-            {label && <label htmlFor={name}>{label}</label>}
-            <StyledCustomSelect
+  const [css, theme] = useCustomStyletron();
+  return (
+    <div
+      className={css({
+        fontSize: "16px",
+        fontWeight: 400,
+        textTransform: "capitalize",
+        margin: "10px 0",
+        color: "#fff",
+      })}
+      {...others}
+    >
+      {type === "select" ? (
+        <>
+          {label && <label htmlFor={name}>{label}</label>}
+          <StyledCustomSelect
+            placeholder={placeholder}
+            options={options!}
+            onSelect={onChange}
+            name={name}
+            value={value}
+            {...others}
+            inputStyles={inputStyles}
+          />
+        </>
+      ) : (
+        <div
+          className={css({
+            display: "flex",
+            flexFlow: "column",
+            alignItems: "start",
+          })}
+        >
+          <label htmlFor={name}>
+            {label}{" "}
+            {required && (
+              <strong
+                title={`${label} is required`}
+                style={{ color: "red", fontSize: "1rem" }}
+              >
+                *
+              </strong>
+            )}
+          </label>
+          {type == "password" ? (
+            <StyledPasswordInput
               placeholder={placeholder}
-              options={options!}
-              onSelect={onChange}
-              name={name}
-              value={value}
-              {...others}
-              inputStyles={inputStyles}
-            />
-          </>
-        ) : (
-          <div className={css({ display: 'flex', flexFlow: 'column', alignItems: 'start' })}>
-            <label htmlFor={name}>{label} {required && <strong title={`${label} is required`} style={{ color: 'red', fontSize: '1rem' }}>*</strong>}</label>
-            {type == "password" ? <StyledPasswordInput placeholder={placeholder}
               value={value}
               onChange={onChange}
               name={name}
               overrides={inputStyles}
-              {...others} /> :
-              <StyledInput
-                id={name}
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                name={name}
-                {...others}
-                overrides={inputStyles}
-              />}
-            {error && <StyledParagraphText weight={400} size={'.7rem'} style={{
-              color: 'red'
-            }}>{error} </StyledParagraphText>}
-          </div>
-        )}
-      </div>
-    )
-  }
+              {...others}
+            />
+          ) : (
+            <StyledInput
+              id={name}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}
+              name={name}
+              {...others}
+              overrides={inputStyles}
+            />
+          )}
+          {error && (
+            <StyledParagraphText
+              weight={400}
+              size={".7rem"}
+              style={{
+                color: "red",
+              }}
+            >
+              {error}{" "}
+            </StyledParagraphText>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const StyledCustomSelect: React.FC<{
   placeholder: string;
-  options: { value: string, name: string }[];
+  options: { value: string; name: string }[];
   onSelect: (e: ChangeEvent<HTMLInputElement>) => void;
   name: string;
-  value: string,
-  inputStyles: StyleObject
-}> = ({ placeholder, options, onSelect, name, value, inputStyles, ...others }) => {
+  value: string;
+  inputStyles: StyleObject;
+}> = ({
+  placeholder,
+  options,
+  onSelect,
+  name,
+  value,
+  inputStyles,
+  ...others
+}) => {
   const [css] = useCustomStyletron();
   const [optionsOpen, setOptionsOpen] = useState(false);
   const inputRef = useRef(null);
   const inputStyle = css({
     background: "transparent",
-    outline: 'none',
+    outline: "none",
     "::placeholder": {
       color: "rgba(176, 176, 176, 1)",
     },
@@ -339,8 +390,7 @@ export const StyledCustomSelect: React.FC<{
         height: "fit-content",
         position: "relative",
         gridArea: "input",
-        background: '#F6FFED'
-
+        background: "#F6FFED",
       })}
     >
       <div
@@ -348,11 +398,10 @@ export const StyledCustomSelect: React.FC<{
           position: "relative",
           width: "100%",
           height: "fit-content",
-          background: 'transparent'
-
+          background: "transparent",
         })}
         onClick={(e) => {
-          if ((others as any).readOnly) return
+          if ((others as any).readOnly) return;
           setOptionsOpen(!optionsOpen);
         }}
       >
@@ -385,7 +434,20 @@ export const StyledCustomSelect: React.FC<{
         </svg>
       </div>
       {/**handle clickaway */}
-      {optionsOpen && <div onClick={() => setOptionsOpen(false)} className={css({ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0, 0, 0, .02)', zIndex: 1 })} />}
+      {optionsOpen && (
+        <div
+          onClick={() => setOptionsOpen(false)}
+          className={css({
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0, 0, 0, .02)",
+            zIndex: 1,
+          })}
+        />
+      )}
 
       <div
         className={css({
@@ -397,34 +459,38 @@ export const StyledCustomSelect: React.FC<{
           display: optionsOpen ? "flex" : "none",
           flexFlow: "column",
           // border: "1px solid rgba(139, 139, 139, 1)",
-          background: 'F6FFED',
+          background: "F6FFED",
           zIndex: 1,
-          maxHeight: '300px',
-          overflowY: 'auto'
-
-
+          maxHeight: "300px",
+          overflowY: "auto",
         })}
       >
         {options.map((opt) => (
           <StyledInput
             onClick={() => {
-              onSelect({ target: { name, value: opt.name } } as any)
+              onSelect({ target: { name, value: opt.name } } as any);
               setOptionsOpen(false);
             }}
             readOnly
             value={opt.name}
-            className={inputStyle + ' ' + css({
-              border: 'none',
-              outline: 'none',
-              margin: 0,
-              // ':not(:last-child)': {
-              //   borderBottom: "1px solid rgba(139, 139, 139, 1)",
-              // },
-              ':hover': {
-                background: "rgba(241, 241, 241, 1)"
-              },
-              ...(value === opt.name && { background: 'rgba(241, 241, 241, 1) !important' })
-            })}
+            className={
+              inputStyle +
+              " " +
+              css({
+                border: "none",
+                outline: "none",
+                margin: 0,
+                // ':not(:last-child)': {
+                //   borderBottom: "1px solid rgba(139, 139, 139, 1)",
+                // },
+                ":hover": {
+                  background: "rgba(241, 241, 241, 1)",
+                },
+                ...(value === opt.name && {
+                  background: "rgba(241, 241, 241, 1) !important",
+                }),
+              })
+            }
             overrides={inputStyles}
           />
         ))}
@@ -434,18 +500,34 @@ export const StyledCustomSelect: React.FC<{
   );
 };
 
-export const StyledCheckbox: React.FC<{ checked: boolean, label?: string, name: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }> = ({ checked, label, name, onChange }) => {
+export const StyledCheckbox: React.FC<{
+  checked: boolean;
+  label?: string;
+  name: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}> = ({ checked, label, name, onChange }) => {
   const [css, theme] = useCustomStyletron();
-  return <div className={css({
-    display: 'flex', gap: '10px', alignItems: 'flex-start',
-    ...theme.typography.font(14, 500),
-    marginBottom: '10px'
-  })}>
-    <input id={name} type="checkbox" name={name} checked={checked} onChange={onChange} className={css({
-      cursor: 'pointer'
-    })} />
-    <label htmlFor={name}>{label}</label>
-  </div>
-
-}
-
+  return (
+    <div
+      className={css({
+        display: "flex",
+        gap: "10px",
+        alignItems: "flex-start",
+        ...theme.typography.font(14, 500),
+        marginBottom: "10px",
+      })}
+    >
+      <input
+        id={name}
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+        className={css({
+          cursor: "pointer",
+        })}
+      />
+      <label htmlFor={name}>{label}</label>
+    </div>
+  );
+};

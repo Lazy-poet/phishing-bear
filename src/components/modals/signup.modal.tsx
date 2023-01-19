@@ -1,21 +1,23 @@
 import { StyledDarkParagraphText, StyledButton } from "@components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BaseModal } from ".";
-import { ActiveModal } from "../../../redux/slices/auth.slice";
+import { ActiveModal, toggleModal } from "../../../redux/slices/auth.slice";
 import { useCustomStyletron } from "../../styles/custom-styles";
 import { InputField } from "@components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authServices } from "../../../services";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { PulseLoader } from "react-spinners";
 
-export const Signup = () => {
+export const Signup: React.FC<{
+  setEmail: Dispatch<SetStateAction<string>>;
+}> = ({ setEmail }) => {
   const [css, theme] = useCustomStyletron();
   const [loading, setLoading] = useState(false);
-
-  const { activeModal } = useSelector((state: any) => state.auth);
-  const open = activeModal === ActiveModal.SIGNUP;
+  const dispatch = useDispatch();
+  const { activeModal, isLoggedIn } = useSelector((state: any) => state.auth);
+  const open = activeModal === ActiveModal.SIGNUP && !isLoggedIn;
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,7 +31,12 @@ export const Signup = () => {
 
     onSubmit: async (values: any) => {
       setLoading(true);
-      authServices.forgotPassword(values).then((data: any) => {
+      setEmail(values.email);
+      authServices.register(values).then((data: any) => {
+        if (!data.error) {
+          // dispatch(handleLogin(handleLogin()))
+          dispatch(toggleModal(ActiveModal.VERIFICATION_MAIL_SENT));
+        }
         setLoading(false);
       });
     },

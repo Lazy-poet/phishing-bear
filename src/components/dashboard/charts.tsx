@@ -279,8 +279,6 @@ export const LineChart = ({ labels, data, range, isMobile = false }) => {
         }
     };
 
-
-    // console.log('data', labelData1)
     const chartData = {
         labels: labels?.map(v => v.label),
         datasets: [

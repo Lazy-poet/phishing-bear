@@ -25,7 +25,6 @@ const ContactUs: NextPage = () => {
 
     }),
     onSubmit: async (values: any, { resetForm }) => {
-      console.log('values', values);
       resetForm({ values: '' })
     },
   })

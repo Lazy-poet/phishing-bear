@@ -5,10 +5,10 @@ import { useStore } from "react-redux";
 export enum ActiveModal {
   LOGIN,
   SIGNUP,
-  SIGNUP_VERIFICATION_SENT,
+  VERIFICATION_MAIL_SENT,
   FORGOT_PASSWORD,
   CHOOSE_PASSWORD,
-  SUBSCRIPTION,
+  PRICING,
   PERSONAL_INFO,
   LOGOUT,
 }

@@ -137,6 +137,7 @@ const Sidebar = ({
                 margin: "10px",
               },
               ...theme.typography.font(18, 400),
+              placeContent: "start",
               justifyContent: "start",
               borderRadius: "30px",
               margin: "10px 0",

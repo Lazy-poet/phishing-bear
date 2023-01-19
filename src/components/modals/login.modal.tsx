@@ -7,10 +7,7 @@ import {
 import { PulseLoader } from "react-spinners";
 import { useCustomStyletron } from "../../styles/custom-styles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  toggleModal,
-  ActiveModal,
-} from "../../../redux/slices/auth.slice";
+import { toggleModal, ActiveModal } from "../../../redux/slices/auth.slice";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -22,9 +19,9 @@ import { handleLogin } from "../../../redux/slices/auth.slice";
 
 export const LoginModal = () => {
   const [css, theme] = useCustomStyletron();
-  const { activeModal } = useSelector((state: any) => state.auth);
+  const { activeModal, isLoggedIn } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
-  const open = activeModal === ActiveModal.LOGIN;
+  const open = activeModal === ActiveModal.LOGIN && !isLoggedIn;
   const [loading, setLoading] = useState(false);
   const [loginType, setLoginType] = useState("password");
 
@@ -47,33 +44,49 @@ export const LoginModal = () => {
     }),
     onSubmit: async (values: { [key: string]: string }, { resetForm }) => {
       setLoading(true);
-      const data = (await authServices.login(values)) as unknown as {
-        access_token: string;
-        error: boolean;
-      };
-      if (data && !data.error) {
-        dispatch(handleLogin(data?.access_token));
-        setTimeout(() => {
-          router.push(redirect_path || "/dashboard");
-          resetForm({ values: {} });
-        }, 100);
+      if (loginType === "email") {
+        const data = await authServices.resendVerification({
+          email: values.email,
+        });
+        if (data && !data.error) {
+          dispatch(toggleModal(ActiveModal.VERIFICATION_MAIL_SENT));
+        }
+      } else {
+        const data = await authServices.login(values);
+        if (data && !data.error) {
+          dispatch(handleLogin(data.data.access_token));
+          setTimeout(() => {
+            resetForm({ values: {} });
+            if (data.data.user.subscription) {
+              router.push(redirect_path || "/dashboard");
+            } else {
+              dispatch(toggleModal(ActiveModal.PRICING));
+            }
+          }, 100);
+        }
       }
       setLoading(false);
     },
   });
   return (
-    <BaseModal open={open}>
+    <BaseModal
+      open={open}
+    >
       <div
         className={css({
-          background: theme.colors.secondary,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "30px",
-          gap: "50px",
-          maxWidth: "100%",
-          flex: 1,
+          display: "none",
+          width: "100%",
+          [theme.mediaQuery.xsmall]: {
+            background: theme.colors.secondary,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "30px",
+            gap: "50px",
+            maxWidth: "100%",
+            flex: 1,
+          },
         })}
       >
         <StyledParagraphText size="24px" weight={600}>
@@ -115,6 +128,7 @@ export const LoginModal = () => {
           padding: "30px",
           gap: "20px",
           height: "100%",
+          width: "100%",
         })}
       >
         <StyledDarkParagraphText size="24px" weight={700}>
@@ -141,6 +155,7 @@ export const LoginModal = () => {
             borderRadius: "8px",
             height: "42px",
             marginTop: "10px !important",
+            color: "#0E0E0F",
             "::placeholder": {
               color: "#0E0E0F",
               opacity: 0.5,
@@ -185,8 +200,6 @@ export const LoginModal = () => {
               name="loginType"
               checked={loginType === "email"}
               onChange={(e) => {
-                console.log("clickk", e.target.checked);
-
                 setLoginType("email");
               }}
             />
@@ -222,6 +235,8 @@ export const LoginModal = () => {
               borderRadius: "8px",
               height: "42px",
               marginTop: "10px !important",
+              color: "#0E0E0F",
+
               "::placeholder": {
                 color: "#0E0E0F",
                 opacity: 0.5,

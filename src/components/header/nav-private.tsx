@@ -47,7 +47,9 @@ const NavPrivate = ({ showSidebar, toggleSidebar, headerTheme }) => {
   const router = useRouter();
 
   const { isLoggedIn, profileData } = useSelector((state: any) => state.auth);
-  const userName = `${profileData?.first_name}+${profileData?.last_name}`;
+  const userName = `${profileData?.first_name || ""}+${
+    profileData?.last_name || ""
+  }`;
   const matches = userName.match(/\b(\w)/g);
   const initials = matches?.join("").toUpperCase() || "";
   useEffect(() => {
