@@ -52,16 +52,13 @@ export const PersonalIno = () => {
 
     onSubmit: async (values: any) => {
       setLoading(true);
-      authServices
-        .updatePassword({ ...values, access_token: token })
-        .then((data: any) => {
-          if (!data.error) {
-            // dispatch(handleLogin(handleLogin()))
-            dispatch(handleLogin(data?.access_token));
-            dispatch(toggleModal(ActiveModal.PRICING));
-          }
-          setLoading(false);
-        });
+      authServices.updateUserProfile({ ...values }).then((data: any) => {
+        if (!data.error) {
+          // dispatch(handleLogin(handleLogin()))
+          dispatch(toggleModal(null));
+        }
+        setLoading(false);
+      });
     },
   });
   return (

@@ -6,6 +6,7 @@ import { ActiveModal, toggleModal } from "../../../redux/slices/auth.slice";
 import { customStyled, useCustomStyletron } from "../../styles/custom-styles";
 
 const links = [
+  { label: "Subscription", path: "/my-account/subscription" },
   { label: "Account", path: "/my-account" },
   { label: "Password", path: "/my-account/change-password" },
   { label: "Friends", path: "/my-account/friends" },

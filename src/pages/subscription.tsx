@@ -20,7 +20,7 @@ const VerifySubscription = () => {
   const { push, query, isReady } = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { session_id } = query;
+  const { session_id, init } = query;
   const dispatch = useDispatch();
   const requestSent = useRef(false);
   useEffect(() => {
@@ -42,7 +42,9 @@ const VerifySubscription = () => {
           push("/pricing");
         }
         push("/dashboard");
-        dispatch(toggleModal(ActiveModal.PERSONAL_INFO));
+        if (init === "true") {
+          dispatch(toggleModal(ActiveModal.PERSONAL_INFO));
+        }
         setLoading(false);
       })();
     }
